@@ -1,0 +1,527 @@
+@inproceedings{bellon2022demoTagAlong,
+  keywords={posterdemo},
+  author = {Bellon, Alex and Yen, Alex and \textbf{Pannuto}, \textbf{Pat}},
+  title={Demo Abstract: TagAlong: A Free, Wide-Area Data-Muling Service Built on the AirTag Protocol},
+  booktitle = {Proceedings of the 20th ACM Conference on Embedded Networked Sensor Systems},
+  series = {SenSys'22},
+  year = {2022},
+  month = {11},
+  location = {Boston, Massachusetts, USA},
+  conference-url={\url{http://sensys.acm.org/2022/}},
+  abstract = {
+    We demonstrate how to leverage Apple's Find My protocol, most
+well known as the underlying protocol of the AirTag, for arbitrary
+data-muling. This provides a new ``infrastructure-free'' deployment
+option, where areas with frequent human activity can take advantage of this zero-cost backhaul network. While there are severe
+limitations (e.g. no acknowledgement channel back to the sending
+device), Find My-based networking could still be a highly reliable
+backhaul with sufficient transmission redundancy and knowledge
+of deployment context.
+
+In this demo, we allow users to send arbitrary data to devices
+that will forward the data to the Find My network. The data is
+then recovered from Apple's servers and displayed on a status
+page. Critically, we will not deploy any of our own intermediate
+infrastructure and will instead rely on a sufficient density of iPhones
+and other Apple devices from the demo audience to backhaul data
+from our demo.
+  },
+}
+
+@inproceedings{marcano2021einkENSsysDemo,
+  keywords={posterdemo},
+  author={Marcano, Gabriel and \textbf{Pannuto}, \textbf{Pat}},
+  title={Demo Abstract: Powering an E-Ink Display from Soil Bacteria},
+  booktitle={Proceedings of the 9th International Workshop on Energy Harvesting \& Energy-Neutral Sensing Systems},
+  series={ENSsys'21},
+  month={11},
+  year={2021},
+  conference-url={\url{http://www.enssys.org/2021/}},
+  abstract={This demo showcases the power delivery potential of soil-based
+microbial fuel cells. We build a prototype energy harvesting setup
+for a soil microbial fuel cell, measure the amount of power that we
+can harvest, and use that energy to drive an e-ink display. Microbial
+fuel cells are highly sensitive to environmental conditions, especially
+soil moisture. In near-optimal, super moist conditions our
+cell provides approximately 100\,\uW of power at around 500\,mV,
+which is ample power over time to power our system several times
+a day. In sum, we find that the confluence of ever lower-power
+electronics and new understanding of microbial fuel cell design
+means that ``soil-powered sensors'' are now feasible. There remains,
+however, significant future work to make these systems reliable
+and maximally performant.
+This demo is a working copy of the system presented at LP-IoT'21.
+  },
+  acceptance-accepted=11,
+  acceptance-total=14,
+}
+
+@inproceedings{adkins18signpostdemo,
+ keywords={posterdemo},
+ author = {Adkins, Joshua and Campbell, Bradford and Ghena, Branden and Jackson, Neal and \textbf{Pannuto}, \textbf{Pat} and Rohrer, Samuel and Dutta, Prabal},
+ title = {Demo Abstract: Applications on the Signpost Platform for City-Scale Sensing},
+ booktitle = {Proceedings of the 17th ACM/IEEE International Conference on Information Processing in Sensor Networks},
+ series = {IPSN'18},
+ year = {2018},
+ month = {April},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ conference-url={\url{http://ipsn.acm.org/2018/}},
+ abstract = {
+City-scale sensing holds the promise of enabling deeper insight into how our
+urban environments function. Applications such as observing air quality and
+measuring traffic flows can have powerful impacts, allowing city
+planners and citizen scientists alike to understand and improve their world.
+However, the path from conceiving applications to implementing them is fraught with difficulty.
+A successful city-scale deployment requires physical installation, power
+management, and communications---all challenging tasks standing between a good
+idea and a realized one.
+
+The Signpost platform, presented at IPSN 2018, has been created 
+to address these challenges. Signpost
+enables easy deployment by relying on harvested, solar energy and wireless
+networking rather than their wired counterparts. To further lower the bar
+to deploying applications, the platform provides the key resources necessary
+to support its pluggable sensor modules in their distributed sensing tasks. 
+In this demo, we present the Signpost hardware and
+several applications running on a deployment of Signposts on UC Berkeley's campus,
+including distributed, energy-adaptive traffic monitoring and 
+fine grained weather reporting. Additionally we show the cloud infrastructure
+supporting the Signpost deployment, specifically the ability to push new
+applications and parameters down to existing sensors, with the goal of demonstrating that 
+the existing deployment can serve as a future testbed. 
+ },
+ extra = {Best Demo Runner Up},
+ acceptance-accepted=28,
+ acceptance-total=32,
+}
+
+@inproceedings{adkins17signpost-ts,
+  keywords={posterdemo},
+  author={Adkins, Joshua and Campbell, Bradford and Ghena, Branden and Jackson, Neal and \textbf{Pannuto}, \textbf{Pat} and Dutta, Prabal},
+  title={The Signpost Platform for City-Scale Sensing},
+  booktitle={TerraSwarm 2017 Annual Review},
+  series={TerraSwarm'17},
+  year={2017},
+  month={10},
+  location={Berkeley, CA, USA},
+  conference-url={\url{https://www.terraswarm.org/conferences/17/annual/}},
+  no-abstract = {},
+  extra = {David Wessel Best Demo Award},
+}
+
+@inproceedings{kempke16surepoint-demo,
+  keywords={posterdemo},
+  author = {Kempke, Benjamin and \textbf{Pannuto}, \textbf{Pat} and Campbell, Bradford and Dutta, Prabal},
+  title={{SurePoint}: Exploiting Ultra Wideband Flooding and Diversity to Provide Robust, Scalable, High-Fidelity Indoor Localization},
+  booktitle = {Proceedings of the 14th ACM Conference on Embedded Networked Sensor Systems},
+  series = {SenSys'16},
+  year = {2016},
+  month = {11},
+  location = {Stanford, CA, USA},
+  conference-url={\url{http://sensys.acm.org/2016/}},
+  abstract = {
+We present SurePoint, a system for drop-in, high-fidelity indoor localization.
+SurePoint builds on recently available commercial ultra-wideband radio hardware.
+While ultra-wideband radios provide a pairwise range estimate natively, we
+show that with the addition of frequency and spatial diversity, we can achieve
+a 53\% decrease in median range error.
+Because this extra diversity requires many additional packets for each range
+estimate, we leverage an efficient broadcast ranging protocol for
+localization that ameliorates this overhead.
+In stationary and fast-moving environments SurePoint achieves up to
+0.08\,m median error and 0.53\,m 99th percentile error.
+As ranging requires the tag to have exclusive access to the channel, we
+employ a protocol to coordinate the localization of multiple tags in space.
+This protocol builds on recent work exploiting the constructive interference
+phenomenon, however SurePoint is the first to demonstrate constructive interface
+using the 802.15.4a ultra-wideband PHY.
+Finally, as the ranging protocol requires careful management of the
+ultra-wideband radio and tight timing, we utilize TriPoint, a dedicated
+``drop-in'' ranging module that provides a simple \iic interface. We show that
+this additional microcontroller demands only marginal energy overhead while
+facilitating interoperability by freeing the primary microcontroller to
+handle other tasks.
+
+This demo complements the paper ``SurePoint: Exploiting Ultra Wideband Flooding
+and Diversity to Provide Robust, Scalable, High-Fidelity Indoor Localization''
+to be presented at SenSys'16.
+  },
+}
+
+@inproceedings{pannuto16inc,
+  keywords={posterdemo},
+  author = {\textbf{Pannuto}, \textbf{Pat}},
+  title = {Accessors and the RoboCaf\'e: Interoperability in the Internet of Things},
+  booktitle = {Twelfth International Nanotechnology Conference on Communication and Cooperation},
+  series = {INC12},
+  year = {2016},
+  month = {5},
+  location = {Leuven, Belgium},
+  extra = {Outstanding Poster Award},
+}
+
+@inproceedings{kempke15polypoint-demo,
+  keywords={posterdemo},
+  author = {Kempke, Benjamin and \textbf{Pannuto}, \textbf{Pat} and Campbell, Bradford and Adkins, Joshua and Dutta, Prabal},
+  title = {{PolyPoint}: High-Precision Indoor Localization with {UWB}},
+  booktitle = {Proceedings of the 13th ACM Conference on Embedded Networked Sensor Systems},
+  series = {SenSys'15},
+  year = {2015},
+  month = {11},
+  location = {Soeul, Republic of Korea},
+  abstract = {We demonstrate PolyPoint, a high-fidelity RF-based indoor localization system that
+		  achieves 28~cm accuracy indoors and tracks a fast-moving quadcopter with only
+		  56~cm average error.
+		  PolyPoint uses ultra-wideband signals to achieve high precision RF time-of-flight
+		  estimates between nodes. To further improve accuracy, PolyPoint exploits two forms
+		  of diversity: frequency diversity, which leverages several ultra-wideband
+		  channels to improve channel response, and antenna diversity, which adds three
+		  antennas at $120\degree$ offsets to mitigate the effects of antenna
+		  polarization and nulls. PolyPoint introduces an efficient, novel ranging protocol
+		  that maximizes these diversity sources with a minimal number of packets.
+
+		  Additionally, this work introduces a new hardware platform that provides
+		  ranging and localization as a service. The minimal \emph{TriPoint} module
+		  integrates an ultra-wideband transceiver and microcontroller with firmware
+		  that implements the PolyPoint protocol. The \emph{TriTag} carrier board adds
+		  Bluetooth and batteries to create a complete mobile tag, and the
+		  \emph{TriBase} anchor platform integrates a TriPoint with an Intel Edison to
+		  act as anchors for the system.
+  },
+  conference-url = {\url{http://sensys.acm.org/2015/}},
+}
+
+@inproceedings{adkins15iot-toolkit,
+  author = {Adkins, Joshua and Campbell, Bradford and DeBruin, Samuel and Ghena, Branden and Kempke, Benjamin and Klugman, Noah and Kuo, Ye-Sheng and Natarajan, Deepkia and \textbf{Pannuto}, \textbf{Pat} and Zachariah, Thomas and Zhen, Alan and Dutta, Prabal},
+  title = {Michigan's {IoT} Toolkit},
+  booktitle = {Proceedings of the 13th ACM Conference on Embedded Networked Sensor Systems},
+  series = {SenSys'15},
+  year = {2015},
+  month = {11},
+  location = {Soeul, Republic of Korea},
+  abstract = {Building connected, pervasive, human-facing, and responsive applications
+that incorporate local sensors, smartphone interactions, device actuation, and
+cloud-based learning---the promised features of the Internet of
+Things (IoT)---requires a complete suite of tools spanning both hardware and software.
+We present a set of these pieces, including a gateway, four hardware building
+blocks, multiple sensor platforms, an indoor localization system, and software
+for connecting users and devices.
+Each piece plays an integral role towards
+enabling applications, from facilitating rapid development of wireless smart
+devices to composing data streams and services from a diverse set of components.
+By providing layered interoperable systems, our toolkit offers cohesive
+support for moving beyond single-device, cloud-centric applications---typical
+in today's IoT landscape---and towards richer applications that incorporate
+multiple data streams, human interaction, cloud processing, location awareness,
+multiple communication protocols, historical data, access control, and
+on-demand user interfaces.
+To show how the pieces in the toolkit cooperate, we demonstrate a location-based
+access control application where a user's smartphone can control a room's lighting,
+but only from within the room. Further, data streams from the phone and
+nearby sensors are used to provide a constant lighting service which attempts
+to maintain a user-set brightness under variable external lighting conditions.
+  },
+  conference-url = {\url{http://sensys.acm.org/2015/}},
+}
+
+@inproceedings{kempke15loccomp,
+	keywords={posterdemo},
+  author = {Campbell, Bradford and Dutta, Prabal and Kempke, Benjamin and Kuo, Ye-Sheng and \textbf{Pannuto}, \textbf{Pat}},
+  title = {DecaWave: Exploring State of the Art Commercial Localization},
+  booktitle = {Microsoft Indoor Localization Competition},
+  year = {2015},
+  month = {4},
+  location = {Seattle, Washington, USA},
+  abstract = {In developing technology for indoor localization, we have recently
+begun exploring commercially available state of the art localization technologies.
+The DecaWave DW1000 is a new ultra-wideband
+transceiver that advertises high-precision indoor pairwise ranging
+between modules with errors as low as 10 cm. We are currently exploring this
+technology to automate obtaining anchor ground-truth
+locations for other indoor localization systems. Anchor positioning
+is a constrained version of indoor localization, with minimal time
+constraints and static devices. However, as we intend to include the
+DW1000 hardware on our own localization system, this provides
+an opportunity for gathering performance data for a commercially-enabled
+localization system deployed by a third-party for comparison purposes.
+We do not claim the ranging hardware as our originalwork, but we do provide a
+hardware implementation, an infrastructure for converting pairwise measurements
+to locations, and the front-end for viewing the results.},
+  conference-url = {\url{http://research.microsoft.com/en-us/events/indoorloccompetition2015/}},
+  extra = {Third Place in Infrastructure-Based Systems}
+}
+
+@inproceedings{kuo15loccomp,
+	keywords={posterdemo},
+  author = {Kuo, Ye-Sheng and \textbf{Pannuto}, \textbf{Pat} and Campbell, Bradford and Dutta, Prabal},
+  title = {Luxapose: Indoor Positioning with Mobile Phones and Visible Light},
+  booktitle = {Microsoft Indoor Localization Competition},
+  year = {2015},
+  month = {April},
+  location = {Seattle, Washington, USA},
+  abstract = {
+    Luxapose addresses the indoor localization problem
+with unmodified smartphones and software controlled LED luminaires.
+Each luminaire, while providing normal lighting for a space,
+transmits an identifier by switching the luminaire on-and-off at a particular
+frequency. The pulses are imperceptible to humans, but smartphone
+cameras can detect the switching by exploiting the rolling shutter effect
+of CMOS cameras. Once the camera captures an image, the image
+is processed to find the luminaires, determine their identifiers,
+construct a sufficiently constrained angle-of-arrival localization
+problem, and ultimately calculate the smartphone's position and
+orientation in space.
+
+Luxapose requires LED lighting infrastructure for localization, however,
+the LED lights can replace the current lighting in a building. Luxapose
+has virtually no cost to the end-users, requiring just an app on the
+smartphone they already carry. The system has demonstrated ninetieth percentile
+position error of 10~cm and orientation error of 10~degrees when the
+smartphone is held under the LED luminaires.
+  },
+  conference-url = {\url{http://research.microsoft.com/en-us/events/indoorloccompetition2015/}}
+}
+
+@inproceedings{pannuto14postmote,
+	keywords={posterdemo},
+	author = {\textbf{Pannuto}, \textbf{Pat} and Andersen, Michael P and Bauer, Tom and Campbell, Bradford and Levy, Amit and Culler, David and Levis, Philip and Dutta, Prabal},
+	title = {Poster Abstract: A Networked Embedded System Platform for the Post-Mote Era},
+	booktitle = {Proceedings of the 12th ACM Conference on Embedded Networked Sensor Systems},
+	series = {SenSys '14},
+	year = {2014},
+	mon = {Nov},
+	location = {Memphis, Tennessee, USA},
+	publisher = {ACM},
+	address = {New York, NY, USA},
+	conference-url={http://sensys.acm.org/2014/},
+	abstract={For the last fifteen years, research explored the hardware,
+		software, sensing, communication abstractions, languages, and
+			protocols that could make networks of small, embedded
+			devices---motes---sample and report data for long
+			periods of time unattended.
+			Today, the application and technological landscapes
+			have shifted, introducing new requirements and new
+			capabilities. Hardware has evolved past 8~and 16~bit
+			microcontrollers: there are now 32~bit processors with
+			lower energy budgets and greater computing capability.
+			New wireless link layers have emerged, creating
+			protocols that support rapid and efficient setup and
+			teardown but introduce novel limitations that systems
+			must consider.
+			The time has come to look beyond optimizing networks of
+			motes. We look towards new technologies such as
+			Bluetooth Low Energy, Cortex~M processors, and capable
+			energy harvesting, with new application spaces such as
+			personal area networks, and new capabilities and
+			requirements in security and privacy to inform
+			contemporary hardware and software platforms.  It is
+			time for a new, open experimental platform in this
+			post-mote era.
+	},
+}
+
+@INPROCEEDINGS{kuo14luxapose_mobicom_demo,
+	keywords={posterdemo},
+	author={Kuo, Ye-Sheng and \textbf{Pannuto}, \textbf{Pat} and Dutta, Prabal},
+	booktitle={The 20th Annual International Conference on Mobile Computing and Networking},
+	title={Demo --- {Luxapose}: {I}ndoor Positioning with Mobile Phones and Visible Light},
+	series={MobiCom '14},
+	year={2014},
+	month={9},
+	location={Maui, Hawaii, USA},
+	conference-url={http://www.sigmobile.com/mobicom/2014/},
+	video-url={\url{https://www.youtube.com/watch?v=HSNY0XVXM1w}},
+	abstract = {We explore the indoor positioning problem with unmodified smartphones
+			and slightly-modified commercial LED luminaires.  The
+			luminaires---modified to allow rapid, on-off keying---transmit their
+			identifiers and/or locations encoded in human-imperceptible optical
+			pulses.  A camera-equipped smartphone, using just a single image frame
+			capture, can detect the presence of the luminaires in the image,
+			decode their transmitted identifiers and/or locations, and determine
+			the smartphone's location and orientation relative to the luminaires.
+			Continuous image capture and processing enables continuous position
+			updates.
+			The key insights underlying this work are (i) the driver circuits of
+			emerging LED lighting systems can be easily modified to transmit data
+			through on-off keying; (ii) the rolling shutter effect of CMOS imagers
+			can be leveraged to receive many bits of data encoded in the optical
+			transmissions with just a single frame capture, (iii) a camera is
+			intrinsically an angle-of-arrival sensor, so the projection of
+			multiple nearby light sources with known positions onto a camera's
+			image plane can be framed as an instance of a sufficiently-constrained
+			angle-of-arrival localization problem, and (iv) this problem can be
+			solved with optimization techniques.
+	},
+}
+
+@inproceedings{kuo14luxapose_vlcs_demo,
+  keywords={posterdemo},
+  author={Kuo, Ye-Sheng and \textbf{Pannuto}, \textbf{Pat} and Dutta, Prabal},
+  title={Demo --- {Luxapose}: {I}ndoor Positioning with Mobile Phones and Visible Light},
+  booktitle = {1st ACM Workshop on Visible Light Communication Systems},
+  series = {VLCS '14},
+  year = {2014},
+  month = {9},
+  location = {Maui, Hawaii, USA},
+  conference-url = {\url{http://www.networks.rice.edu/VLCS-2014/}},
+	video-url={\url{https://www.youtube.com/watch?v=HSNY0XVXM1w}},
+	abstract = {We explore the indoor positioning problem with unmodified smartphones
+			and slightly-modified commercial LED luminaires.  The
+			luminaires---modified to allow rapid, on-off keying---transmit their
+			identifiers and/or locations encoded in human-imperceptible optical
+			pulses.  A camera-equipped smartphone, using just a single image frame
+			capture, can detect the presence of the luminaires in the image,
+			decode their transmitted identifiers and/or locations, and determine
+			the smartphone's location and orientation relative to the luminaires.
+			Continuous image capture and processing enables continuous position
+			updates.
+			The key insights underlying this work are (i) the driver circuits of
+			emerging LED lighting systems can be easily modified to transmit data
+			through on-off keying; (ii) the rolling shutter effect of CMOS imagers
+			can be leveraged to receive many bits of data encoded in the optical
+			transmissions with just a single frame capture, (iii) a camera is
+			intrinsically an angle-of-arrival sensor, so the projection of
+			multiple nearby light sources with known positions onto a camera's
+			image plane can be framed as an instance of a sufficiently-constrained
+			angle-of-arrival localization problem, and (iv) this problem can be
+			solved with optimization techniques.
+	},
+}
+
+@inproceedings{pannuto13m3_demo,
+ keywords={posterdemo},
+ author = {\textbf{Pannuto}, \textbf{Pat} and Lee, Yoonmyung and Foo, ZhiYoong and Blaauw, David and Dutta, Prabal},
+ title = {Demo: M3: A Mm-scale Wireless Energy Harvesting Sensor Platform},
+ booktitle = {Proceedings of the 1st International Workshop on Energy Neutral Sensing Systems},
+ series = {ENSSys '13},
+ year = {2013},
+ month = {11},
+ isbn = {978-1-4503-2432-8},
+ location = {Rome, Italy},
+ pages = {17:1--17:2},
+ articleno = {17},
+ numpages = {2},
+ url-skip = {http://doi.acm.org/10.1145/2534208.2534225},
+ doi = {10.1145/2534208.2534225},
+ acmid = {2534225},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ abstract = {In this demo, we explore the critical role that power plays in the development
+	of a mm-scale system. We argue that any practical deployment of a mm-scale
+	system must have a significant energy harvesting component. We demo the newest
+	M3 system, a self-contained, 1~mm$^3$, energy-harvesting computing platform
+	capable of short-range (order~cm) wireless transmission.
+	Finally, we present some of the M3's innovations that
+	enable its current basic operation and discuss some of the open problems that
+	remain before a smart dust network becomes operable.},
+ conference-url = {\url{http://www.enssys.org/2013/}},
+}
+
+@inproceedings{pannuto13gatd,
+	keywords={posterdemo},
+	author = {\textbf{Pannuto}, \textbf{Pat} and Campbell, Bradford and Dutta, Prabal},
+	title = {{GATD}: A Robust, Extensible, Versatile Swarm Dataplane},
+	booktitle = {The First International Workshop on the Swarm at the Edge of the Cloud},
+	series = {SEC '13},
+	year = {2013},
+	mon = {Sep},
+	day = {29},
+	location = {Montreal, Quebec, Canada},
+	conference-url = {\url{http://www.terraswarm.org/conferences/13/swarm/}},
+	abstract = { We propose Get All The Data (GATD), a data collection and dissemination
+			system for the Swarm. GATD offers a flexible architecture to connect arbitrary
+			producers of data and consumers of events. Too many sensor networks are
+			fragile, vertical silos, with a series of one-off handlers written to shuttle
+			data, manipulate it, process it, and present it. Instead of being mired
+			in details and rigid schemas, we argue that sensor network deployment should
+			be simple. The key in GATD's design is the
+			observation that there are common patterns to how disparate sensor network
+			applications handle and process their generated data.
+
+			To take advantage of these
+			similarities we present a system comprised of common modules that
+			different applications can leverage.
+			To join GATD, new sensors simply send raw data. GATD will buffer this raw
+			data indefinitely until an application specific {\em formatter} is written to
+			map the raw data to key-value pairs. These streams can be combined, processed,
+			graphed, stored, or otherwise manipulated by a standard set of transforms or
+			new custom drivers. With this architecture, we argue that GATD provides a
+			robust, extensible, and versatile Swarm dataplane.
+	},
+}
+
+@inproceedings{kuo13floodcasting,
+	keywords={posterdemo},
+ author = {Kuo, Ye-Sheng and \textbf{Pannuto}, \textbf{Pat} and Dutta, Prabal},
+ title = {Demo: Floodcasting, a Data Dissemination Service Supporting Real-time Actuation and Control},
+ booktitle = {Proceeding of the 11th Annual International Conference on Mobile Systems, Applications, and Services},
+ series = {MobiSys '13},
+ year = {2013},
+ month = {6},
+ isbn = {978-1-4503-1672-9},
+ location = {Taipei, Taiwan},
+ pages = {489--490},
+ numpages = {2},
+ url-skip = {http://doi.acm.org/10.1145/2462456.2465697},
+ doi = {10.1145/2462456.2465697},
+ acmid = {2465697},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ abstract = {Packet collisions have gone from something to be avoided to
+	something that can be embraced. We build upon recent results that employ
+	intentional packet collisions for synchronized flooding to show how multi-hop
+	wireless networks can support real-time actuation and control.
+	First, we show how a network of nodes can synchronize their LED
+	transmissions to extend the range of a visual light communication (VLC) system.  Second, we show
+	how buffer-free, streaming audio is possible over a multi-hop wireless
+	mesh network.},
+ conference-url = {\url{http://www.sigmobile.org/mobisys/2013/demos.php}},
+}
+
+@inproceedings{pannuto12future_of_mobile,
+	keywords={posterdemo},
+ author = {\textbf{Pannuto}, \textbf{Pat} and Dutta, Prabal and Campbell, Bradford and DeBruin, Samuel and Grunnagle, Trey and Huang, William and Kempke, Ben and Kuo, Ye-Sheng and Robinson, Andrew and Schulman, Aaron and Spivak, Maya and Yerva, Lohit},
+ title = {Platforms and Protocols for Emerging Wireless Systems},
+ series = {Future of Mobile Computing Workshop},
+ year = {2012},
+ mon = {5},
+ location = {Mountain View, California},
+ publisher = {Google},
+ address = {Mountain View, CA, USA},
+ conference-url = {\url{https://sites.google.com/site/futureofmobileworkshop/}},
+ no-abstract = {},
+}
+
+@inproceedings{pannuto12i2c,
+	keywords={posterdemo},
+ author = {\textbf{Pannuto}, \textbf{Pat} and Lee, Yoonmyung and Kempke, Ben and Sylvester, Dennis and Blaauw, David and Dutta, Prabal},
+ title = {Demo: Ultra-constrained sensor platform interfacing},
+ booktitle = {Proceedings of the 11th international conference on Information Processing in Sensor Networks},
+ series = {IPSN '12},
+ year = {2012},
+ month = {4},
+ isbn = {978-1-4503-1227-1},
+ location = {Beijing, China},
+ pages = {147--148},
+ numpages = {2},
+ url-skip = {http://doi.acm.org/10.1145/2185677.2185721},
+ doi = {10.1145/2185677.2185721},
+ acmid = {2185721},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+	abstract = {In this work we expose the challenges of interfacing both conventional and new
+		systems with an extremely resource constrained platform. We find that even when
+			attempts are made to utilize an industry standard protocol (I2C), necessary
+			protocol modifications for ultra-low power design means that interfacing remains
+			non-trivial.
+
+			We present a functional 0.4mm~x~0.8mm ARM Cortex~M0 with 3KB of RAM, 24~GPIOs,
+			and an ultra-low power I2C interface. This chip is part of the Michigan Micro
+			Mote (M3) project, which is designed to build a complete software and hardware
+			platform for general purpose sensing at the millimeter scale. We demo an I2C
+			interface circuit allowing commercial hardware to program and interact with the
+			chip and present the beginning of the millimeter scale sensing revolution.
+	},
+	conference-url = {\url{http://ipsn.acm.org/2012/poster.html}},
+}

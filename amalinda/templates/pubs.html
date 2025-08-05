@@ -1,0 +1,29 @@
+{% extends "header.html" %}
+{% set active_page = 'publications' %}
+{% block title %}Publications{% endblock %}
+
+
+{% block content %}
+
+<div class="page-header">
+  <h1><a href="" style="color: inherit;">Amalinda Gamage</a></h1>
+</div>
+
+<p class="lead">
+My <a href="cv/amalinda.pdf">full CV <i class="fa fa-file-pdf-o"></i></a> is also available, though may not yet include newest publications.
+</p>
+
+<div class="offset-sm-1 col-sm-10">
+  {{ filters['type'] }}
+</div>
+
+<hr />
+
+{{ pubs }}
+
+{% endblock %}
+
+
+{% block footer %}
+{{ footer }}
+{% endblock %}

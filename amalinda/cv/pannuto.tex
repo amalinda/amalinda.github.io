@@ -1,0 +1,637 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
+
+\usepackage[%
+  backend=biber,
+  %style=numeric,
+  sorting=none,
+  minnames=15,
+  maxnames=25,
+  defernumbers=true,
+]{biblatex}
+
+\usepackage[ttscale=.875]{libertine} \usepackage[T1]{fontenc}
+
+\usepackage{bold-extra}   % Provides bf+sc (only in textbf+textsc env.)
+\usepackage{calc}         % Do math in tex (used for percent calculation)
+\usepackage{comment}      % Provides \begin,\end{comment} for large blocks
+\usepackage{longtable}    % Tables that spans pages
+\usepackage{makecell}     % Multi-line table cells
+\usepackage[protrusion=true,expansion=true,kerning,spacing]{microtype} % better type, spacing
+\usepackage{tabularx}     % Complicated table creation
+\usepackage{textcomp}     % Missing UTF characters
+\usepackage[sc]{titlesec}
+\usepackage{url}          % Pretty printing of hyperlinks
+\usepackage[usenames,dvipsnames,svgnames]{xcolor} % Allow the use and definition of colors
+\usepackage{xparse}       % For doing math (acceptance percentage in particular)
+\usepackage{xspace}
+\usepackage{xstring}
+
+% The hyperref package must loaded last. Can conflict with some packages, see:
+% README ( http://ctan.mackichan.com/macros/latex/contrib/hyperref/README.pdf )
+\usepackage[colorlinks=true,citecolor=violet,urlcolor=Navy]{hyperref}     % Creates hyperlinks from ref/cite
+\hypersetup{pdfstartview=FitH} % Sets default zoom to 100% width
+
+% Break URLs properly (thanks to Alex Halderman)
+\def\UrlBreaks{\do-\do\.\do\@\do\\\do\!\do\_\do\|\do\;\do\>\do\]\do\)\do\,\do\?\do\'\do+\do\=\do\#}
+\def\UrlBigBreaks{\do\:\do\/}
+
+% Some macros that a broadly useful:
+\newcommand{\uW}{{\textmu}W\xspace}
+\newcommand{\uA}{{\textmu}A\xspace}
+\newcommand{\um}{{\textmu}m\xspace}
+\newcommand{\us}{{\textmu}s\xspace}
+\newcommand{\uF}{{\textmu}F\xspace}
+\newcommand{\uJ}{{\textmu}J\xspace}
+\newcommand{\iic}{I$^2$C\xspace}
+\newcommand{\vdd}{V$_{\textnormal{DD}}$\xspace}
+
+% Don't typset URLs in tt font
+\urlstyle{sf}
+
+\addbibresource{journals.bib}
+\addbibresource{conferences.bib}
+\addbibresource{workshops.bib}
+\addbibresource{posterdemo.bib}
+
+% Longtable adds more padding than tabular by default, change to match tabular's no-padding
+\setlength{\LTpre}{0pt}
+%\setlength{\LTpost}{0pt} -- Actually, bottom padding is good
+
+% Configure makecell cells to be top-left aligned
+\renewcommand{\cellalign}{tp{5.75in}}
+
+% Custom bibtex keys, from
+% http://tex.stackexchange.com/questions/111846/biblatex-2-custom-fields-only-one-is-working
+\DeclareSourcemap{
+  \maps[datatype=bibtex,overwrite=true]{
+    \map{
+      \step[fieldsource=acceptance-total]
+      \step[fieldset=usera,origfieldval]
+    }
+    \map{
+      \step[fieldsource=acceptance-accepted]
+      \step[fieldset=userb,origfieldval]
+    }
+    \map{
+      \step[fieldsource=acceptance-total]
+      \step[fieldset=acceptance-accepted,append=true,fieldvalue=/]
+      \step[fieldset=acceptance-accepted,append=true,origfieldval]
+      \step[fieldsource=acceptance-accepted]
+      \step[fieldset=userc,append=true,origfieldval]
+    }
+    \map{
+      \step[fieldsource=extra]
+      \step[fieldset=userd,origfieldval]
+    }
+    \map{
+      \step[fieldsource=acceptance-percent]
+      \step[fieldset=usere,origfieldval]
+    }
+  }
+}
+
+\ExplSyntaxOn
+\NewDocumentCommand{\myMathFunction}{m}
+{ \fp_eval:n {round((#1)*100)} }
+\ExplSyntaxOff
+
+\DeclareFieldFormat{userc}{\myMathFunction{#1}\%}
+
+\AtEveryBibitem{%
+  \csappto{blx@bbx@\thefield{entrytype}}{% put at end of entry
+    \iffieldundef{usera}{%
+%    \space \textbf{No annotation!}}{%
+    }{%
+      \\Acceptance:%
+      \space\printfield{userb}~/~\printfield{usera}%
+      \space(\printfield{userc}).
+    }
+    \iffieldundef{usere}{%
+    }{%
+      \\Acceptance:%
+      \space\printfield{usere}\%.
+    }
+    \iffieldundef{userd}{%
+      %
+    }{%
+      \textbf{\\\color{BrickRed}\printfield{userd}.}
+    }
+  }
+}
+
+% https://tex.stackexchange.com/questions/297087/putting-the-title-first-in-the-bibliography
+\newcommand{\nameuse}[1]{%
+  \def\do##1{\settoggle{blx@use##1}{#1}}%
+  \dolistcsloop{blx@datamodel@names}}
+
+\newcommand{\nameusesave}{%
+  \def\do##1{%
+    \providetoggle{blx@save@use##1}%
+    \iftoggle{blx@use##1}{\toggletrue{blx@save@use##1}}{\togglefalse{blx@save@use##1}}%
+  }%
+  \dolistcsloop{blx@datamodel@names}}
+
+\newcommand{\nameuserestore}{%
+  \def\do##1{%
+    \iftoggle{blx@save@use##1}{\toggletrue{blx@use##1}}{\togglefalse{blx@use##1}}%
+  }%
+  \dolistcsloop{blx@datamodel@names}}
+
+\begin{document}
+
+\nocite{*}
+
+\begin{table}
+  \centering
+  \begin{tabular}{c}
+    \textsc{\LARGE Pat Pannuto} \\
+    \\
+    \textsc{\large May 24, 2021}
+  \end{tabular}
+\end{table}
+
+\begin{table*}
+  \centering
+  \begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} r}
+    3202 EBU3                          & \href{tel:+18588222924}{Tel: +1.858.822.2924} \\
+    9500 Gilamn Dr                     & \href{mailto:ppannuto@ucsd.edu}{ppannuto@ucsd.edu} \\
+    San Diego, CA 92093                & \url{https://patpannuto.com} \\
+  \end{tabular*}
+\end{table*}
+
+
+
+%\section*{Research Interests and Overview}
+%
+%\begin{itemize}
+%  \item[]
+%    From mainframes to wearables Bell's law captures the march of progress,
+%    noting the emergence of a new computing class roughly every decade.  My
+%    research explores what will be required to keep enabling these next
+%    generations of computing, how insights from the emerging centimeter-scale
+%    and nascent millimeter-scale computing class can solve problems across all
+%    domains, and how our expectations and interactions with technology will
+%    shift as we begin to realize the ubiquitous computing vision.
+%
+%  \item[]
+%    The \textbf{MBus} project considers this from an architectural
+%    perspective, finding fundamental area and energy constraints in current
+%    interconnect technologies and demonstrating that shifting system
+%    management into the interconnect can simplify both system and circuit
+%    design.
+%
+%    \textbf{Slocalization}, the first FCC-compliant ultra wideband backscatter
+%    platform, is motivated by deployment challenges, giving one answer for how
+%    we might manage the deployment of millions of miniature sensors.  It
+%    demonstrates decimeter-accurate sub-microwatt whole-room concurrent
+%    localization, creates a novel integration technique to recover signals
+%    from far below the noise floor, and introduces the energy versus latency
+%    tradeoff for systems design.
+%
+%    \textbf{Harmonium} explores how to efficiently design an active ultra
+%    wideband tag, empowering opportunistic high-fidelity tracking, and first
+%    introduced the bandstitching technique that allows access to the ultra
+%    wideband channel using widely-available narrowband frontends.
+%
+%    \textbf{SurePoint} investigates diversity in the ultra wideband channel,
+%    efficient protocols to capture multiple independent samples, and is the
+%    first to demonstrate constructive interference with 802.15.4a.
+%
+%    The \textbf{Tock} operating system answers questions of management,
+%    bringing proper process isolation to embedded systems via new hardware and
+%    language features that afford safety. Tock addresses fundamental
+%    robustness and adaptability tensions with the introduction of grants, a
+%    mechanism for a statically allocated kernel to safely perform dynamic
+%    allocations in process memory.
+%
+%    \textbf{Luxapose} shows how the smartphone camera can recover data from
+%    visible lights using the rolling shutter effect and realize
+%    centimeter-accurate position and single-degree accurate orientation from
+%    the projection of these lights on the camera imager.
+%
+%    \textbf{Opo} crafts a novel, highly efficient ultrasonic wakeup
+%    frontend that enables a new broadcast ranging primitive, affording
+%    infrastructure-free human interaction tracking with high spatio-temporal
+%    fidelity.
+%
+%    %aiming to understand how our interaction and utilization of technology
+%    %will shift as computing becomes omnipresent and its operation and
+%    %interaction shifts from conscious action to unconscious extension of
+%    %perception and ability.
+%    %What advancements will most change how people interact with themselves,
+%    %the world, and one another, and what innovations facilitate these paradigm
+%    %shifts?
+%\end{itemize}
+
+
+\section*{Academic Appointments}
+
+\begin{itemize}
+  \item[]
+    \textbf{University of California San Diego}, San Diego, CA (2019--present) \\
+    Assistant Professor, Computer Science Engineering
+\end{itemize}
+
+\section*{Research Interests}
+\begin{itemize}
+  \item[] Embedded Systems, Computer Architecture, Wireless Communications, Mobile Computing, Operating Systems, and Development Engineering
+\end{itemize}
+
+\section*{Education}
+
+\begin{itemize}
+  \item[]
+    \textbf{University of California, Berkeley}, Berkeley, CA (2017--2020) \\
+    Ph.D. in Electrical Engineering and Computer Sciences \\
+    Advisor: Prabal Dutta
+
+  \item[]
+    \textbf{University of Michigan}, Ann Arbor, MI (2012--2017) \\
+    M.Eng. in Computer Science \\
+    Advisor: Prabal Dutta
+
+  \item[]
+    \textbf{University of Michigan}, Ann Arbor, MI (2007--2012) \\
+    B.S.Eng. in Computer Engineering
+\end{itemize}
+
+
+
+
+\section*{Awards and Honors}
+
+\subsection*{Fellowships}
+
+\renewcommand{\arraystretch}{0.5}
+\begin{tabular}{>{\bf}p{1cm} l}
+  2013 & \makecell{Qualcomm Innovation Fellowship (Honorable Mention), joint with Bradford Campbell, \$50,000} \\
+  \\
+
+  2013 & \makecell{National Defense Science \& Engineering Graduate Fellowship (NDSEG), \$95,000 plus tuition} \\
+  \\
+
+  2013 & \makecell{National Science Foundation Graduate Research Fellowship (NSF~GRFP), \$90,000 plus tuition} \\
+  \\
+
+  2012 & \makecell{University of Michigan Department of Computer Science First-Year Fellowship} \\
+\end{tabular}
+\renewcommand{\arraystretch}{1.0}
+
+\subsection*{Publication Awards}
+\renewcommand{\arraystretch}{0.5}
+\begin{tabular}{>{\bf}p{1cm} l}
+  2018 & \makecell{Best Paper Finalist, The 17th ACM/IEEE International Conference on Information Processing in Sensor Networks} \\
+  \\
+
+  2017 & \makecell{David Wessel Best Demo Award, TerraSwarm Annual Review} \\
+  \\
+
+  2016 & \makecell{IEEE Micro Top Pick in Computer Architecture} \\
+  \\
+
+  2016 & \makecell{Outstanding Poster Award, Twelfth International Nanotechnology Conference on Communication and Cooperation} \\
+  \\
+
+  2015 & \makecell{Potential for Test of Time 2025 Award, The 2nd ACM Workshop on Hot Topics in Wireless} \\
+\end{tabular}
+\renewcommand{\arraystretch}{1.0}
+
+
+\subsection*{Teaching Honors}
+\renewcommand{\arraystretch}{0.5}
+\begin{tabular}{>{\bf}p{1cm} l}
+  2017 & \makecell{University of Michigan Rackham Graduate School Outstanding Graduate Student Instructor} \\
+  \\
+
+  2017 & \makecell{University of Michigan College of Engineering Richard \& Eleanor Towner Prize for Outstanding Graduate Student Instructors} \\
+  \\
+
+  2012 & \makecell{Best Undergraduate Instructor, University of Michigan, EECS} \\
+\end{tabular}
+\renewcommand{\arraystretch}{1.0}
+
+
+
+\section*{Advising and Mentoring}
+
+\renewcommand{\arraystretch}{0.5}
+\begin{tabular}{>{\bf}p{1cm} l}
+  2018 & \makecell{
+    \href{https://n.ethz.ch/~abiri/}{Andreas Biri}, (M.Sc.; went on to Ph.D. program at ETH Z\"urich)\\
+    Thesis: ``TotTernary: A wearable platform for social interaction tracking''
+  } \\
+
+  \\
+
+  2014 & \makecell{
+    Noah Nuechterlein, (undergraduate independent study): Applied computer vision
+  } \\
+\end{tabular}
+\renewcommand{\arraystretch}{1.0}
+
+\section*{Teaching Experience}
+
+\renewcommand{\arraystretch}{0.5}
+\begin{tabular}{>{\bf}p{2.1cm} l}
+  \makecell*[{{p{2.1cm}}}]{
+    \raggedright
+    2020 Fall
+  } & \makecell{
+    \textbf{Primary Instructor},
+    \href{https://patpannuto.com/classes/2020/fall/cse141/}%
+    {CSE 141: Introduction to Computer Architecture}
+  } \\
+
+  \makecell*[{{p{2.1cm}}}]{
+    \raggedright
+    2020 Fall
+  } & \makecell{
+    \textbf{Primary Instructor},
+    \href{https://sites.google.com/eng.ucsd.edu/embeddedlunch/}%
+    {CSE 290: Seminar on Topics in Embedded Systems}
+  } \\
+
+  \makecell*[{{p{2.1cm}}}]{
+    \raggedright
+    2020 Winter
+  } & \makecell{
+    \textbf{Primary Instructor},
+    \href{https://patpannuto.com/classes/2020/winter/cse291/}%
+    {CSE 291: Platforms \& Systems to Bridge the Digital \& Physical World}
+  } \\
+
+  \makecell*[{{p{2.1cm}}}]{
+    \raggedright
+    2016 Fall
+    2016 Winter
+  } & \makecell*[{{p{5.5in}}}]{
+    \textbf{Primary Instructor}, EECS\,398: Computing for Computer Scientists \\[.5em]
+        A new class designed and built from scratch. This class attempts
+        to address the experience gap that exists across the spectrum of
+        incoming Computer Science students. While driven by tools (shells,
+        build systems, debuggers, version control), it explores how and why
+        computer scientists interface with computers differently in their
+        day-to-day activities, how to apply principles learned in courses to
+        everyday activities, and ultimately how to be a more efficient user of
+        computing resources.  \\[5.5em]
+        This course has been adopted as part of the permanent curriculum
+        at the University of Michigan as EECS\,201: Computing Pragmatics, an
+        advised co-requisite for first-year EECS majors. \\[1.5em]
+        \url{https://c4cs.github.io} \\[.5em]
+        \emph{In 2017, I was awarded the Rackham Graduate School Outstanding Graduate Student Instructor and the College of Engineering Richard \& Eleanor Towner Prize for Outstanding Graduate Student Instructors for this course.} \\
+  } \\
+
+  \\
+
+  \makecell*[{{p{2.1cm}}}]{
+    \raggedright
+    2015 Fall
+    2015 Winter
+  } & \makecell{
+    \textbf{Graduate Teaching Assistant}, EECS\,373: Design of Microprocessor Based Systems
+  } \\
+
+  \\
+
+  \makecell*[{{p{2.1cm}}}]{
+    \raggedright
+    2012 Winter
+  } & \makecell{
+    \textbf{Undergraduate Teaching Assistant}, EECS\,470: Computer Architecture (W12)
+  } \\
+
+  \\
+
+  \makecell*[{{p{2.1cm}}}]{
+    \raggedright
+    2012 Winter
+    2011 Fall
+    2011 Winter
+    2010 Fall
+  } & \makecell{
+    \textbf{Undergraduate Teaching Assistant}, EECS\,482: Introduction to Operating Systems
+  } \\
+
+  \\
+
+  \makecell*[{{p{2.1cm}}}]{
+    \raggedright
+    2011 Fall
+    2011 Winter
+  } & \makecell{
+    \textbf{Undergraduate Teaching Assistant}, EECS\,373: Design of Microprocessor Based Systems
+  } \\
+\end{tabular}
+\renewcommand{\arraystretch}{1.0}
+
+
+\section*{Professional Service}
+
+\renewcommand{\arraystretch}{0.5}
+
+\begin{longtable}{>{\bf}p{2.1cm} l}
+  2021          & \makecell{The 20th International Conference on Information Processing in Sensor Networks (IPSN) -- TPC Member} \\
+  \\
+
+  2020          & \makecell{8th International Workshop on Energy Harvesting \& Energy-Neutral Sensing Systems (ENSsys) -- TPC Member} \\
+  \\
+
+  2020          & \makecell{The 3rd Workshop on Benchmarking Cyber-Physical Systems and Internet of Things (CPS-IoTBench 2020) -- TPC Member} \\
+  \\
+
+  2019          & \makecell{ACM Workshop on Data Acquisition to Analysis (DATA\,19) -- Conference Organizer \& PC Chair} \\
+  \\
+
+  2019--present & \makecell{Recurring reviewer for IEEE/ACM Transactions on Networking (TNET)} \\
+  \\
+
+  2018          & \makecell{ACM Workshop on Data Acquisition to Analysis (DATA\,18) -- TPC Member} \\
+  \\
+
+  2014--2016    & \makecell{Recurring reviewer for IEEE Transactions on Mobile Computing (TMC)} \\
+  \\
+
+  2015--2016    & \makecell{Computer Science Engineering Student Faculty Representative} \\
+  \\
+
+  2013--2015    & \makecell{Computer Science Engineering Graduate Student Body President} \\
+  \\
+
+  2015          & \makecell{Recurring reviewer for USAID Development Innovation Ventures (DIV)} \\
+  \\
+
+  2014          & \makecell{ACM Workshop on Visible Light Communication Systems -- Demo Co-Chair} \\
+  \\
+
+  2013--2014    & \makecell{Recurring reviewer for IEEE Transactions on Circuits and Systems II (TCAS-II)} \\
+  \\
+\end{longtable}
+
+\renewcommand{\arraystretch}{1.0}
+
+
+
+\section*{Invited Presentations}
+
+\renewcommand{\arraystretch}{0.5}
+\begin{longtable}{>{\bf}p{1cm} l}
+  2020 & \makecell{
+    \textbf{Panel: Benchmarking IoT for social distancing solutions} \\
+    The 3rd Workshop on Benchmarking Cyber-Physical Systems and Internet of Things (CPS-IoTBench 2020) \\
+    \textbf{\color{BrickRed} Invited Panelist} \\
+  } \\
+
+  \\
+
+  2019 & \makecell{
+    \textbf{Planes, Trains, Apples, and Oranges: Reproducible Results and Fair Comparisons in Localization Research} \\
+    2nd Workshop on Benchmarking Cyber-Physical Systems and Internet of Things (CPS-IoTBench'19) \\
+    \textbf{\color{BrickRed} Invited Talk} \\
+  } \\
+
+  \\
+
+  2019 & \makecell{
+    \textbf{A Modular Platform for Nanopower Computing} \\
+    IBM Research; Yorktown Heights, New York \\
+    ETH Z\"urich; Z\"urich, Switzerland \\
+    University of Michigan; Ann Arbor, Michigan \\
+    University of California, Los Angeles; Los Angeles, California \\
+    University of Wisconsin-Madison; Madison, Wisconsin \\
+    Cornell University; Ithaca, New York \\
+    Princeton University; Princeton, New Jersey \\
+    Carnegie Mellon University; Pittsburgh, Pennsylvania \\
+    Massachusetts Institute of Technology; Cambridge, Massachusetts \\
+    University of Washington; Seattle, Washington \\
+    University of California, San Diego; San Diego, California \\
+    Northwestern University; Evanston, Illinois \\
+    \textbf{\color{BrickRed} Invited Talk} \\
+  } \\
+
+  \\
+
+  2016 & \makecell {
+    \textbf{MBus: A power-aware interconnect for ultra-low power micro-scale system design} \\
+    DARPA Near Zero Power RF and Sensor Operations (N-ZERO) Program Review; Santa Barbara, California \\
+    \textbf{\color{BrickRed} Invited Talk} \\
+  } \\
+
+  \\
+
+  2016 & \makecell{
+    \textbf{Ultra Wideband and Indoor Localization} \\
+    3rd ACM Workshop on Hot Topics in Wireless (HotWireless'16); New York City, New York \\
+    \textbf{\color{BrickRed} Invited Talk}
+  } \\
+
+  \\
+
+  2016 & \makecell{
+    \textbf{The Recent Past and Distant Future of [Micro-Scale] Embedded Systems} \\
+    NextMote: Next Generation Platforms for the Cyber-Physical Internet, part of the International Conference on Embedded Wireless Systems and Networks (EWSN'16); Graz, Austria \\
+    \textbf{\color{BrickRed} Keynote Address} \\
+  } \\
+
+  \\
+
+  2016 & \makecell{
+    \textbf{PolyPoint and the First Steps Towards Ubiquitous Localization} \\
+    Student Summit on Mobility, Systems, and Networking, Microsoft Research; Petaluma, California \\
+  } \\
+
+  \\
+
+  2015 & \makecell{
+    \textbf{Sensor Systems and the Art of Effectively Deploying Sensor Networks} \\
+    TechChange TC111: Technology for Monitoring and Evaluation; Online \\
+    \textbf{\color{BrickRed} Invited Guest Speaker} \\
+  } \\
+
+  \\
+
+  2014 & \makecell{
+    \textbf{Embedded System Design and the Internet of Things} \\
+    Stanford Internet of Things Industrial Research Program; Stanford, California \\
+    \textbf{\color{BrickRed} Invited Talk} \\
+  } \\
+
+  \\
+
+  2014 & \makecell{
+    \textbf{Sensing Technologies for Data Collection and Monitoring} \\
+    State of the Science, Development Impact Lab (DIL) and USAID Higher Education Solutions Network (HESN); Washington, D.C. \\
+    \textbf{\color{BrickRed} Invited Talk} \\
+  } \\
+
+  \\
+
+  2013 & \makecell{
+    \textbf{MBus: Enabling the Next Generation of Sensors and Systems} \\
+    TerraSwarm Annual Meeting; Berkeley, California \\
+  } \\
+\end{longtable}
+
+\renewcommand{\arraystretch}{1.0}
+
+
+
+\section*{References}
+
+\begin{tabularx}{\textwidth}{X X X}
+  \textbf{\href{https://people.eecs.berkeley.edu/~prabal/}{Prabal Dutta}} &
+  \textbf{\href{https://users.ece.cmu.edu/~agr/}{Anthony Rowe}}           &
+  \textbf{\href{https://blaauw.engin.umich.edu/}{David Blaauw}}           \\
+  %Associate Professor   & Associate Professor        & Professor               \\
+  UC Berkeley           & Carnegie Mellon University & University of Michigan  \\
+  \href{mailto:prabal@berkeley.edu}{prabal@berkeley.edu}   &
+  \href{mailto:agr@ece.cmu.edu}{agr@ece.cmu.edu}           &
+  \href{mailto:blaauw@umich.edu}{blaauw@umich.edu}         \\[.5em]
+  550C Cory Hall        & CIC 2312                   & 2417C EECS              \\
+  UC Berkeley           & 4720 Forbes Ave            & 1301 Beal Ave           \\
+  Berkeley, CA 94720    & Pittsburgh, PA 15213       & Ann Arbor, MI 48109     \\
+  +1.510.664.9004       & +1.412.268.4340            & +1.734.763.4526         \\
+  \\
+  \textbf{\href{http://csl.stanford.edu/~pal/}{Philip Levis}} &
+  \textbf{\href{https://amitlevy.com/}{Amit Levy}}            \\
+  %Associate Professor   & Assistant Professor        \\
+  Stanford University   & Princeton University       \\
+  \href{mailto:pal@cs.stanford.edu}{pal@cs.stanford.edu}**          &
+  \href{mailto:aalevy@cs.princeton.edu}{aalevy@cs.princeton.edu}    \\
+  ~\emph{**Please send reference}\\
+  ~\emph{solicitations to Ann Harara}\\
+  ~\emph{\href{mailto:ann1083@stanford.edu}{ann1083@stanford.edu}}\\[.5em]
+  409 Gates Hall        & 307 Computer Science       \\
+  Stanford University   & 35 Olden Street            \\
+  Stanford, CA 94305    & Princeton, NJ 08540        \\
+  +1.650.725.9046       & +1.609.258.8701            \\
+\end{tabularx}
+
+
+% multibib style labels with biblatex, from
+% http://tex.stackexchange.com/questions/29780/
+\nameusesave
+\nameuse{false}
+\newrefcontext[labelprefix={J}]
+\printbibliography[keyword=journal,heading=subbibliography,title={\Large Journal Publications}]
+\newrefcontext[labelprefix={C}]
+\printbibliography[keyword=conf,heading=subbibliography,title={\Large Conference Publications}]
+\newrefcontext[labelprefix={W}]
+\printbibliography[keyword=workshop,heading=subbibliography,title={\Large Workshop Publications}]
+\newrefcontext[labelprefix={PD}]
+\printbibliography[keyword=posterdemo,heading=subbibliography,title={\Large Posters and Demos}]
+\nameuserestore
+
+
+%{\bf {\em Talks and Lectures}}
+%
+%\begin{enumerate}
+%
+%\item ``Sensing Technologies for Data Collection and Monitoring''. Invited
+%  Talk, State of the Science, Georgetown. March 2014
+%\item ``An Introduction to Git''. Invited Lecture, Michigan Hackers,
+%University of Michigan. April 2012
+%
+%\end{enumerate}
+
+\end{document}

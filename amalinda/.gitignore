@@ -1,0 +1,9 @@
+html/
+__pycache__
+venv/
+
+# Local Netlify folder
+.netlify
+
+# Word temp files
+~*

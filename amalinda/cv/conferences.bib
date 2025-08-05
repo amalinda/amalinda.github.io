@@ -1,0 +1,733 @@
+@inproceedings{yen2022effiSenseSee,
+  keywords={conf},
+  title = {EffiSenseSee: Towards Classifying Light Bulb Types and Energy Efficiency with Camera-Based Sensing},
+  author = {Yen, Alex and Shah, Zeal and Ochoa, Benjamin and \textbf{Pannuto}, \textbf{Pat} and Taneja, Jay},
+  booktitle = {Proceedings of the 9th ACM Conference on Embedded Systems for Energy-Efficient Buildings},
+  series = {BuildSys'22},
+  year = {2022},
+  month = {11},
+  isbn = {978-1-4503-9890-9/22/11},
+  location = {Boston, MA, USA},
+  doi = {10.1145/3563357.3564062},
+  publisher = {ACM},
+  address = {New York, NY, USA},
+  conference-url = {http://www.buildsys.org/2022/},
+  abstract = {
+    EffiSenseSee is a means to identify energy-inefficient lighting infrastructure lingering in our built environment.
+      When light bulbs convert incoming AC power into visible light, a carefully designed camera can ``see'' some of the original AC signal in the varying light intensity.
+      Using a large corpus of over 60 bulbs, we show that based solely on analysis of subtleties in observed light output, previously unseen bulbs can be classified as energy-efficient or energy-inefficient with over 95\% accuracy.
+      With 89\% accuracy, EffiSenseSee can group bulbs into incandescent, halogen, CFL, or LED—the four primary categories measured by regulatory bodies.
+      We then investigate how to bring this technology ``out of the lab.''
+      In an outdoor setting with a commodity camera, EffiSenseSee identifies inefficient bulbs with 74\% accuracy.
+  },
+}
+
+@inproceedings{marcano2022iscasMFCs,
+  keywords={conf},
+  author = {Marcano, Gabriel and Josephson, Colleen, and \textbf{Pannuto}, \textbf{Pat}},
+  title={Early Characterization of Soil Microbial Fuel Cells},
+  booktitle = {IEEE International Symposium on Circuits and Systems (ISCAS) Special Session on Smart Agriculture},
+  series = {ISCAS'22},
+  year = {2022},
+  month = {5},
+  publisher = {IEEE},
+  conference-url={\url{https://www.iscas2022.org/}},
+  abstract = {
+    This paper discusses experiments on soil-based microbial fuel cells (MFCs) as energy scavenging sources.
+    We explain the mechanism of operation for MFCs, perform controlled laboratory experiments of MFCs, and deploy a small-scale in-situ pilot in an active farm.
+    We find that traditional energy harvester ICs draw power too aggressively, which reduces overall energy capture.
+    We show that isolated MFCs can be combined in series or parallel to improve the voltage or current output of the harvesting source.
+    Lastly, we observe that under a real-world, drip-irrigated agricultural setting, MFC output is appreciably lower, but consistent at 0.5-2 microwatts.
+  },
+  acceptance-accepted=5,
+  acceptance-total=5,
+}
+
+@inproceedings{jagtapyen2021helium,
+ keywords={conf},
+ author = {Jagtap, Dhananjay and Yen, Alex and Wu, Huanlei and Schulman, Aaron and \textbf{Pannuto}, \textbf{Pat}},
+ title = {Federated Infrastructure: Usage, Patterns, and Insights from ``The People's Network''},
+ booktitle = {ACM Internet Measurement Conference 2021},
+ series = {IMC'21},
+ year = {2021},
+ month = {11},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ conference-url={\url{https://conferences.sigcomm.org/imc/2021/}},
+ abstract = {
+   In this paper, we provide the first broad measurement study of the operation, adoption, performance, and efficacy of Helium.
+   The Helium network aims to provide low-power, wide-area network wireless
+coverage for Internet of Things-class devices.
+   In contrast to traditional infrastructure, ``hotspots'' (base stations) are owned and
+operated by individuals who are paid by the network for
+providing coverage and are paid directly by users for ferrying data.
+
+   As of May, 2021, Helium has over 40,000 active hotspots with 1,000 new hotspots coming online every day.
+   This deployment is decentralized -- 84\% of users own at most three hotspots.
+   Some support infrastructure remains highly centralized, however, with over 99\% of data traffic routed through one cloud endpoint and multiple cities in which all hotspots rely on one ISP for backhaul.
+   Helium is largely speculative today with more hotspot activity than user activity.
+   Crowdsourced, incentive-guided infrastructure deployment largely works but shows evidence of gamification and apathy.
+   As Helium lacks clear, radio-oriented coverage maps, we develop and test coverage models based on network incentives.
+   Finally, empirical testing with IoT devices finds basic success, but uncovers numerous reliability issues.
+ },
+  acceptance-accepted=55,
+  acceptance-total=196,
+}
+
+@inproceedings{jagtap2021cathodicprotection,
+ keywords={conf},
+ author = {Jagtap, Dhananjay and \textbf{Pannuto}, \textbf{Pat}},
+ title = {Repurposing Cathodic Protection Systems as Reliable, in-situ, Ambient Batteries for Sensor Networks},
+ booktitle = {Proceedings of the 20th ACM/IEEE International Conference on Information Processing in Sensor Networks},
+ series = {IPSN'21},
+ year = {2021},
+ month = {5},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ conference-url={\url{http://ipsn.acm.org/2021/}},
+ abstract = {
+  Generally, infrastructure is susceptible to, and therefore must
+  constantly combat, corrosion.
+  The monitoring and maintenance of
+  corrosion protection (or the consequences of its unchecked failure) is often
+  one of the leading costs of infrastructure upkeep.
+  Galvanic cathodic protection is a common corrosion control technique
+  that is employed in applications from home appliances to boats to bridges.
+  At its core, however, galvanic cathodic protection is simply an
+  electrochemical cell---that is, a battery.
+  This presents an opportunity to treat this corrosion protection as an
+  in-situ power source that \emph{by definition} will last as long as the
+  protection system itself.
+  In this paper, we explore the efficacy of these pervasive, ``ambient
+  galvanic cells'' as potential energy harvesting sources.
+  We then show how to use these cells as a power source for wireless sensing
+  devices that monitor the health of the same corrosion protection system.
+  Our system takes advantage of newly available LPWAN technologies that allow
+  for effortless wide-area coverage.
+  We demonstrate the viability and efficacy of the system on one of the most
+  common galvanic cathodic protection systems, home hot water heaters.
+  We show that this technique can be a powerful new asset for corrosion
+  monitoring and for deploying wireless sensor networks broadly.
+ },
+  acceptance-accepted=26,
+  acceptance-total=105,
+}
+
+@inproceedings{biri2020socitrack,
+  keywords={conf},
+  author = {Biri, Andreas and Jackson, Neal and Thiele, Lothar and \textbf{Pannuto}, \textbf{Pat} and Dutta, Prabal},
+  title = {SociTrack: Infrastructure-Free Interaction Tracking through Mobile Sensor Networks},
+  year = {2020},
+  month={9},
+  isbn = {9781450370851},
+  publisher = {Association for Computing Machinery},
+  address = {New York, NY, USA},
+  url = {https://doi.org/10.1145/3372224.3419190},
+  doi = {10.1145/3372224.3419190},
+  abstract = {Social scientists, psychologists, and epidemiologists use empirical human interaction data to research human behaviour, social bonding, and disease spread. Historically, systems measuring interactions have been forced to choose between deployability and measurement fidelity---they operate only in instrumented spaces, under line-of-sight conditions, or provide coarse-grained proximity data. We introduce SociTrack, a platform for autonomous social interaction tracking via wireless distance measurements. Deployments require no supporting infrastructure and provide sub-second, decimeter-accurate ranging information over multiple days. The key insight that enables both deployability and fidelity in one system is to decouple node mobility and network management from range measurement, which results in a novel dual-radio architecture. SociTrack leverages an energy-efficient and scalable ranging protocol that is accurate to 14.8 cm (99th percentile) in complex indoor environments and allows our prototype to operate for 12 days on a 2000 mAh battery. Finally, to validate its deployability and efficacy, SociTrack is used by early childhood development researchers to capture caregiver-infant interactions.},
+  booktitle = {Proceedings of the 26th Annual International Conference on Mobile Computing and Networking},
+  articleno = {33},
+  numpages = {14},
+  location = {London, United Kingdom},
+  conference-url={http://www.sigmobile.org/mobicom/2020/},
+  series = {MobiCom '20},
+  acceptance-accepted=62,
+  acceptance-total=384,
+}
+
+@inproceedings{klugman19scale,
+  keywords={conf},
+  author={Klugman, Noah and Adkins, Joshua and Berkouwer, Susanna and Abrokwah, Kwame and Bobashev, Ivan and \textbf{Pannuto}, \textbf{Pat} and Podolsky, Matthew and Susenot, Aldo and Thatte, Revati and Wolfram, Catherine and Taneja, Jay and Dutta, Prabal},
+  booktitle={ACM SIGCAS Conference on Computing and Sustainable Societies},
+  title={Hardware, Apps, and Surveys at Scale: Insights from Measuring Grid Reliability in Accra, Ghana},
+  series={COMPASS'19},
+  year={2019},
+  month={7},
+  location={Accra, Ghana},
+  conference-url={https://acmcompass.org/},
+  abstract={
+    The vision of sensor systems that collect critical and previously ungathered
+      information about the world is often only realized when sensors, students,
+    and subjects move outside the academic laboratory. However, deployments at
+      even the smallest scales introduce complexities and risks that can be
+      difficult for a research team to anticipate. Over the past year, our
+      interdisciplinary team of engineers and economists has been designing,
+    deploying, and operating a large sensor network in Accra, Ghana that
+      measures power outages and quality at households and firms. This network
+      consists of 457 custom sensors, over 3,000 mobile app instances,
+    thousands of participant surveys, and custom user incentive and
+      deployment management systems. In part, this deployment supports an
+      evaluation of the impacts of investments in the grid on reliability and
+      the subsequent effects of improvements in reliability on
+      socioeconomic well-being. We report our experiences as we move from
+      performing small pilot deployments to our current scale, attempting to
+      identify the pain points at each stage of the deployment. Finally, we
+      extract high-level observations and lessons learned from our
+      deployment activities, which we wish we had originally known when
+      forecasting budgets, human resources, and project timelines. These
+      insights will be critical as we look toward scaling our deployment to the
+      en-tire city of Accra and beyond, and we hope that they will encourage and
+      support other researchers looking to measure highly granular information
+      about our world’s critical systems.
+  },
+  acceptance-accepted=25,
+  acceptance-total=50,
+}
+
+@inproceedings{oh2019IoT2,
+  keywords={conf},
+  author={Oh, Sechang and Cho, Minchang and Wu, Xiao and Kim, Yejoong and Chuo, Li-Xuan and Lim, Wootaek and \textbf{Pannuto}, \textbf{Pat} and Bang, Suyoung and Yang, Kaiyuan and Kim, Hun-Seok and Sylvester, Dennis and Blaauw, David},
+  booktitle={2019 Design, Automation Test in Europe Conference Exhibition},
+  series={DATE'19},
+  title={IoT2 -- the Internet of Tiny Things: Realizing mm-Scale Sensors through 3D Die Stacking},
+  year={2019},
+  volume={},
+  number={},
+  pages={686-691},
+  doi={10.23919/DATE.2019.8715201},
+  ISSN={1558-1101},
+  month={3},
+  conference-url={https://www.date-conference.com/},
+  abstract={
+      The Internt of Things (IoT) is a rapidly evolving application space. One
+      of the fascinating new fields in IoT research is mm-scale sensors, which
+      make up a myriad of new application domains. Enabled by the unique
+      characteristics of cyber-physical systems and recent advances in low-power
+      design and bare-die 3D chip stacking, mm-scale sensors are rapidly becoming
+      a reality. In this paper, we will survey the challenges and solutions to
+      3D-stacked mm-scale design, highlighting low-power circuit issues ranging
+      from low-power SRAM and miniature neural network accelerators to radio
+      communication protocols and analog interfaces. We will discuss system-level
+      challenges and illustrate several complete systems and their merging
+      applicaiton spaces.
+  },
+  extra = {Invited Paper},
+}
+
+@inproceedings{klugman19oink,
+    keywords={conf},
+    author={Klugman, Noah and Correa, Santiago and \textbf{Pannuto}, \textbf{Pat} and Podolsky, Matthew and Taneja, Jay and Dutta, Prabal},
+    booktitle={The Tenth International Conference on Information and Communication Technologies and Development},
+    title={The {Open} {INcentive} {Kit} {(OINK)}: Standardizing the Generation, Comparison, and Deployment of Incentive Systems},
+    series={ICTD'19},
+    year={2019},
+    month={1},
+    location={Ahmedabad, India},
+    conference-url={https://www.ictdx.org/},
+    abstract ={
+Incentives are a key facet of human studies research, yet the state-of-the-art
+often designs and implements incentive systems in an ad-hoc, on-demand manner.
+We introduce the first vocabulary for formally describing incentive
+systems and develop a software infrastructure that enables UI-based graphical
+generation of complex, auditable, reliable, and reproducible incentive systems.
+We call this infrastructure the Open INcentive Kit (OINK).
+A review of recent literature from several communities finds that of the one hundred and twenty-one publications that incorporate
+incentives, only thirty-one describe their incentive system in detail, and all of these could be implemented using OINK. We evaluate OINK in practice by using it for an active energy monitoring deployment in Ghana and find that OINK successfully facilitates thousands of individual incentive payments. Finally, we describe our efforts to generalize OINK for different research communities, specifically focusing on architectural decisions around extensibility to support unanticipated use cases. OINK is free and open-source software.
+    },
+ acceptance-accepted=22,
+ acceptance-total=74,
+}
+
+@inproceedings{pannuto18accessors,
+    keywords={conf},
+    author={\textbf{Pannuto}, \textbf{Pat} and Wang, Wenpeng and Dutta, Prabal and Campbell, Bradford},
+    booktitle={The 1st IEEE International Conference on Industrial Internet},
+    title={A Modular and Adaptive Architecture for Building Applications with Connected Devices},
+    series={ICII'18},
+    year={2018},
+    month={10},
+    location={Bellevue, WA, USA},
+    conference-url={http://www.ieee-icii.org/index.html},
+    abstract = {
+Smart and connected devices offer enormous potential to enable
+context-aware, localized, and multi-device orchestrations that could
+substantially increase the reach and utility of computing.  The growth
+of these applications has been hampered, however, as devices, their
+data, and their control have been largely sequestered to their own
+vendor-specific APIs, clouds, and applications---a largely stove-piped
+state of affairs.  In instances where barriers between devices have
+been pierced, the connections often occur between vendor clouds,
+affecting the latency, privacy, and reliability of the original
+application, while simultaneously making them more complex.  Locally
+executing applications have not materialized as devices with
+incompatible communication protocols, inconsistent APIs, and
+incongruent data models rarely communicate. We claim that what is
+needed to unlock the application potential is an architecture tailored
+to facilitating applications composed of networked devices.
+
+Our proposed architecture addresses this by providing a port-based abstraction
+for devices using a small wrapper layer. This device abstraction
+provides a consistent view of devices, and embeddable runtimes provide existing
+applications straightforward access to devices. The architecture also supports
+device discovery, shared interfaces between devices, and an application
+specification interface that promotes creating device-agnostic applications
+capable of operating even when devices change.  We demonstrate the efficacy of
+our architecture with two application case studies that highlight the
+abstraction layers between applications and devices and employ the
+embeddability of our system to add new functionality to existing systems.
+    },
+    extra = {Invited Paper},
+}
+
+@INPROCEEDINGS{klugman18liberation,
+	keywords={conf},
+	author={Klugman, Noah and Jacome, Veronica and Clark, Meghan and Podolsky, Matthew and \textbf{Pannuto}, \textbf{Pat} and Jackson, Neal and Nassor, Aley Soud and Wolfram, Catherine and Callaway, Duncan and Taneja, Jay and Dutta, Prabal},
+	booktitle={The 24th Annual International Conference on Mobile Computing and Networking},
+	title={Experience: Android Resists Liberation from Its Primary Use Case},
+	series={MobiCom'18},
+	year={2018},
+	month={10},
+	location={New Delhi, India},
+	conference-url={http://www.sigmobile.org/mobicom/2018/},
+	abstract = {
+    Network connectivity is often one of the most challenging aspects of deploying
+    sensors. In many countries, cellular networks provide the most reliable,
+    highest bandwidth, and greatest coverage option for internet access. While this makes smartphones a seemingly ideal platform to serve as a gateway between sensors and the cloud,
+    we find that a device designed for
+    multi-tenant operation and frequent human interaction becomes unreliable
+    when tasked to continuously run a single application with no human
+    interaction, a seemingly counter-intuitive result. Further, we find that economy phones cannot physically
+    withstand continuous operation, resulting in a surprisingly high rate of
+    permanent device failures in the field. If these observations hold more broadly, they would make mobile phones
+    poorly suited to a range of sensing applications for which they have been 
+    rumored to hold great promise.
+	},
+ acceptance-accepted=42,
+ acceptance-total=187,
+}
+
+@inproceedings{pannuto18slocalization,
+ keywords={conf},
+ author = {\textbf{Pannuto}, \textbf{Pat} and Kempke, Benjamin, and Dutta, Prabal},
+ title = {Slocalization: Sub-\uW Ultra Wideband Backscatter Localization},
+ booktitle = {Proceedings of the 17th ACM/IEEE International Conference on Information Processing in Sensor Networks},
+ series = {IPSN'18},
+ year = {2018},
+ month = {4},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ conference-url={\url{http://ipsn.acm.org/2018/}},
+ abstract = {
+Ultra wideband technology has shown great promise for providing
+high-quality location estimation, even in complex indoor multipath
+environments, but existing ultra wideband systems require tens to hundreds of
+milliwatts during operation.
+Backscatter communication has demonstrated the viability of astonishingly
+low-power tags, but has thus far been restricted to
+narrowband systems with low localization resolution.
+The challenge to combining these complimentary technologies is that they
+share a compounding limitation, constrained transmit power. Regulations limit
+ultra wideband transmissions to just -41.3\,dBm/MHz, and a backscatter device
+can only reflect the power it receives.
+The solution is long-term integration of this limited power, lifting the
+initially imperceptible signal out of the noise.
+This integration only works while the target is stationary. However, stationary
+describes the vast majority of objects, especially lost ones.
+With this insight, we design Slocalization, a sub-microwatt,
+decimeter-accurate localization system that opens a new tradeoff space in
+localization systems and realizes an energy, size, and cost point that invites
+the localization of every thing.
+To evaluate this concept,
+we implement an energy-harvesting Slocalization tag and find that
+Slocalization can recover ultra wideband backscatter
+in under fifteen minutes across thirty meters of space
+and localize tags with a mean 3D Euclidean error of only 30\,cm.
+ },
+ acceptance-accepted=22,
+ acceptance-total=83,
+ extra = {Best Paper Finalist},
+}
+
+@inproceedings{adkins18signpost,
+ keywords={conf},
+ author = {Adkins, Joshua and Campbell, Bradford and Ghena, Branden and Jackson, Neal and \textbf{Pannuto}, \textbf{Pat} and Rohrer, Samuel and Dutta, Prabal},
+ title = {The Signpost Platform for City-Scale Sensing},
+ booktitle = {Proceedings of the 17th ACM/IEEE International Conference on Information Processing in Sensor Networks},
+ series = {IPSN'18},
+ year = {2018},
+ month = {4},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ conference-url={\url{http://ipsn.acm.org/2018/}},
+ abstract = {
+City-scale sensing holds the promise of enabling a deeper understanding of our
+urban environments.
+However, a city-scale deployment requires physical installation,
+power management, and communications---all challenging tasks standing between a
+good idea and a realized one.
+This indicates the need for a platform that enables easy deployment and
+experimentation for applications operating at city scale.
+To address these challenges, we present Signpost, a modular, energy-harvesting platform for city-scale sensing.
+Signpost simplifies deployment by eliminating the need
+for connection to wired infrastructure and instead harvesting energy from an
+integrated solar panel. The platform furnishes the key resources necessary to 
+support multiple, pluggable sensor modules while providing
+fair, safe, and reliable sharing in the face of dynamic energy constraints.
+We deploy Signpost with several sensor modules, showing the viability
+of an energy-harvesting, multi-tenant, sensing system, and evaluate its
+ability to support sensing applications.
+We believe Signpost reduces the difficulty inherent in city-scale deployments,
+enables new experimentation, and provides improved insights into urban health.
+ },
+ acceptance-accepted=22,
+ acceptance-total=83,
+}
+
+@inproceedings{levy17multiprogramming,
+ keywords={conf},
+ author = {Levy, Amit and Campbell, Bradford and Ghena, Branden and Giffin, Daniel B. and \textbf{Pannuto}, \textbf{Pat} and Dutta, Prabal and Levis, Philip},
+ title = {Multiprogramming a 64kB Computer Safely and Efficiently},
+ booktitle = {Proceedings of the 26th Symposium on Operating Systems Principles},
+ series = {SOSP'17},
+ year = {2017},
+ month = {10},
+ isbn = {978-1-4503-5085-3},
+ location = {Shanghai, China},
+ pages = {234--251},
+ numpages = {18},
+ url = {http://doi.acm.org/10.1145/3132747.3132786},
+ doi = {10.1145/3132747.3132786},
+ acmid = {3132786},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ conference-url={\url{https://www.sigops.org/sosp/sosp17/}},
+ abstract = {Low-power microcontrollers lack some of the hardware features and
+     memory resources that enable multiprogrammable systems.  Accordingly,
+     microcontroller-based operating systems have not provided important
+     features like fault isolation, dynamic memory allocation, and
+     flexible concurrency. However, an emerging class of embedded
+     applications are software platforms, rather than single purpose
+     devices, and need these multiprogramming features.  Tock, a new
+     operating system for low-power platforms, takes advantage of limited
+     hardware-protection mechanisms as well as the type-safety features of the
+     Rust programming language to provide a multiprogramming environment
+     for microcontrollers.  Tock isolates software faults, provides
+     memory protection, and efficiently manages memory for dynamic
+     application workloads written in any language. It achieves this while
+     retaining the dependability requirements of long-running applications.
+ },
+ acceptance-percent=17,
+}
+
+@INPROCEEDINGS{kempke16surepoint,
+	keywords={conf},
+	author={Kempke, Benjamin and \textbf{Pannuto}, \textbf{Pat} and Campbell, Bradford and Dutta, Prabal},
+	title={{SurePoint}: Exploiting Ultra Wideband Flooding and Diversity to Provide Robust, Scalable, High-Fidelity Indoor Localization},
+	booktitle = {Proceedings of the 14th ACM Conference on Embedded Networked Sensor Systems},
+	series = {SenSys'16},
+	year = {2016},
+	month = {11},
+	location = {Stanford, CA, USA},
+	conference-url={\url{http://sensys.acm.org/2016/}},
+	abstract = {
+We present SurePoint, a system for drop-in, high-fidelity indoor localization.
+SurePoint builds on recently available commercial ultra-wideband radio hardware.
+While ultra-wideband radio hardware can provide the timing primitives necessary
+for a simple adaptation of two-way ranging, we show that with the addition of
+frequency and spatial diversity, we can achieve a 53\% decrease in median
+ranging error.
+Because this extra diversity requires many additional packets for each range
+estimate, we next develop an efficient broadcast ranging protocol for
+localization that ameliorates this overhead.
+We evaluate the performance of this ranging protocol in stationary and
+fast-moving environments and find that it achieves up to 0.08\,m median error
+and 0.53\,m 99th percentile error.
+As ranging requires the tag to have exclusive access to the channel, we next
+develop a protocol to coordinate the localization of multiple tags in space.
+This protocol builds on recent work exploiting the constructive interference
+phenomenon. The ultra-wideband PHY uses a different modulation scheme
+compared to the narrowband PHY used by previous work, thus we first explore the
+viability and performance of constructive interference with ultra-wideband
+radios.
+Finally, as the ranging protocol requires careful management of the
+ultra-wideband radio and tight timing, we develop TriPoint, a dedicated
+``drop-in'' ranging module that provides a simple \iic interface. We show that
+this additional microcontroller demands only marginal energy overhead while
+facilitating interoperability by freeing the primary microcontroller to
+handle other tasks.
+	},
+	acceptance-accepted=21,
+	acceptance-total=119,
+}
+
+@INPROCEEDINGS{kempke16harmonium,
+	keywords={conf},
+	author={Kempke, Benjamin and \textbf{Pannuto}, \textbf{Pat} and Dutta, Prabal},
+	title={Harmonium: Asymmetric, Bandstitched {UWB} for Fast, Accurate, and Robust Indoor Localization},
+	booktitle = {Proceedings of the 15th International Conference on Information Processing in Sensor Networks},
+	series = {IPSN'16},
+	year = {2016},
+	month = {4},
+	location = {Vienna, Austria},
+	conference-url={\url{http://ipsn.acm.org/2016/}},
+	abstract = {
+We introduce \emph{Harmonium}, a novel ultra-wideband RF localization architecture
+that achieves decimeter-scale accuracy indoors.
+Harmonium strikes a balance between tag simplicity and processing complexity to
+provide fast and accurate indoor location estimates.
+Harmonium uses only commodity components and consists of a small, inexpensive,
+lightweight, and FCC-compliant ultra-wideband transmitter or \emph{tag}, fixed
+infrastructure \emph{anchors} with known locations, and centralized processing
+that calculates the tag's position.
+Anchors employ a new frequency-stepped narrowband receiver architecture that
+rejects narrowband interferers and
+extracts high-resolution timing information without the cost or complexity of
+traditional ultra-wideband approaches.
+In a complex indoor environment, 90\% of position estimates obtained with
+Harmonium exhibit less than 31\,cm of error with an average 9\,cm of inter-sample
+noise. In non-line-of-sight conditions (i.e. through-wall), 90\% of position error is less than
+42\,cm.
+The tag draws 75\,mW when actively transmitting, or 3.9\,mJ per location fix
+at the 19\,Hz update rate.  Tags weigh 3\,g and cost \$4.50\,USD at modest
+volumes.
+Harmonium introduces a new design point for indoor localization
+and enables localization of small, fast objects such as micro quadrotors,
+devices previously restricted to expensive optical motion capture
+systems.
+	},
+	acceptance-accepted=23,
+	acceptance-total=117,
+}
+
+@INPROCEEDINGS{pannuto15mbus,
+	keywords={conf},
+	author={\textbf{Pannuto}, \textbf{Pat} and Lee, Yoonmyung and Kuo, Ye-Sheng and Foo, ZhiYoong and Kempke, Benjamin and Kim, Gyouho and Dreslinski, Ronald G. and Blaauw, David and Dutta, Prabal},
+	title={{MBus}: An Ultra-Low Power Interconnect Bus for Next Generation Nanopower Systems},
+	booktitle={Proceedings of the 42nd International Symposium on Computer Architecture},
+	series={ISCA '15},
+	year={2015},
+	month={6},
+	location={Portland, Oregon, USA},
+	publisher={ACM},
+	conference-url={\url{http://www.ece.cmu.edu/calcm/isca2015}},
+	abstract = {As we show in this paper, I/O has become the limiting
+			factor in scaling down size and power toward the goal of
+			invisible computing. Achieving this goal will require
+			composing optimized and specialized---yet
+			reusable---components with an interconnect that permits
+			tiny, ultra-low power systems.  In contrast to today's
+			interconnects which are limited by power-hungry
+			pull-ups or high-overhead chip-select lines, our
+			approach provides a superset of common bus features but
+			at lower power, with fixed area and pin count, using
+			fully synthesizable logic, and with surprisingly low
+			protocol overhead.
+
+			We present \textbf{MBus}, a new 4-pin,
+			22.6\,pJ/bit/chip chip-to-chip interconnect made of two
+			``shoot-through'' rings.  MBus facilitates ultra-low
+			power system operation by implementing automatic
+			power-gating of each chip in the system, easing the
+			integration of active, inactive, and activating
+			circuits on a single die.  In addition, we introduce a
+			new bus primitive: power oblivious communication, which
+			guarantees message reception regardless of the
+			recipient's power state when a message is sent.  This
+			disentangles power management from communication,
+			greatly simplifying the creation of viable, modular,
+			and heterogeneous systems that operate on the order of
+			nanowatts.
+
+			To evaluate the viability, power, performance,
+			overhead, and scalability of our design, we build both
+			hardware and software implementations of MBus and show
+			its seamless operation across two FPGAs and twelve
+			custom chips from three different semiconductor
+			processes.  A three-chip, 2.2\,mm$^3$ MBus system draws
+			8\,nW of total system standby power and uses only
+			22.6\,pJ/bit/chip for communication.  This is the
+			lowest power for any system bus with MBus's feature
+			set.
+	},
+	acceptance-accepted=58,
+	acceptance-total=305,
+}
+
+@INPROCEEDINGS{huang14opo,
+	keywords={conf},
+	author={Huang, William and Kuo, Ye-Sheng and \textbf{Pannuto}, \textbf{Pat} and Dutta, Prabal},
+	title={Opo: A Wearable Sensor for Capturing High-Fidelity Face-to-Face Interactions},
+	booktitle = {Proceedings of the 12th ACM Conference on Embedded Networked Sensor Systems},
+	series = {SenSys '14},
+	year = {2014},
+	mon = {Nov},
+	isbn = {978-1-4503-3143-2},
+	location = {Memphis, Tennessee, USA},
+	publisher = {ACM},
+	address = {New York, NY, USA},
+	conference-url={http://sensys.acm.org/2014/},
+	abstract = {Currently, researchers study face-to-face interactions using wearable sensors and
+		smartphones which provide 2 to 5~m proximity sensing every 20 to 300~s.
+		However, studying interaction distance, which is known to
+		impact disease spread, communication behavior, and other phenomenon, has
+		proven challenging.
+		Smartphones are limited by their inaccurate and/or
+		impractical ranging capabilities, while wearable sensors
+		are limited by their need for
+		infrastructure nodes, bulkiness, and/or inaccurate ranging.
+		To address these challenges, we present Opo, a 14~cm$^2$, 11.4~g ``lapel pin''
+		built from commercial components.
+		Opo sensors range neighbors every 2~s up to 2~m away with 5\% average
+		error, all while requiring zero
+		infrastructure and improving upon current wearable sensors' accuracy and power usage.
+		The cornerstone of Opo is an ultrasonic wakeup circuit that draws 19~\uA
+		when no neighbors are present. This enables Opo sensors to discover and range
+		neighbors without the need for infrastructure nodes and slow or power-hungry
+		RF discovery protocols.
+		Thus, Opo is able to sense interaction distance with high accuracy (5~cm)
+		and temporal fidelity (2~s) on a limited power budget.
+	},
+	acceptance-accepted=21,
+	acceptance-total=117,
+}
+
+
+@INPROCEEDINGS{kuo14mbus,
+	keywords={conf},
+	author={Kuo, Ye-Sheng and \textbf{Pannuto}, \textbf{Pat} and Kim, Gyouho and Foo, ZhiYoong and Lee, Inhee and Kempke, Benjamin and Dutta, Prabal and Blaauw, David and Lee, Yoonmyung},
+	booktitle={CICC '14: IEEE Custom Integrated Circuits Conference},
+	title={{MBus}: A 17.5~{pJ}/bit Portable Interconnect Bus for Millimeter-Scale Sensor Systems with 8~{nW} Standby Power},
+	year={2014},
+	month={9},
+	location={San Jose, California, USA},
+	conference-url={http://www.iee-cicc.org},
+	abstract = {We propose an ultra-low power interconnect bus for
+			millimeter-scale wireless sensor nodes. Using only 4~IO pads,
+			the bus minimizes the required chip real estate, enabling
+			ultra-small form factors in modular sensor node
+			designs. Low power is achieved using a ``clockless''
+			design of member nodes while aggressive power gating
+			allows an ultra-low power standby mode with only
+			53~gates powered on. An integrated wakeup scheme is
+			compatible with PMUs that have a special low power
+			standby mode. The MBus is fully synthesizable and uses
+			robust timing. Implemented in a 3~module system in
+			180~nm technology, Mbus achieves 8~nW of standby power
+			and 17.5~pJ/bit/chip.
+	},
+	acceptance-accepted = 94,
+	acceptance-total = 266,
+}
+
+@INPROCEEDINGS{kuo14luxapose,
+	keywords={conf},
+	author={Kuo, Ye-Sheng and \textbf{Pannuto}, \textbf{Pat} and Hsiao, Ko-Jen and Dutta, Prabal},
+	booktitle={The 20th Annual International Conference on Mobile Computing and Networking},
+	title={Luxapose: Indoor Positioning with Mobile Phones and Visible Light},
+	series={MobiCom '14},
+	year={2014},
+	month={9},
+	location={Maui, Hawaii, USA},
+	conference-url={http://www.sigmobile.com/mobicom/2014/},
+	abstract = {We explore the indoor positioning problem with unmodified smartphones
+			and slightly-modified commercial LED luminaires.  The
+			luminaires---modified to allow rapid, on-off keying---transmit their
+			identifiers and/or locations encoded in human-imperceptible optical
+			pulses.  A camera-equipped smartphone, using just a single image frame
+			capture, can detect the presence of the luminaires in the image,
+			decode their transmitted identifiers and/or locations, and determine
+			the smartphone's location and orientation relative to the luminaires.
+			Continuous image capture and processing enables continuous position
+			updates.
+			The key insights underlying this work are (i) the driver circuits of
+			emerging LED lighting systems can be easily modified to transmit data
+			through on-off keying; (ii) the rolling shutter effect of CMOS imagers
+			can be leveraged to receive many bits of data encoded in the optical
+			transmissions with just a single frame capture, (iii) a camera is
+			intrinsically an angle-of-arrival sensor, so the projection of
+			multiple nearby light sources with known positions onto a camera's
+			image plane can be framed as an instance of a sufficiently-constrained
+			angle-of-arrival localization problem, and (iv) this problem can be
+			solved with optimization techniques.  We explore the feasibility of
+			the design through an analytical model, demonstrate the viability of
+			the design through a prototype system, discuss the challenges to a
+			practical deployment including usability and scalability, and
+			demonstrate decimeter-level accuracy in both carefully controlled and
+			more realistic human mobility scenarios.
+	},
+	acceptance-accepted = 36,
+	acceptance-total = 220,
+}
+
+@INPROCEEDINGS{blaauw14iot,
+	keywords={conf},
+	author={Blaauw, David and Sylvester, Dennis and Dutta, Prabal and Lee, Yoonmyung and Lee, Inhee and Bang, Sechang and Kim, Yejoong and Kim, Gyouho and \textbf{Pannuto}, \textbf{Pat} and Kuo, Ye-Sheng and Yoon, Dongmin and Jung, Wanyeong and Foo, ZhiYoong and Chen, Yen-Po and Seok-Hyeon, Jeong and Choi, Myungjoon},
+	booktitle={Proceedings of the 2014 IEEE Symposium on VLSI Technology (VLSI'14)},
+	title={{IoT} Design Space Challenges: Circuits and Systems},
+	year={2014},
+	month={6},
+	location = {Honolulu, Hawaii, USA},
+	conference-url = {http://www.vlsisymposium.org/},
+	abstract = {The Internet of Things (IoT) is a rapidly emerging
+			application space, poised to become the largest
+			electronics market for the semiconductor industry. IoT
+			devices are focused on sensing and actuating of our
+			physical environment and have a nearly unlimited
+			breadth of uses. In this paper, we explore the IoT
+			application space and then identify two common
+			challenges that exist across this space: ultra-low
+			power operation and system design using modular,
+			composable components. We survey recent low power
+			techniques and discuss a low power bus that enables
+			modular design. Finally, we conclude with three example
+			ultra-low power, millimeter-scale IoT systems.
+	},
+	extra = {Invited Paper},
+}
+
+@INPROCEEDINGS{kim14motion,
+	keywords={conf},
+	author={Kim, Gyouho and Foo, ZhiYoong and \textbf{Pannuto}, \textbf{Pat} and Kuo, Ye-Sheng and Kempke, Benjamin and Ghaed, Mohammad Hassan and Bang, Suyoung and Lee, Inhee and Kim, Yejoong and Jeong, Seokhyeon and Dutta, Prabal and Sylvester, Dennis and Blaauw, David},
+	booktitle={VLSI Circuits (VLSIC), 2014 Symposium on},
+	title={A Millimeter-Scale Wireless Imaging System with Continuous Motion Detection and Energy Harvesting},
+	year={2014},
+	month={6},
+	location = {Honolulu, Hawaii, USA},
+	conference-url = {http://www.vlsisymposium.org/},
+	abstract = {We present a $2\times4\times4$~mm$^3$ imaging system
+		complete with optics, wireless communication, battery, power
+		management, solar harvesting, processor and memory. The system
+		features a 160$\times$160 resolution CMOS image sensor with 304nW
+		continuous in-pixel motion detection mode.  System components
+		are fabricated in five different IC layers and die-stacked for
+		minimal form factor.  Photovoltaic (PV) cells face the opposite
+		direction of the imager for optimal illumination and generate
+		456~nW at 10~klux to enable energy autonomous system operation.
+	},
+	acceptance-accepted = 96,
+	acceptance-total = 420,
+}
+
+@inproceedings{kuo12sdr,
+	keywords={conf},
+	author={Kuo, Ye-Sheng and \textbf{Pannuto}, \textbf{Pat} and Schmid, Thomas and Dutta, Prabal},
+	title={Reconfiguring the Software Radio to Improve Power, Price, and Portability},
+	booktitle = {Proceedings of the 10th ACM Conference on Embedded Networked Sensor Systems},
+	series = {SenSys '12},
+	year = {2012},
+	mon = {Nov},
+	location = {Toronto, Canada},
+	publisher = {ACM},
+	address = {New York, NY, USA},
+	abstract = {Most modern software-defined radios are large, expensive, and
+		power-hungry, and this diminishes their utility in low-power,
+		size-constrained settings like sensor networks and mobile computing.
+		We explore the viability of scaling down the software radio in size,
+		cost, and power, and show that an index card-sized, sub-\$150, `AA'
+		battery-powered system is possible using off-the-shelf components.
+		Key to our approach is that we leverage an integrated, reconfigurable,
+		flash-based FPGA with a hard ARM Cortex-M3 microprocessor which
+		simultaneously enables lower power and tighter hardware/soft\-ware
+		integration than prior designs.  This architecture allows us to
+		implement timing-critical MAC protocols and validate the speculated
+		performance of several recent MAC/PHY primitives and protocols
+		including Backcast, A-MAC, and Glossy using an IEEE 802.15.4-compliant
+		radio implementation that interoperates with commercial radios.  The
+		work also identifies several enhancements in the underlying hardware
+		components that could improve power, performance, and flexibility.
+	},
+	conference-url = {\url{http://sensys.acm.org/2012/}},
+	acceptance-accepted = 23,
+	acceptance-total = 123,
+}
+

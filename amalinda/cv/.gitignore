@@ -1,0 +1,17 @@
+*.aux
+*.log
+*.pdf
+*.bbl
+*.blg
+*.out
+*.4ct
+*.4tc
+*.css
+*.dvi
+*.html
+*.idv
+*.lg
+*.tmp
+*.xref
+*.bcf
+*.xml

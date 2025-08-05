@@ -1,0 +1,503 @@
+@inproceedings{madden2022smfcCurrentSense,
+  keywords={workshop},
+ author = {Madden, John and Marcano, Gabriel and Taylor, Stephen and \textbf{Pannuto}, \textbf{Pat} and Josephson, Colleen},
+ title = {Hardware to enable large-scale deployment and observation of
+soil microbial fuel cells},
+ booktitle = {Proceedings of the Tenth ACM International Workshop on Energy Harvesting and Energy-Neutral Sensing Systems},
+ series = {ENSsys'22},
+ year = {2022},
+ month = {11},
+ location = {Boston, Massachusetts, USA},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ conference-url = {\url{http://www.enssys.org/2022/}},
+ abstract = {
+   Soil microbial fuel cells are a promising source of energy for outdoor
+sensor networks. These biological systems are sensitive to environmental conditions, therefore more data is needed on their behavior
+``in the wild'' to enable the creation of an energy system capable
+of being widely deployed. Prior work on early characterization of
+microbial fuel cells relied on extremely accurate, but expensive,
+logging hardware. To scale up the number of deployment sites, we
+present custom logging hardware, specially designed to accurately
+monitor the behavior of microbial fuel cells at low cost. This paper
+describes the design and evaluation of the board, which is open
+source and freely available on GitHub.
+ },
+}
+
+@inproceedings{ayers2022tieredtrust,
+  keywords={workshop},
+  author = {Ayers, Hudson and Dutta, Prabal and Levis, Philip and Levy, Amit and \textbf{Pannuto}, \textbf{Pat} and Van~Why, Johnathan and Watson, Jean-Luc},
+  title = {Tiered Trust for Useful Embedded Systems Security},
+  year = {2022},
+  month = {3},
+  isbn = {9781450392556},
+  publisher = {Association for Computing Machinery},
+  address = {New York, NY, USA},
+  url = {https://doi.org/10.1145/3517208.3523752},
+  doi = {10.1145/3517208.3523752},
+  abstract = {
+    Traditional embedded systems rely on custom C code deployed in a monolithic firmware image. In these systems, all code must be trusted completely, as any code can directly modify memory or hardware registers. More recently, some embedded OSes have improved security by separating userspace applications from the kernel, using strong hardware isolation in the form of a memory protection unit (MPU). Unfortunately, this design requires either a large trusted computing base (TCB) containing all OS services, or moving many OS services into userspace. The large TCB approach offers no protection against seemingly-correct backdoored code, discouraging the use of kernel code produced by others and complicating security audits. OS services in userspace come at a cost to usability and efficiency. We posit that a model enabling two tiers of trust for kernel code is better suited to modern embedded software practices. In this paper, we present the threat model of the Tock Operating System, which is based on this idea. We compare this threat model to existing security approaches, and show how it provides useful guarantees to different stakeholders.
+  },
+  booktitle = {Proceedings of the 15th European Workshop on Systems Security},
+  pages = {15–21},
+  numpages = {7},
+  location = {Rennes, France},
+  series = {EuroSec '22},
+  conference-url = {https://concordia-h2020.eu/eurosec-2022/},
+}
+
+@inproceedings{marcano2021einkbiobattery,
+  keywords={workshop},
+  author = {Marcano, Gabriel and \textbf{Pannuto}, \textbf{Pat}},
+  title = {Soil Power? Can Microbial Fuel Cells Power Non-Trivial Sensors?},
+  booktitle = {The 1st ACM International Workshop on No Power and Low Power Internet of Things},
+  series = {LP-IoT '21},
+  year = {2022},
+  month = {1},
+  location = {New Orleans, LA, USA},
+  conference-url = {https://www.witechlab.com/lpiot2021/},
+  abstract = {
+    This paper explores the power delivery potential of soil-based microbial fuel cells.
+    We build a prototype energy harvesting setup for a soil microbial fuel cell, measure the amount of power that we can harvest, and use that energy to drive an e-ink display as a representative example of a periodic energy-intensive load.
+    Microbial fuel cells are highly sensitive to environmental conditions, especially soil moisture.
+    In near-optimal, super moist conditions our cell provides approximately 100\,\uW of power at around 500\,mV, which is ample power over time to power our system several times a day.
+    We further explore how cell performance diminishes and recovers with varying moisture levels as well as how cell performance is affected by the load from the energy harvester itself.
+    In sum, we find that the confluence of ever lower-power electronics and new understanding of microbial fuel cell design means that ``soil-powered sensors'' are now feasible. There remains, however, significant future work to make these systems reliable and maximally performant.
+  },
+  acceptance-accepted = 4,
+  acceptance-total = 5,
+}
+
+@inproceedings{jagtap2021centuryinfra,
+  keywords={workshop},
+  author = {Jagtap, Dhananjay and Bhaskar, Nishant and \textbf{Pannuto}, \textbf{Pat}},
+  title = {Century-Scale Smart Infrastructure},
+  booktitle = {The 18th Workshop on Hot Topics in Operating Systems},
+  series = {HotOS '21},
+  year = {2021},
+  month = {6},
+  location = {Virtual Event},
+  conference-url = {https://sigops.org/s/conferences/hotos/2021/},
+  abstract = {
+    On average, wireless electronics devices are replaced every 50~months.
+    On average, a bridge is replaced every 50~years.
+    As we begin to imagine integrating electronics and intelligence into the built environment, we need to to begin to think about electronic devices and systems on infrastructure timelines.
+    This is not to say that every individual electronic device can, will, or should last for decades, but much like the ship of Theseus, the \emph{system} that defines emerging Smart Cities will have a lifetime reaching into the century-scale.
+    In this paper, we contemplate what the devices, gateways, network architectures, and their management might look like for a system designed to operate for decades.
+    The result is a mixture of actionable insights for today and research questions for tomorrow, which culminates in the commencement of a 50-year experiment designed to see how long energy-harvesting sensors, without the implicit lifetime of batteries, can remain viable without human attention or intervention.
+  },
+  acceptance-accepted = 30,
+  acceptance-total = 114,
+}
+
+@inproceedings{yen2021repro,
+  keywords={workshop},
+  author = {Yen, Alex and Flowers, Bryce and Luo, Wenshan and Nagesh, Nitish and Tueller, Peter and Kastner, Ryan and \textbf{Pannuto}, \textbf{Pat}},
+  title = {A UCSD View on Replication and Reproducibility for CPS \& IoT},
+  booktitle = {},
+  series = {CPS-IoTBench'21},
+  year = {2021},
+  month = {5},
+  location = {Virtual Event, Nashville, TN, USA},
+  conference-url = {https://www.iotbench.ethz.ch/cps-iotbench-2021/},
+  extra = {Best Presentation Runner-Up},
+  abstract = {
+    Reproducibility and replicability (R\&R) are important for research.
+    Many communities are beginning efforts to reward, incentivize, and highlight projects as a motive to adopt R\&R practices.
+    This is clearly a good direction -- we should all aim to make our research sound, replicable, and reproducible.
+    Yet, this involves a lot of effort to document, debug, and generally make the systems that we build more usable.
+    Interfacing with the
+    \emph{Physical} world and building custom \emph{Things} exacerbates these
+    challenges.
+    Therein lies the dilemma: how does the CPS/IoT community reward and incentivize R\&R efforts?
+    This paper looks into the question of R\&R in CPS/IoT.
+    We survey efforts in other fields spanning computing to healthcare and
+    highlight similarities and differences to CPS/IoT.
+    We then discuss several exemplar CPS/IoT projects related to UCSD's research and
+    highlight the R\&R efforts in these projects, the potential ways that they
+    could be improved, and best practices.
+    We finish with recommendations and insights for R\&R tailored to the CPS/IoT
+    community.
+  },
+}
+
+@inproceedings{jagtap2020ehreliable,
+  keywords={workshop},
+ author = {Jagtap, Dhananjay and \textbf{Pannuto}, \textbf{Pat}},
+ title = {Reliable Energy Sources as a Foundation for Reliable Intermittent Systems},
+ booktitle = {Proceedings of the Eigth ACM International Workshop on Energy Harvesting and Energy-Neutral Sensing Systems},
+ series = {ENSsys'20},
+ year = {2020},
+ month = {11},
+ isbn = {978-1-4503-8129-1},
+ location = {Virtual Event, Japan},
+ url = {https://doi.org/10.1145/3417308.3430276},
+ doi = {10.1145/3417308.3430276},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ conference-url = {\url{http://www.enssys.org/2020/}},
+ extra = {Best Presentation (Second Prize)},
+ abstract = {
+   This paper defines architectural and operational principles for simple and reliable energy harvesting devices that can be used in service of high-level applications. For many maintenance and monitoring tasks, we propose that it is more valuable to have reliable, trusted affirmations that nothing has changed than it is to know the exact moment that something has failed. This presents an opportunity for a new class of highly reliable, but not necessarily timely, intermittent devices. These are devices that are capable of sending messages at reasonable, fixed intervals (e.g. once an hour or once a day). They cannot activate more often, but they also promise not to activate less often. To establish this reliability, we look to opportunities for energy scavenging that are often ignored as their instantaneous power delivery capability is very limited. However, unlike higher power scavenging opportunities, many of these sources are not intermittent. Such sources may provide less than a microwatt, but their trickle of energy will be continuously, reliably available for months to decades. This enables the creation of devices that can be guaranteed to activate at predictable intervals, which allows for the construction of non-intermittent systems atop intermittent devices.
+ },
+}
+
+@inproceedings{pannuto18uwbdata,
+  keywords={workshop},
+  author = {\textbf{Pannuto}, \textbf{Pat} and Kempke, Benjamin and Campbell, Bradford and Dutta, Prabal},
+  title = {Indoor Ultra Wideband Ranging Samples from the {DecaWave} {DW1000} Including Frequency and Polarization Diversity},
+  booktitle = {Data Acquisition To Analysis},
+  series = {DATA'18},
+  year = {2018},
+  month = {November},
+  conference-url={\url{https://workshopdata.github.io/DATA2018/}},
+  abstract = {
+When performing RF ranging in a complex indoor environment, the error of a
+single channel estimate can vary widely. A key insight of the PolyPoint and
+SurePoint ranging protocols is that individual nodes can efficiently capture
+multiple independent samples of the RF channel. For each point in space, nodes
+capture twenty seven independent samples by varying the spectrum sampled and
+the polarization of antennas. This dataset includes all of the measurements
+reported in the PolyPoint and SurePoint papers, which comprises several
+thousand points in a complex indoor environment. Precise 3D coordinates of
+nodes were captured using an optical motion capture system calibrated to
+millimeter accuracy. Several tracking studies are included, with continuous
+samples over time as a node moves through the environment.
+  },
+  acceptance-accepted = 14,
+  acceptance-total = 15,
+}
+
+@inproceedings{adkins17energy,
+  keywords={workshop},
+ author = {Adkins, Joshua and Campbell, Bradford and Ghena, Branden and Jackson, Neal and \textbf{Pannuto}, \textbf{Pat} and Dutta, Prabal},
+ title = {Energy Isolation Required for Multi-tenant Energy Harvesting Platforms},
+ booktitle = {Proceedings of the Fifth ACM International Workshop on Energy Harvesting and Energy-Neutral Sensing Systems},
+ series = {ENSsys'17},
+ year = {2017},
+ month = {11},
+ isbn = {978-1-4503-5477-6},
+ location = {Delft, Netherlands},
+ pages = {27--30},
+ numpages = {4},
+ url = {http://doi.acm.org/10.1145/3142992.3142995},
+ doi = {10.1145/3142992.3142995},
+ acmid = {3142995},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ conference-url = {\url{http://www.enssys.org/2017/}},
+ abstract = {
+   Embedded systems have long been synonymous with special purpose, single
+   stakeholder computing. However, as these systems have become more capable and
+   the demands placed on them have become more varied and variable, embedded
+   software is beginning to embrace multi-tenancy.
+   While the general problem of supporting multiple users and processes on a
+   computing platform has been well explored in computer science, the
+   challenges of supporting multiple users with competing desires on a highly
+   energy-variable system remain unexplored.
+   On an energy-harvesting platform, incoming energy needs to be distributed
+   between stakeholders, and users accessing shared platform resources should
+   be charged for the energy use of those resources.
+   Furthermore, with system designers and application creators being
+   increasingly removed from each other, the software environments of
+   energy-harvesting platforms must provide primitives that enable applications
+   to adapt to system variability.
+   We explore several initial techniques for solving these problems and
+   demonstrate them using Signpost---a modular, energy-harvesting platform for
+   city-scale sensing.
+ },
+ acceptance-accepted = 6,
+ acceptance-total = 18,
+}
+% 15 full, 5 accepted; 3 position, 1 accepted; 1 poster/demo -> 4 (rej papers -> P/D)
+
+@inproceedings{levy17rustkernel,
+  keywords={workshop},
+ author = {Levy, Amit and Campbell, Bradford and Ghena, Branden and \textbf{Pannuto}, \textbf{Pat} and Dutta, Prabal and Levis, Philip},
+ title = {The Case for Writing a Kernel in Rust},
+ booktitle = {Proceedings of the 8th Asia-Pacific Workshop on Systems},
+ series = {APSys '17},
+ year = {2017},
+ month = {9},
+ isbn = {978-1-4503-5197-3},
+ location = {Mumbai, India},
+ pages = {1:1--1:7},
+ articleno = {1},
+ numpages = {7},
+ url = {http://doi.acm.org/10.1145/3124680.3124717},
+ doi = {10.1145/3124680.3124717},
+ acmid = {3124717},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ conference-url = {\url{https://www.cse.iitb.ac.in/~apsys2017/}},
+ abstract = {Decades of research has attempted to add safety mechanisms to
+   operating system kernels, but this effort has failed in most practical
+     systems. In particular, solutions that sacrifice performance have been
+     generally avoided. However, isolation techniques in modern languages can
+     provide safety while avoiding performance issues. Moreover, utilizing a
+     type-safe language with no garbage collector or other runtime services
+     avoids what would otherwise be some of the largest sections of trusted
+     code base. We report on our experiences in writing a resource efficient
+     embedded kernel in Rust, finding that only a small set of unsafe
+     abstractions are necessary in order to form common kernel building blocks.
+     Further, we argue that Rust's choice to avoid runtime memory management by
+     using a linear type system will enable the next generation of safe
+     operating systems.
+ },
+}
+
+@inproceedings{levy15ownership,
+  keywords={workshop},
+    author = {Levy, Amit and Andersen, Michael P and Campbell, Bradford and Culler, David and Dutta, Prabal and Ghena, Branden and Levis, Philip and \textbf{Pannuto}, \textbf{Pat}},
+    title = {Ownership is Theft: Experiences Building an Embedded {OS} in {R}ust},
+    booktitle = {Proceedings of the 8th Workshop on Programming Languages and Operating Systems},
+    series = {PLOS 2015},
+    year = {2015},
+    month = {10},
+    isbn = {978-1-4503-3942-1},
+    doi = {10.1145/2818302.2818306},
+    url = {http://dx.doi.org/10.1145/2818302.2818306},
+    location = {Monterey, CA},
+    publisher = {ACM},
+    address = {New York, NY, USA},
+    conference-url = {http://plosworkshop.org/2015/},
+    abstract = { Rust, a new systems programming language, provides
+        compile-time memory safety checks to help eliminate runtime bugs that
+        manifest from improper memory management. This feature is advantageous
+        for operating system development, and especially for embedded OS
+        development, where recovery and debugging are particularly challenging.
+        However, embedded platforms are highly event-based, and Rust's memory
+        safety mechanisms largely presume threads. In our experience developing
+        an operating system for embedded systems in Rust, we have found that
+        Rust's {\em ownership} model prevents otherwise safe resource sharing
+        common in the embedded domain, conflicts with the reality of hardware
+        resources, and hinders using closures for programming asynchronously.
+        We describe these experiences and how they relate to memory safety as
+        well as illustrate our workarounds that preserve the safety guarantees
+        to the largest extent possible. In addition, we draw from our
+        experience to propose a new language extension to Rust that would
+        enable it to provide better memory safety tools for event-driven
+        platforms.
+    },
+    acceptance-accepted=7,
+    acceptance-total=16,
+}
+
+@inproceedings{kempke15polypoint,
+  keywords={workshop},
+  author = {Kempke, Benjamin and \textbf{Pannuto}, \textbf{Pat} and Dutta, Prabal},
+  title = {PolyPoint: Guiding Indoor Quadrotors with Ultra-Wideband Localization},
+  booktitle = {2015 ACM Workshop on Hot Topics in Wireless},
+  series = {HotWireless '15},
+  year = {2015},
+  month = {9},
+  location = {Paris, France},
+  abstract = {We introduce PolyPoint, the first RF localization system which enables the
+	  real-time tracking and navigating of quadrotors through complex indoor
+	  environments.  PolyPoint leverages the new ScenSor transceiver from DecaWave
+	  to acquire the timestamps necessary for accurate time-based location
+	  estimation and leverages the benefits of antenna and frequency diversity to
+	  iteratively refine a tag's position.
+	  PolyPoint produces quadrotor position estimates at a rate of 20\,Hz with
+	  median error below 40\,cm and average error of 56\,cm in line-of-sight
+	  conditions.  PolyPoint approaches the localization accuracy necessary to safely
+	  navigate quadrotors indoors, a feat currently achieved by costly and
+	  delicate optical motion capture systems.
+  },
+  conference-url = {\url{http://web.cse.ohio-state.edu/~chebo/HotWireless/}},
+  extra = {Potential for Test of Time 2025 Award},
+}
+
+@inproceedings{pannuto15making-m3,
+	keywords={workshop},
+	author = {\textbf{Pannuto}, \textbf{Pat} and Lee, Yoonmyung and Foo, ZhiYoong and Kim, Gyouho and Blaauw, David and Dutta, Prabal},
+	title = {Lessons from Five Years of Making {Michigan Micro Motes}},
+	booktitle = {6th Workshop of Architectural Research Prototyping},
+	series = {WARP '15},
+	year = {2015},
+	mon = {June},
+	location = {Portland, Oregon, USA},
+	abstract = { It has now been over fifteen years since Kris Pister's
+			call for ``smart dust''. Today, we are capable of
+			building general purpose computing systems, including
+			computation, storage, sensing, and communication, that
+			fit in a cubic millimeter.  In this work, we discuss
+			the lessons learned in the design, manufacture,
+			debugging, and preliminary deployment of
+			millimeter-scale systems.
+	},
+	conference-url = {\url{http://www.csl.cornell.edu/warp2015/}},
+	acceptance-accepted = 11,
+	acceptance-total = 20,
+}
+
+@inproceedings{campbell15interfacing,
+	keywords={workshop},
+	author = {Campbell, Bradford and \textbf{Pannuto}, \textbf{Pat} and Dutta, Prabal},
+	title = {Interfacing the Internet of a Trillion Things},
+	booktitle = {The Second International Workshop on the Swarm at the Edge of the Cloud},
+	series = {SEC '15},
+	year = {2015},
+	mon = {Apr},
+	location = {Seattle, Washington, USA},
+	abstract = {Meaningful, reusable applications built on top of ubiquitous and networked
+			devices will be slow to materialize as long as device APIs vary widely, communication
+			protocols are not standardized, and programming support is limited and
+			inconsistent. When even feature-identical devices present different APIs
+			and application creators are burdened with managing the variability,
+			the promise of the swarm of devices will go unrealized. We start addressing
+			this issue by providing a model for devices, based on input and output ports, that allows for a set of common
+			interfaces to represent a range of devices. Further, we provide a solution
+			to the bootstrapping problem, providing a general means to
+			bridge the adoption gap for a new API for the Internet of Things.
+			We borrow both the name, \emph{accessor}, and several key design concepts from
+			a recent proposal by Latronico~et.\,al, for our interface layer that wraps
+			currently non-conforming devices with the standard interface. We show how
+			a small, straightforward to write (and read) JavaScript file can convert
+			diverse devices into common interfaces that are conducive for creating applications.
+
+			We realize our system with three environments that can execute accessors,
+			Python, Java, and Node.js, a range of accessors for both IoT and legacy devices,
+			and a browser-based application for interacting with devices using our proposed
+			interfaces. We show how the same accessor mechanism can form synthetic devices
+			with higher-level interfaces and we outline how our system can be extended
+			to support authentication, accessor control, and cloud storage support.
+	},
+	conference-url = {\url{https://www.terraswarm.org/swec15/}},
+	acceptance-accepted = 7,
+}
+
+@inproceedings{kempke14harmonia,
+  keywords={workshop},
+  author = {Kempke, Benjamin and \textbf{Pannuto}, \textbf{Pat} and Dutta, Prabal},
+  title = {Harmonia: Wideband Spreading for Accurate Indoor {RF} Localization},
+  booktitle = {2014 ACM Workshop on Hot Topics in Wireless},
+  series = {HotWireless '14},
+  year = {2014},
+  month = {9},
+  location = {Maui, Hawaii, USA},
+  abstract = {We introduce {\em Harmonia}, a new RF-based localization scheme
+		that provides the simplicity, cost, and power advantages of
+		  traditional narrowband radios with the decimeter-scale
+		  accuracy of ultra wideband localization techniques. Harmonia is
+		  an asymmetric {\em tag} and {\em anchor} system, requiring
+		  minimal modifications to existing low-power wireless devices
+		  to support high-fidelity localization with comparatively
+		  modest infrastructure costs.  A prototype Harmonia design offers
+		  location estimates with an average-case error of 53.4~cm in
+		  complex, heavy-multipath, indoor environments and captures
+		  location estimates at 56~Hz while requiring only 1.7~mA
+		  additional power draw for each tag and complying with all
+		  US~UWB regulations.  We believe this architecture's
+		  combination of accuracy, update rate, power draw, and system
+		  complexity will lead to a new point in the design space.
+  },
+  conference-url = {\url{http://hotwireless.cs.umass.edu/}},
+}
+
+@inproceedings{kuo14vlc_arch,
+  keywords={workshop},
+  author = {Kuo, Ye-Sheng and \textbf{Pannuto}, \textbf{Pat} and Dutta, Prabal},
+  title = {System Architecture Directions for a Software-Defined Lighting Infrastructure},
+  booktitle = {1st ACM Workshop on Visible Light Communication Systems},
+  series = {VLCS '14},
+  year = {2014},
+  month = {9},
+  location = {Maui, Hawaii, USA},
+  abstract = {After years of development, cost-effective, energy-efficient, and
+  long-lasting solid-state lighting technology is finally a viable alternative
+  to incandescent and fluorescent lights.  Unfortunately, the remarkable march
+  of semiconductor technology into the lighting industry is almost entirely in
+  the form of a substitute good---one kind of lighting technology that replaces
+  another---but this, we argue, squanders a unique opportunity for lighting to
+  enable a bevy of new applications.  In this paper, we discuss applications in
+  health, energy efficiency, entertainment, communications, indoor positioning,
+  device configuration, and time synchronization.  We then prototype several of
+  the indoor applications to explore a {\em software-defined lighting} (SDL)
+  architecture that could support them.
+
+  Using our prototyped applications, we next take a primitive stab at
+  demonstrating application coexistence, multiplexing multiple applications on
+  a single lighting network.  A major question raised by this effort is how to
+  multiplex these various applications in a more principled manner on a shared
+  lighting infrastructure whose primary role is illumination (implying that any
+  human-perceptible flicker or flashing will be unacceptable).
+  Looking ahead, we draw inspiration from software-defined networking's
+  approach to sharing the network, and software-defined radios' approach to
+  processing waveforms, to sketch the beginnings of an SDL architecture and its
+  application programming interfaces.
+  },
+  conference-url = {\url{http://www.networks.rice.edu/VLCS-2014/}},
+}
+
+@inproceedings{klugman14gridwatch,
+  keywords={workshop},
+ author = {Klugman, Noah and Rosa, Javier and \textbf{Pannuto}, \textbf{Pat} and Podolsky, Matthew and Huang, William and Dutta, Prabal},
+ title = {{Grid Watch}: Mapping Blackouts with Smart Phones},
+ booktitle = {Proceedings of the 15th Workshop on Mobile Computing Systems and Applications},
+ series = {HotMobile '14},
+ year = {2014},
+ month = {2},
+ location = {Santa Barbara, California},
+ publisher = {ACM},
+ address = {New York, NY, USA},
+ abstract = {The power grid is one of humanity's most significant engineering
+	 undertakings and it is essential in developed and developing nations
+		 alike.  Currently, transparency into the power grid relies on
+		 utility companies and more fine-grained insight is provided by
+		 costly smart meter deployments. We claim that greater
+		 visibility into power grid conditions can be provided in an
+		 inexpensive and crowd-sourced manner independent of utility
+		 companies by leveraging existing smartphones.  Our key insight
+		 is that an unmodified smartphone can detect power outages by
+		 monitoring changes to its own power state, locally verifying
+		 these outages using a variety of sensors that reduce the
+		 likelihood of false power outage reports, and corroborating
+		 actual reports with other phones through data aggregation in
+		 the cloud.  The proposed approach enables a decentralized
+		 system that can scale, potentially providing researchers and
+		 concerned citizens with a powerful new tool to analyze the
+		 power grid and hold utility companies accountable for poor
+		 power quality.  This paper demonstrates the viability of the
+		 basic idea, identifies a number of challenges that are
+		 specific to this application as well as ones that are common
+		 to many crowd-sourced applications, and highlights some
+		 improvements to smartphone operating systems that could better
+		 support such applications in the future.},
+ conference-url = {\url{http://www.hotmobile.org/2014/}},
+}
+
+@inproceedings{pannuto11plc,
+	keywords={workshop},
+	author={\textbf{Pannuto}, \textbf{Pat} and Dutta, Prabal},
+	title={Exploring Powerline Networking for the Smart Building},
+	booktitle = {Extending the Internet to Low power and Lossy Networks},
+	series = {IP+SN '11},
+	year = {2011},
+	month = {4},
+	location = {Chicago, Illinois, USA},
+	conference-url = {\url{http://hinrg.cs.jhu.edu/ip+sn2011/}},
+	abstract = {
+		The SmartGrid is ushering in an era of new IP endpoints that already
+		reside on the power grid today, but lack network connectivity.  Many
+		of these endpoints -- refrigerators, air conditioners, and power
+		strips -- will be networked wirelessly.  However, since they already
+		exist on the power grid, a natural question is whether they might be
+		networked over the same wires that supply their power.  Such an
+		approach would allow SmartGrid sensors to vacate increasingly
+		congested spectrum and allow information to flow along the same path
+		as power, perhaps simplifying deployment in the short term and deep
+		demand response in the long term.
+		In this paper we explore the current state of Powerline Communications
+		(PLC) and explore the efficacy of PLC as a sensor network backbone in
+		a modern building.  We evaluate several different PLC modems in both
+		end-to-end and multi-hop configurations.  We further analyze building
+		blueprints to identify and correlate several PLC ``disruptors'' --
+		building facets that inhibit PLC.  Our preliminary results show that
+		PLC is a promising technology for networking sensors in the Smart
+		Building.  However, a number of anomalies suggest a more in-depth
+		study is warranted.
+	},
+}
+
