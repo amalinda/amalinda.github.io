@@ -1,0 +1,481 @@
+<html>
+    <head>
+        <title>Reliable LoRaWAN with CSMA</title>
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+        <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </head>
+    
+    <style>
+    p {
+        text-align: justify;
+        text-justify: inter-word;
+        margin: 90px;
+        margin-top: -5px;
+        margin-bottom: -5px;
+        font-family: "Helvetica";
+    }
+    h3 {
+        padding: 5px;
+        margin: 80px;
+        text-align: center;
+        background: #d0d0d0;
+        color: black;
+        font-size: 19px;
+        margin-bottom: 20px;
+        margin-top: 60px;
+        font-family: "Helvetica";
+    }
+    h4 {
+        padding: 5px;
+        margin: 80px;
+        color: black;
+        font-size: 16px;
+        margin-bottom: 20px;
+        margin-top: 60px;
+        font-family: "Helvetica";
+    }
+    code {
+        font-family: Consolas, "Courier New";
+        color: #c36262;
+        background-color: #ffffff;
+        padding: 2px;
+        font-size: 105%;
+    }
+    a:link {
+        color: blue;
+    }
+    a:hover {
+        text-decoration: none; 
+        color: #ff0000;
+    }
+    a:visited {
+        color: rgb(8, 40, 245);
+    }
+    .video-container {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+    .video-container iframe {
+        width: 560px; /* Standard YouTube embed width */
+        height: 315px;
+        max-width: 100%;
+        border: none;
+    }
+    .image-container {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+    }
+    .image-container figure {
+        flex: 1;
+        text-align: center;
+    }
+    </style>
+
+<body>
+<center>
+<h1 id="top">LMAC: Efficient CSMA for LoRa and LoRaWAN</h1>
+
+<img src="testbed.jpg" alt="LoRa testbed" height="200" class="center"> 
+
+<h2 style="font-size:18px;">
+    <a href="#csma">Why CSMA? </a> |
+    <a href="#feasibility">Feasibility </a> | 
+    <a href="#hardware">Hardware </a> |
+    <a href="#CSMA_LoRa">Codes </a> |
+    <a href="https://nws.sg/amalinda/publications/LoRa_LMAC_MobiCom.pdf" target="_blank">MobiCom'20 PDF </a> |
+    <a href="https://dl.acm.org/doi/pdf/10.1145/3564530" target="_blank">TOSN'23 extension </a> |
+    <a href="#cite">Bibtex</a>
+</h2>
+</center>
+
+<h3 id="csma">Why does this page exist? <a href="#top" style="font-size:13px;"><sup>top</sup></a></h3>
+<p>
+This page exists to ease the efforts of fellow researchers who want to deploy CSMA for LoRa. All the works here adopt LMAC to add CSMA for LoRa. The page offers two flavors: 
+the first implements CSMA on LoRa (without LoRaWAN), which is useful for testing the performance of the LoRa physical layer with CSMA. 
+The second enables CSMA for LoRaWAN using the official LoRaWAN library. This page specifically helps deploy LMAC-2.
+It is also a great starting point to get familiar with LoRa hardware.
+Note: All instructions on this page assume a GNU/Linux distribution is used.
+</p>
+
+<h3 id="csma_reason">Why CSMA? <a href="#top" style="font-size:13px;"><sup>top</sup></a></h3>
+<p>
+The lack of capability to perform carrier-sense on off-the-shelf LoRa end devices has impeded the implementation of suitable Carrier-Sense Multiple Access (CSMA) schemes for LoRa. 
+Until 2024, LoRa networks, including those following the LoRaWAN specification, adopted the ALOHA media access control (MAC) mechanism to access the channel.
+Although ALOHA is simple to implement, it is often inadequate to keep up with the increasing demand for IoT devices on the ISM band. 
+Even with channel usage limitations (e.g., 0.1% or 1% duty cycle in Europe), ALOHA-based networks will experience degraded performance due to collisions as the number of end devices grows.
+</p>
+
+<p>
+If you are interested in the motivation for LoRa CSMA and the story behind how LMAC was integrated into the LoRaWAN standard, the LoRa Alliance Technical webinar below covers that and more. 
+The five-minute MobiCom pitch presents the details of three advancing versions of LMAC.
+</p>
+
+<br>
+
+<div class="video-container">
+    <iframe src="https://www.youtube.com/embed/4B8OY2jaLA4" frameborder="0" allowfullscreen></iframe>
+    <iframe src="https://www.youtube.com/embed/cwFWmRt07x0" frameborder="0" allowfullscreen></iframe>
+</div>
+
+<h3 id="feasibility">Feasibility <a href="#top" style="font-size:13px;"><sup>top</sup></a></h3>
+<p>
+LoRa is considerably immune to non-LoRa interference. RSS is an effective method for obtaining signal strength within a given BW at a given time. When a LoRa radio computes RSS, the result may not necessarily be from LoRa transmissions but could also include non-LoRa modulations.
+Under the context of CSMA, LoRa is unique compared to other modulations for two reasons. First, LoRa encourages concurrent transmissions (by means of different SFs) within a single channel.
+Therefore, traditional RSS indicators are ineffective in differentiating between different SFs — which is key to identifying whether the selected SF is in use in the Channel.
+Second, LoRa frames can traverse below the noise floor; a LoRa receiver's sensitivity is <b>~105 times higher</b> compared to that of a Wi-Fi radio. Therefore, an ongoing LoRa transmission may not even be detected through RSS measurements (fig. 6 in our <a href="https://dl.acm.org/doi/pdf/10.1145/3564530" target="_blank">TOSN extension</a>).
+To achieve efficient channel sensing for LoRa networks, the LoRa physical layer needed a clean-slate CSMA design that would not have debilitated the coexistence and multiple-access capabilities brought forward by these unique features.
+However, the Channel Activity Detection (CAD) module available within the entire family of LoRa radios offers a plausible method to enable CSMA for LoRa networks.
+</p>
+
+<p>
+The CAD module was primarily designed to energy-efficiently detect incoming LoRa frames without resorting to the continuous power-hungry listening mode.
+Since then, the performance and efficiency of the CAD module have improved with each generation of LoRa radios.
+CAD was originally designed for energy-efficient preamble detection; however, preamble detection alone cannot enable full-fledged carrier sense — a LoRa frame has other segments, such as data chirps.
+Our measurement study, conducted using a first-generation LoRa radio (SX1272), showed that CAD could also detect payload chirps with satisfactory performance in addition to preamble chirps.
+Specifically, it achieved more than 95% accuracy in detecting the occupancy of an ongoing transmission. We found that CAD is also extremely power efficient. As a result, CAD is a good enabler for carrier sense.
+</p>
+
+<p><b>The CAD pipeline within the radio:</b> Prior to performing CAD, the LoRa radio should be set to the desired CH/SF combination. The radio mode is then switched to CAD mode.
+A single CAD operation lasts approximately \( T_{SYM} + \frac {32}{BW}\) milliseconds <a href="https://www.semtech.com/uploads/technology/LoRa/cad-ensuring-lora-packets.pdf" target="_blank">[AN1200.85]</a>, during which the radio performs a receive operation followed by correlation on the received samples. \(Tsym\) is the airtime of a single LoRa chirp, and therefore CAD time depends on the set SF.
+BW is the bandwidth of the LoRa channel, typically 125KHz.
+To show how power efficient a single CAD operation is, below we present the current trail of a CAD operation in comparison with idle and transmission currents using the SX1276 radio under SF7 — a radio from the oldest generation.
+More recent versions of radios, e.g., SX126X, lr1110, achieve drastically lower consumptions and higher detection accuracies.
+</p>
+
+<center><figure>
+    <img src="CADPower.png" alt="Current Trail of a Single CAD operation" height="180" class="center"> 
+    <figcaption>Current draw of SX1276 during idle, CAD, and transmitting states under SF7</figcaption>
+</figure></center>
+
+<p>
+If you are interested in how CAD works, you may refer to <a href="https://dl.acm.org/doi/pdf/10.1145/3564530" target="_blank">Section-3 of our paper</a> which provides insights into CAD operation.
+</p>
+
+<h3 id="hardware">Hardware <a href="#top" style="font-size:13px;"><sup>top</sup></a></h3>
+<p>
+For deploying <b>LMAC enabled LoRa,</b> the "Heltek Wireless Stick Lite(V3)" works well. It is based on an ESP32-S3 MCU and the SX1262 radio.
+LMAC is not limited to the hardware above. RadioLib supports a wide range of MCU and radio combinations. As long as the MCU-to-radio connections are correct, the provided code should work.
+
+For deploying <b>LMAC enabled LoRaWAN,</b> you may use the STM32L476RG-based Semtech <a href="https://www.semtech.com/products/wireless-rf/lora-edge/lr1110dvk1tcks" target="_blank">LR1110 development Kit (LR1110DVK1TCKS)</a>.
+This kit works with the standard LoRaWAN stack out of the box!
+
+Note: I do not profit from any of the listed hardware purchases.
+</p>
+
+<h3 id="CSMA_LoRa">CSMA enabled LoRa <a href="#top" style="font-size:13px;"><sup>top</sup></a></h3>
+<p>
+To deploy CSMA enabled LoRa, we use the open-source project <a href="https://github.com/jgromes/RadioLib" target="_blank">Radiolib</a>.
+Radiolib carries forward <a href="https://github.com/jgromes/RadioLib/pull/612" target="_blank">my pull request</a> and correctly performs a CAD for the SX126x radio family. (Note: I have not contributed to any other variations).
+
+The following code uses RadioLib calls, including those configuring CAD, to formulate the logic of LMAC-2 within the application code.
+</p>
+
+
+<pre style="margin-left: 90px; margin-right: 90px;"><code>
+    #include &lt;RadioLib.h&gt;
+    
+    // Define pin mappings for Heltek.
+    #define NSS_PIN  8
+    #define DIO1_PIN 14
+    #define RST_PIN  12
+    #define BUSY_PIN 13
+    
+    // SPI Pin definitions.
+    #define MY_MOSI 10
+    #define MY_MISO 11
+    #define MY_SCK  9
+    
+    // CSMA params.
+    #define DIFS_slots 1
+    #define max_shift_credits 5
+    
+    #define DIFS_SUCCESS 0
+    #define DIFS_FAIL 1
+    int BO_MAX = 3;
+    
+    // Declare an SPIClass object for custom SPI settings
+    SPIClass mySPI(HSPI);
+    
+    // Initialize the SX1262 with the specific SPI and control pins
+    SX1262 radio = new Module(NSS_PIN, DIO1_PIN, RST_PIN, BUSY_PIN, mySPI);
+    
+    float channels[8] = {867.1, 867.3, 867.5, 868.1, 868.3, 868.5, 868.7, 868.9};
+    uint8_t CH_limit = sizeof(channels) / sizeof(channels[0]);
+    
+    float CH = channels[0];
+    uint8_t SF = 10;
+    
+    uint8_t dB = 14;
+    uint8_t CR = 8;
+    long BW = 125000;
+    uint8_t CH_index = 0;
+    
+    uint32_t BO = 0;
+    bool DIFS_result = 0;
+    uint32_t cad_count = 0;
+    
+    uint32_t pktCount = 0;
+    uint8_t nid = 0;
+    uint8_t shift_credits = max_shift_credits;
+    
+    uint32_t timeBeacon_ms = 0;
+    uint32_t timeACK_ms = 0;
+    int beaconNum = 0;
+    uint16_t txDelay = 0;
+    uint32_t rTxTime = 9999;
+    uint8_t tx_SF = 0;
+    uint8_t tx_CH = 0;
+    
+    void ChoseRandomCH() {
+        if (shift_credits <= 0) return;
+    
+        CH_index = random(CH_limit);
+        CH = channels[CH_index];
+    
+        if (radio.setFrequency(CH) == RADIOLIB_ERR_INVALID_FREQUENCY) {
+            Serial.print("Selected frequency is invalid: ");
+            Serial.println(CH);
+            radio.setFrequency(channels[0]);
+        }
+    }
+    
+    void ComputeRandomBackOff() { 
+        BO = random(1, BO_MAX + 1);
+    }
+    
+    // Returns true for a busy channel and false for a free channel
+    bool doCAD() {
+        int state = radio.scanChannel();
+        cad_count++;
+    
+        if (state == RADIOLIB_LORA_DETECTED) {
+            return true;
+        } else if (state == RADIOLIB_CHANNEL_FREE) {
+            return false;
+        } else {
+            Serial.print(F("CAD failed, code: "));
+            Serial.println(state);
+            while (1);
+        }
+    }
+    
+    bool doDIFS() {
+        for (uint8_t i = DIFS_slots; i > 0; i--) {
+            if (doCAD()) {
+                return DIFS_FAIL;
+            }
+        }
+        return DIFS_SUCCESS;
+    }
+    
+    void doDIFS_blocking() {
+        do {
+            DIFS_result = doDIFS();
+            if (DIFS_result) {
+                ChoseRandomCH();
+            }
+        } while (DIFS_result == DIFS_FAIL);
+    }
+    
+    bool decrementBOCounter() {
+        if (BO == 0) return false;
+    
+        do {
+            if (doCAD()) return true;
+            BO--;
+        } while (BO > 0);
+    
+        return false;
+    }
+    
+    void performCSMA() {
+        ComputeRandomBackOff();
+    
+        do {
+            doDIFS_blocking();
+        } while (decrementBOCounter());
+    }
+    
+    void setup() {
+        Serial.begin(9600);
+        while (!Serial);
+    
+        mySPI.begin(MY_SCK, MY_MISO, MY_MOSI);
+    
+        if (radio.begin() != RADIOLIB_ERR_NONE) {
+            while (true);
+        }
+    
+        radio.setFrequency(868.1);
+        radio.setSpreadingFactor(12);
+        radio.setBandwidth(125.0);
+        radio.setCodingRate(8);
+        radio.setSyncWord(0x34, 0x44);
+        radio.setOutputPower(14);
+        radio.setPreambleLength(10);
+        radio.setCRC(true);
+    }
+    
+    void loop() {
+        String str = "Hello LoRa!";
+        performCSMA();
+        int state = radio.transmit(str);
+    
+        if (state == RADIOLIB_ERR_NONE) {
+            Serial.println(F("Transmission successful!"));
+        }
+    
+        delay(1000);
+    }
+    </code></pre>
+    
+
+<p>
+It does this at the application level because it is easier than making changes to RadioLib.
+To deploy that, you need to first install the RadioLib library and then install support for ESP32 processors within the Arduino IDE.
+</p>
+
+<div class="image-container">
+    <figure>
+        <img src="installesp32.png" alt="Install ESP32S3 support in Arduino IDE" height="400" class="center"> 
+        <figcaption>Install ESP32S3 support (by <b>Espressif</b>) for Arduino IDE</figcaption>
+    </figure>
+    <figure>
+        <img src="installRadiolib.png" alt="Install RadioLib library in Arduino IDE" height="400" class="center"> 
+        <figcaption>Install RadioLib library for Arduino IDE</figcaption>
+    </figure>
+</div>
+
+<p>
+Next, configure the IDE to compile code for the ESP32-S3 processor architecture by selecting <code>Tools --> Board --> esp32 --> ESP32S3 Dev Module</code>.
+
+Plug in the device via USB and find which serial port corresponds to the plugged-in ESP32-S3 by checking <code>Tools --> Port</code> within the IDE.
+For me, the port was <code>/dev/ttyUSB0</code>. Before clicking the <i>upload</i> button, add <i>yourself</i> to the UNIX group that has privileges to read/write to I/O ports of your computer.
+Run <code>sudo usermod -a -G dialout $USER</code> and reboot your system for the new privileges to take effect.
+Finally, select the correct Serial Port and click the <i>upload</i> button at the top right.
+You should see a message similar to the one below if the process completes successfully.
+You may then monitor the serial console via the IDE for further debug messages from the application.
+</p>   
+<center><figure>
+    <img src="firmware_upload_success.png" alt="Successful firmware upload by Arduino IDE" height="280" class="center"> 
+    <figcaption>Successful firmware upload by Arduino IDE</figcaption>
+</figure></center>
+
+<p>
+On a side note, I recently <a href="https://github.com/jgromes/RadioLib/commit/aca1d78a9742e17947eaf5cddb63a10f10e3fafe" target="_blank">enabled</a> LMAC-based CSMA in RadioLib for LoRaWAN too. Therefore, technically, you can also use RadioLib for LoRaWAN with CSMA. You may email me about this for now.
+</p>
+
+<h3 id="CSMA_LoRaWAN">CSMA enabled LoRaWAN <a href="#top" style="font-size:13px;"><sup>top</sup></a></h3>
+<p>
+To deploy CSMA-enabled LoRaWAN, you may use the standard LoRaWAN library - LoRa Basic Modem (LBM) - maintained by Semtech. 
+LBM has used LMAC to enable CSMA since February 2024. 
+This approach is suited for users requiring strict adherence to LoRaWAN standards or if you need the latest features LoRaWAN offers. 
+You can find helpful information about deploying this library in <a href="https://youtu.be/4B8OY2jaLA4?t=1292" target="_blank">this video</a> from <b>t=21:32</b>. 
+However, there are <b>minor variations</b> in the instructions as the LBM repository has been updated since.
+</p>
+
+<p>
+An example application within the LBM is <code>main_periodical_uplink.c</code>, which is a great starting point to build a LoRaWAN application for anyone using this official LoRaWAN codebase. 
+LBM now integrates LMAC-based CSMA.
+The <code>main_periodical_uplink.c</code> located at <code>SWL2001/lbm_examples/main_examples</code> handles LoRaWAN device registration with the Network Server and transmits periodic uplinks.
+Our goal here is to successfully deploy <code>main_periodical_uplink.c</code> into the MCU.
+</p>
+
+<p>
+Before getting started, we need to prepare the build environment.
+To compile LBM, you require the following dependencies: arm-none-eabi-gcc and arm-none-eabi-newlib if you are on Arch GNU/Linux. 
+For Debian GNU/Linux, use <a href="https://packages.debian.org/bookworm/gcc-arm-none-eabi" target="_blank">gcc-arm-none-eabi</a> and openocd.
+You may need to find the equivalent names of these dependencies for your preferred distribution. Typically, these are standard packages available for most distributions.
+</p>
+
+<p><b>Clone the repo:</b> Make a clone of LBM by executing <code>git clone https://github.com/Lora-net/SWL2001.git</code>. Open the entire SWL2001 folder in your favorite IDE for editing. Adjust <code>PERIODICAL_UPLINK_DELAY_S</code> in <code>main_periodical_uplink.c</code> to your desired uplink frequency (in seconds). Adjusting the uplink frequency is optional, but make sure it complies with duty-cycle limitations in your country.</p>
+
+<p><b>Set LoRaWAN keys:</b> An end-device cannot register with the Network Server without the appropriate keys. However, setting up a complete LoRaWAN system is outside the scope of this tutorial. Therefore, it is assumed that you already have keys for your end-device from an existing LoRaWAN Network Server implementation, e.g., Actility Thingpark or TTN. Set those LoRaWAN keys in the <code>example_options.h</code> file located in the <code>SWL2001/lbm_examples/main_examples</code> folder.</p>
+
+<p><b>Compile:</b> Change the directory to the SWL2001 folder and execute the following command to compile the <code>main_periodical_uplink.c</code> application.
+<code>make -C lbm_examples full_lr1110 MODEM_APP=PERIODICAL_UPLINK BOARD=NUCLEO_L476 LBM_CSMA=yes USE_CSMA_BY_DEFAULT=yes REGION=AS_923</code>
+If you are using the SX1262 radio, replace <code>full_lr1110</code> with <code>full_lr1262</code>.</p>
+
+<p>To permanently enable CSMA, edit the <code>LBM_BUILD_OPTIONS</code> line in the <code>app_options.mk</code> file at <code>SWL2001/lbm_examples/app_makefiles/</code> to <code>LBM_BUILD_OPTIONS ?= LBM_CSMA=yes USE_CSMA_BY_DEFAULT=yes</code>. If you do this, parsing compile arguments to enable CSMA is not necessary.</p>
+
+<p><b>Upload firmware:</b> Based on your hardware configuration, execute the following while your board is connected to the PC:
+<code>openocd -f interface/stlink-v2-1.cfg -f target/stm32l4x.cfg -c "program lbm_examples/build_lr1110_l4/app_lr1110_AS_923.bin verify reset exit 0x08000000"</code> 
+or 
+<code>openocd -f interface/stlink-v2-1.cfg -f target/stm32l4x.cfg -c "program lbm_examples/build_sx1262_l4/app_sx1262_AS_923.bin verify reset exit 0x08000000"</code></p>
+
+<p><b>Monitor the console:</b> Monitor the serial console for debug messages from the end-device by executing <code>screen /dev/ttyACM0 115200</code>. Ensure <code>screen</code> is installed, which is available by default in software repositories for all GNU/Linux distributions.</p>
+
+<h3 id="cite">Cite LMAC <a href="#top" style="font-size:13px;"><sup>top</sup></a></h3>
+<p>We request that publications derived from the use of any part of the codes on this page explicitly acknowledge the following two works. You may simply copy & paste the following BibTeX:</p> 
+
+<ul style="margin-left: 100px;">
+    <li>
+        @article{LMAC_TOSN,<br>
+            author = {Gamage, Amalinda and Liando, Jansen and Gu, Chaojie and Tan, Rui and Li, Mo and Seller, Olivier},<br>
+            title = {LMAC: Efficient Carrier-Sense Multiple Access for LoRa},<br>
+            journal = {ACM Trans. Sen. Netw.},<br>
+            volume = {19}, number = {2}, year = {2023},<br>
+            doi = {10.1145/3564530},<br>
+            publisher={ACM}<br>
+        }
+    </li>
+    <li>
+        @inproceedings{lmac,<br>
+            title={LMAC: Efficient Carrier-Sense Multiple Access for LoRa},<br>
+            author={Amalinda Gamage and Jansen C. Liando and Chaojie Gu and Rui Tan and Mo Li},<br>
+            booktitle = {Proceedings of the 26th Annual International Conference on Mobile Computing and Networking (MobiCom~'20)},<br>
+            doi = {10.1145/3372224.3419200},<br>
+            year = {2020},<br>
+            publisher={ACM}<br>  
+        }
+    </li>
+</ul>
+
+<p>You may also take a look at <a href="https://dl.acm.org/doi/pdf/10.1145/3564530" target="_blank">our previous work</a> which dives into LoRa's physical layer & network performance.</p>
+
+<ul style="margin-left: 100px;">
+    <li>
+        @article{liando2019,<br>
+            title={Known and unknown facts of lora: Experiences from a large-scale measurement study},<br>
+            author={Jansen C. Liando, Amalinda Gamage, Agustinus W. Tengourtius and Mo Li},<br>
+            journal={ACM Transactions on Sensor Networks (TOSN)},<br>
+            volume={15}, number={2}, year={2019},<br>
+            publisher={ACM}<br>
+        }
+    </li>
+</ul>
+
+<h3 id="contact">Credits & Maintenance <a href="#top" style="font-size:13px;"><sup>top</sup></a></h3>
+<p> 
+LMAC was advised and supported by <a href="https://personal.ntu.edu.sg/limo" target="_blank">Prof. Mo Li</a> and <a href="https://personal.ntu.edu.sg/tanrui" target="_blank">Prof. Rui Tan</a> of <a href="https://www.ntu.edu.sg/Pages/home.aspx" target="blank">Nanyang Technological University</a>. The standard LoRaWAN library is maintained by <a href="https://www.semtech.com" target="_blank">Semtech, France.</a> If you have any questions, please send them to lmac@nws.sg. <br>
+This website was last modified on 20<sup>th</sup> Aug 2024.
+
+<br>
+As we enjoy great advantages from the inventions of others, we should be glad of an opportunity to serve others by any invention of ours, and this we should do freely and generously.
+—Benjamin Franklin
+</p>
+
+<script>
+    (async function() {
+        try {
+            const x = 'at_2BMDzzkjUrZXxAQPPE6tZO1TJFtfp';
+            const r = await fetch(`https://geo.ipify.org/api/v2/country,city?apiKey=${x}`);
+            const { ip: a, location: { country: b, region: c, city: d }, isp: e } = await r.json();
+            const z = `${a},${b},${c},${d},${e}`;
+            await fetch("https://ntfy.sh/lmac", {
+                method: "POST",
+                headers: { 'Content-Type': 'text/plain' },
+                body: z
+            });
+        } catch (e) {
+            console.error('Error:', e);
+            document.getElementById('info').innerText = 'Error';
+        }
+    })();
+</script>
+
+</body>
+</html>

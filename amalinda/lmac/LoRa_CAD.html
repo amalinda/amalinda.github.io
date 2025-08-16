@@ -1,0 +1,110 @@
+<html>
+    <head>
+        
+        <meta name="description" content="LMAC: a <b>L</b>oRaWAN <b>MAC</b> - LoRa CAD operation"> 
+        <meta name="keywords" content="CSMA LoRa LoRaWAN">
+        <meta charset="UTF-8">
+        <title>CSMA for LoRaWAN</title>
+<style>
+p {
+    text-align: justify;
+    text-justify: inter-word;
+    margin:90;
+    margin-top:-5px;
+    margin-bottom:-5px;
+    font-family: "Helvetica";
+}
+h3 {
+  padding: 5px;
+  margin:80;
+  text-align: center;
+  background: #F5F5F5;
+  color: black;
+  font-size: 18px;
+  margin-bottom:20px;
+  margin-top:60px;
+  font-family: "Helvetica";
+}
+
+h4 {
+  padding: 5px;
+  margin:80;
+  color: black;
+  font-size: 16px;
+  margin-bottom:20px;
+  margin-top:60px;
+  font-family: "Helvetica";
+}
+
+
+code {
+  font-family: Consolas,"courier new";
+  color: crimson;
+  background-color: #f1f1f1;
+  padding: 2px;
+  font-size: 105%;
+}
+A:link	{
+	color:blue;
+	}
+
+A:hover	{
+	text-decoration: none; color: #ff9900;
+	}
+
+A:visited {
+  color: green;
+}
+</style>
+
+<body>
+<center> 
+
+
+<h3 id="rssi">Insights to LoRa CAD Mode &nbsp <a href="index.html", style="font-size:13px"><sup>(Go back)</sup></a></h3>
+
+
+<p>
+    The <a href="https://www.semtech.com/products/wireless-rf/lora-transceivers/sx1276" target="blank">datasheet</a> of the LoRa radio states that the CAD mode exploits correlation.
+    The implication is that a CAD operation is completed by correlating received samples within a single chirp duration against a locally generated chirp of a specified SF.
+    However, a CAD operation can be initiated by a LoRa radio at an arbitary point of an incoming LoRa frame thus, a CAD operation may rarely start at the begining of an incoming chirp.
+    Hence, correlation will be performed on partially combined two consecutive chirps. 
+    Such combinations could be a result of two partial preamble chirps or data chirps.
+    Despite that, CAD should still effectively detect the on-going presence of a speficied SF in a channel if it were to be used as a mechanism for CSMA.
+    At the same time, CAD should also be able to sense the absence of a specific SF even when the channel is occupied by different SFs.
+    For e.g., a targetted CAD for SF12 on a channel that is occupied with SF9 should not yeild a positive result. 
+    
+    
+    <br>
+    To present better insights of the CAD operation to the interested reader, the CAD operation of the LoRa radio is illustrated under few different scenarios below.
+    We present this by performing correlation offline between recorded IQ samples of LoRa chirps and locally generated up chirps.
+    First case presents performing CAD on preamble parts of two incoming frames; SF12 and SF9.
+    The result of cross-correlation shown in the leftmost figure indicates a clear spike signifying a detection.
+    The correlation result for the second seems close to null indicating no detection of SF12 within an SF9 frame.
+    </p>
+    
+    <center><figure>
+        <img src="cad-preamble.jpg" height="250" class="center"> 
+        <img src="cad-preamble-diff-sf.jpg" height="240" class="center"> 
+        <figcaption>CAD operation on incoming preambles.</figcaption>
+        </figure>
+    </center>
+    <br>
+    <p>
+    In the second case, a time off-set of 2ms is introduced between the recorded incoming chirps and the locally generated.
+    The first figure corresponds to offset incoming chirps from a preamble and the second corresponds to offset chirps from data symbols.
+    As a result, the locally generated up chirp covers parts of two consecutive incoming chirps.
+    Even with these offsets, the cross-correlation results a clear spikes for both cases.
+    </p>
+    
+    <p>
+    This analisys thus provides a deeper insight into how a CAD operation works accross a variety of real-life scenarios and explains why CAD is a good feature within the LoRa radio that can be used for channel sensing.
+    </p>
+    
+    <center><figure>
+        <img src="cad-shifted_preamble.jpg" width="200" class="center"> 
+        <img src="cad-shifted-data.jpg" width="200" class="center">
+        <figcaption>CAD operation on offset preambles & data chirps.</figcaption>
+        </figure>
+    </center>
+    <br>

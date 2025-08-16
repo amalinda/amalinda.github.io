@@ -1,0 +1,117 @@
+<html>
+    <head>
+        
+        <meta name="description" content="LMAC: a <b>L</b>oRaWAN <b>MAC</b> - CSMA Levels for LoRaWAN"> 
+        <meta name="keywords" content="CSMA LoRa LoRaWAN">
+        <meta charset="UTF-8">
+        <title>CSMA for LoRaWAN</title>
+<style>
+p {
+    text-align: justify;
+    text-justify: inter-word;
+    margin:90;
+    margin-top:-5px;
+    margin-bottom:-5px;
+    font-family: "Helvetica";
+}
+h3 {
+  padding: 5px;
+  margin:80;
+  text-align: center;
+  background: #F5F5F5;
+  color: black;
+  font-size: 18px;
+  margin-bottom:20px;
+  margin-top:60px;
+  font-family: "Helvetica";
+}
+
+h4 {
+  padding: 5px;
+  margin:80;
+  color: black;
+  font-size: 16px;
+  margin-bottom:20px;
+  margin-top:60px;
+  font-family: "Helvetica";
+}
+
+
+code {
+  font-family: Consolas,"courier new";
+  color: crimson;
+  background-color: #f1f1f1;
+  padding: 2px;
+  font-size: 105%;
+}
+A:link	{
+	color:blue;
+	}
+
+A:hover	{
+	text-decoration: none; color: #ff9900;
+	}
+
+A:visited {
+  color: green;
+}
+</style>
+
+<body>
+<center> 
+
+
+<h3 id="rssi">LoRaWAN CSMA Configuration levels &nbsp <a href="index.html", style="font-size:13px"><sup>(Go back)</sup></a></h3>
+
+<h4>LMIC_CSMA_LEVEL 1 :</h4>
+
+    <p>
+        Under this configuration, a LoRa node first senses the chosen CH/SF combination for on-going transmissions for a DIFS duration.
+        During a DIFS window a random number of CAD operations are executed.
+        A free channel is classified as "free" upon a cleay DIFS window. I.e., when all of the randomly selected CAD operations report a free channel.
+        The number of CADs to perform is randomly selected while 20 is set at maximum.
+        To assume a free channel, a clear DIFS window is mandatory.
+        This means that all CADs performed within the DIFS window must inform the channel is free.
+        If an on-going transmission is detected, under <code>LMIC_CSMA_LEVEL 1</code> the node waits till the channel is free prior to transmitting the frame.
+        The following state diagram highlights possible states a LoRa node may undergo prior to making a transmission under this setting.
+
+        <center>
+            <figure>
+            <img src="LMAC1.png" alt="LMIC_CSMA_LEVEL 1" height="180" class="center"> 
+            <figcaption>typical state transitions within the MCU for LMIC_CSMA_LEVEL 1</figcaption>
+            </figure>
+        </center>
+    </p>
+
+    <h4>LMIC_CSMA_LEVEL 2 :</h4>
+
+    <p>
+        This option performs the channel sensing as per <code>LMIC_CSMA_LEVEL 1</code> but allows a node to hop randomly to a different channel upon sensing a busy CH/SF.
+        If an on-going transmission is detected, the node switches to a randomly selected channel and senses the same for on-going CH/SF transmissions.
+        Should the newly selected CH is sensed free, the frame is transmitted.
+        Otherwise, the process repeats.
+        The list of channels available for random selection are from the eight user defined channels.
+        The following is a state diagram highlighting possible states a LoRa node may go through prior to making a transmission under this setting.
+
+        <center><figure>
+            <img src="LMAC2.png" alt="LMIC_CSMA_LEVEL 2" height="200" class="center"> 
+            <figcaption>typical state transitions within the MCU for LMIC_CSMA_LEVEL 2</figcaption>
+            </figure>
+        </center>
+    </p>
+
+    <h4>LMIC_CSMA_LEVEL 3 :  </h4>
+
+    <p>
+        This option enables opportunistic channel profiling.
+        Under this setting, a node maintains an "occupancy matrix" representing the busyiness of 8 channels.
+        In other words, the occupancy matrix is a record of a nodes' own historical interactions with channels.
+        When a channel is sensed busy, the node searches through this matrix and opts for the least bussiest channel.
+        This mechanism as opposed to random channel selection yields faster results under higher network contensions.
+
+        <center><figure>
+            <img src="LMAC3.png" alt="LMIC_CSMA_LEVEL 3" height="200" class="center"> 
+            <figcaption>typical state transitions within the MCU for LMIC_CSMA_LEVEL 3</figcaption>
+            </figure>
+        </center>
+    </p>

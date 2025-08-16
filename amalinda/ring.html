@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notify ntfy</title>
+    <style>
+        button {
+            display: block;
+            width: 90%;
+            margin: 20px auto;
+            padding: 15px;
+            font-size: 18px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        button:active {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="sendNotification()">Send Notification</button>
+
+    <script>
+        function sendNotification() {
+            fetch('https://ntfy.sh/90309144', {
+                method: 'POST',
+                headers: {
+                    'Title': 'High Priority Notification',
+                    'Priority': '5'
+                },
+                body: 'Your notification message'
+            }).then(response => {
+                if (response.ok) {
+                    alert('Notification sent successfully!');
+                } else {
+                    alert('Failed to send notification.');
+                }
+            }).catch(error => {
+                alert('Error: ' + error.message);
+            });
+        }
+    </script>
+</body>
+</html>
