@@ -1,0 +1,174 @@
+{
+  "version": "https://schema.openattestation.com/2.0/schema.json",
+  "data": {
+    "id": "4e5139e3-b0eb-47d7-abe1-8169585df022:string:102 AY23 038",
+    "issuedOn": "8c9e54fb-a8f2-4e81-baba-dd4b131e867b:string:2024-02-01T00:00:00+08:00",
+    "attainmentDate": "f688c67d-9c88-4bc2-868c-ff253be4cb36:string:2024-01-31T00:00:00+08:00",
+    "admissionDate": "1ed37b42-84a1-41d8-9b26-d82017c61ea0:string:2020-08-11T00:00:00+08:00",
+    "name": "9df61000-a8d6-4cbb-b006-5fe352b9f047:string:DOCTOR OF PHILOSOPHY ",
+    "cumulativeScore": "ee80e781-895b-4b98-9e3b-1fdda053fdc6:number:4.42",
+    "recipient": {
+      "name": "93474c08-8be0-4855-b879-b481ab13baf8:string:JATHUN GAMAGE ISURU AMALINDA",
+      "nric": "e5462134-3ee2-406b-9a91-269cd24fd49f:string:G3395058L",
+      "studentId": "57d698e0-0ad0-42c4-962d-327608ba5647:string:G2000661L",
+      "dob": "d40b5af8-c33e-4805-af09-20a7e103ef06:string:24 AUGUST 1989",
+      "email": "018c6ada-21ab-4daf-a621-8034296934a4:string:JATH0001@e.ntu.edu.sg",
+      "idType": "5a35bd29-d8e4-41aa-83f3-25fa9cb49c56:string:SO"
+    },
+    "$template": {
+      "name": "49500100-1dbb-49ab-a6b0-71f24e82f761:string:NTU-2024-OAS-PG-RESEARCH-1",
+      "type": "e70143d5-2041-48f4-8f24-b57f10562ba4:string:EMBEDDED_RENDERER",
+      "url": "7a968b81-0d8c-4ee3-a3b2-a3e6fba5290a:string:https://render.ntu.edu.sg"
+    },
+    "issuers": [
+      {
+        "id": "c2c8ff30-a7ea-42ab-a7bc-56f35baa0896:string:did:ethr:0x3d12104c4d77570636ae36d1cffc1cf563c781bb",
+        "issuerName": "4ab90502-0a5f-4b8a-9137-56f004226da4:string:Nanyang Technological University",
+        "name": "226148e0-9b4a-41a9-8d5d-c54263b9e40b:string:Nanyang Technological University",
+        "revocation": {
+          "type": "30622a78-471a-41db-b0f7-a1558f156cb3:string:REVOCATION_STORE",
+          "location": "5991a03e-918b-4ad4-a17b-81f77c44f1a2:string:0x61783202d023fd08dcc7d7ca8a196697c46c9d57"
+        },
+        "identityProof": {
+          "type": "03446fc5-e4cb-4147-a623-baefe8a6fb6e:string:DNS-DID",
+          "key": "6f6eca06-d8c9-47a9-bf3f-0c4a15030b39:string:did:ethr:0x3d12104c4d77570636ae36d1cffc1cf563c781bb#controller",
+          "location": "29d3c4bc-81ff-430c-b544-c9a42a9d26fc:string:ntu.edu.sg"
+        }
+      }
+    ],
+    "qualificationLevel": [
+      {
+        "frameworkName": "06b00407-ba74-4b9b-8aa5-b7322bad6e48:string:singapore/ssec-eqa",
+        "frameworkVersion": "0da506ca-3f07-475c-8bd9-1639e2502a60:string:2020",
+        "code": "8458358e-f1b3-4503-b2d3-3fc4b9fe8de8:string:92",
+        "description": "32e0fe33-c0d9-4ad0-908b-d5d6c5d3c1ed:string:Doctoral degree or equivalent"
+      }
+    ],
+    "transcript": [
+      {
+        "name": "0849985d-221a-49dd-9dcb-92375dd4ae33:string:ADVANCED TOPICS IN DISTRIBUTED SYSTEMS",
+        "courseCode": "aec206cb-48f7-4536-b823-e09a78b37739:string:CE7490",
+        "grade": "3245ec90-6ee9-4bf0-bb5f-3b52e61016ce:string:B+",
+        "score": "9212db06-38b7-4510-a129-a6ffe1943bef:string:4.00",
+        "courseCredit": "5d5f0b76-f53d-4a6d-b884-9b6a43109a14:string:3.0",
+        "academicYear": "76cb8a26-d301-4561-af77-ae87c97f16d6:string:ACADEMIC YEAR 2020-2021",
+        "semester": "4cd89704-f5f9-46da-bc4b-764092f41790:string:SEMESTER 1"
+      },
+      {
+        "name": "73c86163-a3e2-4905-b288-dd27caf4b27c:string:SPECIAL ADVANCED TOPIC: DIGITAL IMAGE PROCESSING",
+        "courseCode": "c14704b8-8d10-4157-9299-e4de0948495d:string:CE7491",
+        "grade": "61dd2362-65a0-4f27-bbd5-5ddbc20edf9b:string:A",
+        "score": "a6ee5dee-6270-49b0-afc7-3f86d951ad2e:string:5.00",
+        "courseCredit": "b663a58d-cd23-4ada-95e4-6867d2e68738:string:3.0",
+        "academicYear": "ac169aa1-7a2c-4e14-9464-036d0177718c:string:ACADEMIC YEAR 2020-2021",
+        "semester": "305d7346-7dd9-441a-8d8f-3977b5b6fc9d:string:SEMESTER 1"
+      },
+      {
+        "name": "8b725c69-84ae-4fdf-8d20-86b5fc2d6d85:string:EPIGEUM RESEARCH INTEGRITY COURSE*",
+        "courseCode": "e90db196-91e2-4705-8450-27c74af0bd80:string:ERI701",
+        "grade": "80d0b39f-cadb-468e-bc90-5e95ec5c7793:string:Pass",
+        "score": "a66bbd76-2b98-4456-9032-7b0b4bd7d6b9:string:",
+        "courseCredit": "3c94fc8f-80d6-4084-ad4f-595525f92133:string:0.0",
+        "academicYear": "a8b61bc3-36eb-4756-b0ec-ef15c0dc91b2:string:ACADEMIC YEAR 2020-2021",
+        "semester": "3548cf3d-34d6-4aa6-be7f-8b149939024e:string:SEMESTER 1"
+      },
+      {
+        "name": "d34f39df-bb52-4ee4-9b70-7bdd78f2bfc3:string:COMPUTATIONAL & SYSTEMS BIOLOGY",
+        "courseCode": "4744ca9a-9e7c-417a-871d-8fd14203e480:string:CE7412",
+        "grade": "c55b544c-ec82-4830-af3c-307a392be535:string:A-",
+        "score": "c773966f-e04e-44c2-ba2a-000f75824ea7:string:4.50",
+        "courseCredit": "63e50ff9-2052-4e17-846e-9b5363c22528:string:3.0",
+        "academicYear": "8eb94208-3ce0-4077-ae2e-c4f2980f2616:string:ACADEMIC YEAR 2020-2021",
+        "semester": "ef1ea56b-13dd-41ff-950d-b00e8d9022f3:string:SEMESTER 2"
+      },
+      {
+        "name": "bf7d2dbc-9c70-4f66-ac87-bdca8b6f9e27:string:HUMAN COMPUTER INTERACTION THEORY & PRACTICE",
+        "courseCode": "90f6427d-0a23-4d74-b5ce-616c978fd293:string:DM6121",
+        "grade": "72d83681-a821-4560-9b24-203e1103d3d0:string:A+",
+        "score": "defe8fac-e129-4410-b8cc-2b9d6f82190b:string:5.00",
+        "courseCredit": "4b327842-9c1a-44b1-a0d7-852476fe540c:string:3.0",
+        "academicYear": "9e06ff31-53ea-453d-8bb4-6f28a1c38573:string:ACADEMIC YEAR 2020-2021",
+        "semester": "f992cf6f-c6e3-4bc5-a876-6b6be094f4c2:string:SEMESTER 2"
+      },
+      {
+        "name": "b14c32c9-3b31-425a-b3df-c867595a8947:string:DEEP LEARNING FOR DATA SCIENCE",
+        "courseCode": "c1ffb3d0-b8f8-4e70-b93f-e96e8e068229:string:CE7454",
+        "grade": "52ac9d9d-ff1d-40ab-a4c6-44a880fb746e:string:B+",
+        "score": "13c6588b-672e-43a9-849f-e8fa2ec6b51a:string:4.00",
+        "courseCredit": "9b45c023-7d58-4bc9-896b-5af2105f363b:string:3.0",
+        "academicYear": "00689e16-5c5d-414b-bbee-5dd47d42c958:string:ACADEMIC YEAR 2021-2022",
+        "semester": "f854c602-66ed-47c2-b885-8ac9743b3225:string:SEMESTER 1"
+      },
+      {
+        "name": "6c86aed7-1259-4a6c-b797-6036af796e3e:string:RF CIRCUITS FOR WIRELESS COMMUNICATIONS",
+        "courseCode": "170f3091-96db-4741-acd6-508f5ea84af2:string:EE6128",
+        "grade": "7442af14-b80d-4ed3-ba16-a95f6b92982f:string:W",
+        "score": "f1005b29-6c36-4590-a1c0-d1a6ea1a71ad:string:",
+        "courseCredit": "3652f2ff-af6e-45ab-b295-08e01447e02f:string:-",
+        "academicYear": "86d49b11-0ccb-4015-b7f3-ed33a227c3aa:string:ACADEMIC YEAR 2021-2022",
+        "semester": "8b4fa3cd-a43e-4d8e-ba80-1cfafdf24ecc:string:SEMESTER 1"
+      },
+      {
+        "name": "7b66c42c-e98b-470a-96dc-3b5d3d0827ca:string:ADVANCED DIGITAL SIGNAL PROCESSING",
+        "courseCode": "6ed2c917-8f97-4faa-8b9f-f0758722cf05:string:EE6401",
+        "grade": "de560b39-b215-4311-915b-711a07e1dc0c:string:W",
+        "score": "9db08808-134e-449e-bd78-55f3552ba22c:string:",
+        "courseCredit": "6f95556f-b7b4-4258-bcf7-661fc0da0be6:string:-",
+        "academicYear": "9f4c8dd1-5b6f-437a-9a14-80e20884352b:string:ACADEMIC YEAR 2021-2022",
+        "semester": "25dc5656-20ae-4375-acbf-36a2ecbdc45b:string:SEMESTER 1"
+      },
+      {
+        "name": "742373f1-ecac-4c39-a4eb-d5d7167c1b06:string:INFORMATION RETRIEVAL & ANALYSIS",
+        "courseCode": "487f145d-a5fb-497d-81bf-25201005b119:string:CI6226",
+        "grade": "7a857e28-ef41-4c05-9c2c-aa21b6d4d70b:string:B+",
+        "score": "e29a78d2-a9c4-41f4-8b1c-98dc0b3a04ce:string:4.00",
+        "courseCredit": "25f6a4a9-3ebc-4aff-9a30-06d83ddbcbc4:string:3.0",
+        "academicYear": "ff955628-f398-4560-b92e-dfd174151164:string:ACADEMIC YEAR 2021-2022",
+        "semester": "688912c7-0617-42d3-9d6c-c3cfa2c19ffe:string:SEMESTER 2"
+      },
+      {
+        "name": "ab48d041-12a4-493d-9079-2bc0cadc7838:string:GRADUATE COMMUNICATION COURSE*",
+        "courseCode": "192aa1a4-caa7-4cde-b725-28ff27fc3676:string:MS8001",
+        "grade": "d63e53e0-fe8a-44f3-b588-15f8cc3cc946:string:Pass",
+        "score": "7331973c-be01-46ed-b9be-9e5ba03a86a0:string:",
+        "courseCredit": "03febb6f-831f-4288-a98f-7e5f1c3c6fe1:string:3.0",
+        "academicYear": "758bba10-7af0-4ce0-ae42-418e07110470:string:ACADEMIC YEAR 2022-2023",
+        "semester": "e9a6895e-83dd-4388-876d-cd1b892a7ca9:string:SEMESTER 2"
+      }
+    ],
+    "additionalData": {
+      "school": "126fe996-46c8-45d0-9eb6-199324818a46:string: COMPUTER SCIENCE AND ENGINEERING",
+      "thesis": [
+        {
+          "name": "8e1b06c3-ca36-4dea-89c7-37b492d3ff20:string:OPTIMIZING SPECTRAL UTILIZATION OF LPWANS"
+        }
+      ],
+      "courseTitle": [
+        "6d5dbec6-2db8-4201-9778-065651db42bc:string:Doctor of Philosophy"
+      ]
+    }
+  },
+  "schema": "https://raw.githubusercontent.com/OpenCerts/open-certificate/master/schema/transcripts/2.0/schema.json",
+  "signature": {
+    "type": "SHA3MerkleProof",
+    "targetHash": "d87297160754dea98cb1eaed3dfd6a1c762235d10dfd458c8a282f680de27348",
+    "proof": [
+      "442ef3caabdfdc037ca3c8e592a25c0de1ce7d219e8b1145584c366cc31fba3c",
+      "9a282f27fc347e1373e298ab91f1a90db775e86ea0e597bf17528e2d52fe1ad7",
+      "4412eed9fd9119b73fc9a433cae4984a0832b0587afc91855264f6dbcd5a6baa",
+      "ee0f08e101d3d08f43ca5a4460148d6241b5b63179b81d0e3490f5d7175a1edc",
+      "a3f3230307eaab84cceedc1226f87f4cd70a7df812760a9a82ce746c6c9826f5",
+      "c6cb9dc4d5c5dfcbed063543a0f1804e29eb877c7980c404447876685fbf37a1"
+    ],
+    "merkleRoot": "3f1db4693317514c0bcae14f3b7da7252939273a46e1667f5365020f15e1a59c"
+  },
+  "proof": [
+    {
+      "type": "OpenAttestationSignature2018",
+      "created": "2024-02-07T01:26:10.049Z",
+      "proofPurpose": "assertionMethod",
+      "verificationMethod": "did:ethr:0x3d12104c4d77570636ae36d1cffc1cf563c781bb#controller",
+      "signature": "0x5426b79af37476e4bc08c5d20b41bc2701506a48d45c1082b8fec5c640ee9f673c3b255b8fdba6f8fa510769b05ac43162808996795a99506fea17f0f00b668f1c"
+    }
+  ]
+}
