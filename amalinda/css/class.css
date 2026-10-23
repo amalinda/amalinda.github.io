@@ -1,0 +1,47 @@
+/* vim: set ts=2 sts=2 sw=2 noet: */
+
+body {
+	padding-top: 50px;
+	justify-content: space-between;
+}
+
+/* Override bootstrap link color to be a little darker */
+a {color: #004499;}
+
+/* Override bootstrap font sizes to be less dramatic for classes */
+.h1, h1 {font-size: 1.75rem;}
+.h2, h2 {font-size: 1.50rem;}
+.h3, h3 {font-size: 1.25rem;}
+.h4, h4 {font-size: 1.15rem;}
+.h5, h5 {font-size: 1.08rem;}
+
+/* Grey-indent blockquotes */
+blockquote {
+	background: #f9f9f9;
+	border-left: 10px solid #ccc;
+	margin: 1.5em 10px;
+	padding: 0.5em 10px;
+}
+
+/* Don't let img's overflow layout space */
+img {
+	width: 100%;
+}
+
+/* Make video thumbnails look nice */
+img.thumbnail {
+	border-style: solid;
+}
+
+/* Have a non-comment way to keep stuff around */
+.prep {
+	display: none;
+}
+
+.final-grade-table {
+	border-collapse: initial;
+	padding: 10px;
+	border: 1px solid;
+	width: 100%;
+	text-align: center;
+}

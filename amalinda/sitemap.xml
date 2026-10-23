@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+    <url>
+        <loc>https://nws.sg/amalinda/</loc>
+        <lastmod>2026-10-12</lastmod>
+        <image:image><image:loc>https://nws.sg/amalinda/images/amalinda-headshot-square.jpg</image:loc></image:image>
+        <image:image><image:loc>https://nws.sg/amalinda/awards/LoRa_alliance_award_amalinda2.jpg</image:loc></image:image>
+        <image:image><image:loc>https://nws.sg/amalinda/awards/amalinda_gamage_LoRa_Alliance_contributors_Award.png</image:loc></image:image>
+        <image:image><image:loc>https://nws.sg/amalinda/images/research/Hark_overview.png</image:loc></image:image>
+        <image:image><image:loc>https://nws.sg/amalinda/images/research/Hark_tunnel_diode_IV.png</image:loc></image:image>
+        <image:image><image:loc>https://nws.sg/amalinda/images/research/Hark_downconversion.png</image:loc></image:image>
+        <image:image><image:loc>https://nws.sg/amalinda/images/research/SateRIoT.png</image:loc></image:image>
+        <image:image><image:loc>https://nws.sg/amalinda/images/research/LoRa_orthogonality.png</image:loc></image:image>
+        <image:image><image:loc>https://nws.sg/amalinda/images/research/low_snr.png</image:loc></image:image>
+        <image:image><image:loc>https://nws.sg/amalinda/images/research/LoRa_testbed.png</image:loc></image:image>
+        <image:image><image:loc>https://nws.sg/amalinda/images/research/LoRa_sx1301_gateway.png</image:loc></image:image>
+        <image:image><image:loc>https://nws.sg/amalinda/images/research/LoRa_sx1276_node.png</image:loc></image:image>
+        <image:image><image:loc>https://nws.sg/amalinda/images/research/collar.jpg</image:loc></image:image>
+        <image:image><image:loc>https://nws.sg/amalinda/images/research/energy_harvester_mounted.jpg</image:loc></image:image>
+    </url>
+    <url>
+        <loc>https://nws.sg/amalinda/hark/</loc>
+        <lastmod>2026-10-23</lastmod>
+    </url>
+    <url>
+        <loc>https://nws.sg/amalinda/lmac/</loc>
+        <lastmod>2024-08-20</lastmod>
+        <image:image><image:loc>https://nws.sg/amalinda/lmac/testbed.jpg</image:loc></image:image>
+        <image:image><image:loc>https://nws.sg/amalinda/lmac/CADPower.png</image:loc></image:image>
+    </url>
+    <url><loc>https://nws.sg/amalinda/publications/LoRa_LMAC_MobiCom.pdf</loc></url>
+    <url><loc>https://nws.sg/amalinda/publications/LoRaHART.pdf</loc></url>
+    <url><loc>https://nws.sg/amalinda/publications/TOSN_19_2.pdf</loc></url>
+    <url><loc>https://nws.sg/amalinda/publications/Amalinda-GLOBECOM16.pdf</loc></url>
+</urlset>
