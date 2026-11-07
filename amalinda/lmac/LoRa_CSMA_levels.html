@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LoRaWAN CSMA Configuration Levels | LMAC</title>
+<meta name="description" content="The three LMAC CSMA configuration levels for LoRaWAN: DIFS-based channel sensing, random channel hopping, and opportunistic channel profiling.">
+<meta name="keywords" content="CSMA, LoRa, LoRaWAN, LMAC, LMIC, DIFS">
+<link rel="canonical" href="https://nws.sg/amalinda/lmac/LoRa_CSMA_levels.html">
+<meta property="og:title" content="LoRaWAN CSMA Configuration Levels | LMAC">
+<meta property="og:description" content="The three LMAC CSMA configuration levels for LoRaWAN: DIFS-based channel sensing, random channel hopping, and opportunistic channel profiling.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://nws.sg/amalinda/lmac/LoRa_CSMA_levels.html">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="../images/icons/favicon.ico" sizes="any">
+<link rel="stylesheet" href="lmac.css">
+</head>
+<body>
+<div class="page">
+
+<header id="top">
+	<a class="back" href="./">&larr; LMAC: Efficient CSMA for LoRa and LoRaWAN</a>
+	<h1 id="rssi">LoRaWAN CSMA Configuration Levels</h1>
+	<p class="subtitle">The three levels of <code>LMIC_CSMA_LEVEL</code> and the state transitions behind each.</p>
+
+	<nav class="toc" aria-label="Contents">
+		<a href="#level1">Level 1</a><span class="sep">&middot;</span>
+		<a href="#level2">Level 2</a><span class="sep">&middot;</span>
+		<a href="#level3">Level 3</a>
+	</nav>
+</header>
+
+<main>
+
+<h2 id="level1"><span><code>LMIC_CSMA_LEVEL 1</code>: channel sensing</span> <a class="top" href="#top">top</a></h2>
+<p>
+Under this configuration, a LoRa node first senses the chosen CH/SF combination for ongoing transmissions for a DIFS duration.
+During a DIFS window, a random number of CAD operations are executed; the number of CADs to perform is randomly selected, with 20 set as the maximum.
+To assume a free channel, a clear DIFS window is mandatory. This means that all CADs performed within the DIFS window must report that the channel is free.
+If an ongoing transmission is detected, under <code>LMIC_CSMA_LEVEL 1</code> the node waits until the channel is free prior to transmitting the frame.
+The following state diagram highlights possible states a LoRa node may undergo prior to making a transmission under this setting.
+</p>
+<figure class="diagram">
+	<picture>
+		<source srcset="LMAC1.avif" type="image/avif">
+		<source srcset="LMAC1.webp" type="image/webp">
+		<img src="LMAC1.png" alt="State diagram for LMIC_CSMA_LEVEL 1" width="1856" height="898" loading="lazy">
+	</picture>
+	<figcaption>Typical state transitions within the MCU for <code>LMIC_CSMA_LEVEL 1</code>.</figcaption>
+</figure>
+
+<h2 id="level2"><span><code>LMIC_CSMA_LEVEL 2</code>: random channel hopping</span> <a class="top" href="#top">top</a></h2>
+<p>
+This option performs the channel sensing as per <code>LMIC_CSMA_LEVEL 1</code> but allows a node to hop randomly to a different channel upon sensing a busy CH/SF.
+If an ongoing transmission is detected, the node switches to a randomly selected channel and senses it for ongoing CH/SF transmissions.
+If the newly selected CH is sensed free, the frame is transmitted. Otherwise, the process repeats.
+The channels available for random selection are the eight user-defined channels.
+The following state diagram highlights possible states a LoRa node may go through prior to making a transmission under this setting.
+</p>
+<figure class="diagram">
+	<picture>
+		<source srcset="LMAC2.avif" type="image/avif">
+		<source srcset="LMAC2.webp" type="image/webp">
+		<img src="LMAC2.png" alt="State diagram for LMIC_CSMA_LEVEL 2" width="2106" height="1323" loading="lazy">
+	</picture>
+	<figcaption>Typical state transitions within the MCU for <code>LMIC_CSMA_LEVEL 2</code>.</figcaption>
+</figure>
+
+<h2 id="level3"><span><code>LMIC_CSMA_LEVEL 3</code>: opportunistic channel profiling</span> <a class="top" href="#top">top</a></h2>
+<p>
+This option enables opportunistic channel profiling.
+Under this setting, a node maintains an "occupancy matrix" representing the busyness of 8 channels.
+In other words, the occupancy matrix is a record of a node's own historical interactions with channels.
+When a channel is sensed busy, the node searches through this matrix and opts for the least busy channel.
+This mechanism, as opposed to random channel selection, yields faster results under higher network contention.
+</p>
+<figure class="diagram">
+	<picture>
+		<source srcset="LMAC3.avif" type="image/avif">
+		<source srcset="LMAC3.webp" type="image/webp">
+		<img src="LMAC3.png" alt="State diagram for LMIC_CSMA_LEVEL 3" width="1693" height="1020" loading="lazy">
+	</picture>
+	<figcaption>Typical state transitions within the MCU for <code>LMIC_CSMA_LEVEL 3</code>.</figcaption>
+</figure>
+
+</main>
+
+<footer>
+	<p><a href="./">&larr; Back to LMAC</a> &middot; Questions: <a href="mailto:lmac@nws.sg">lmac@nws.sg</a></p>
+</footer>
+
+</div>
+<script src="../js/mtr.js" defer></script>
+</body>
+</html>

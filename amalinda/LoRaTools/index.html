@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LoRa Tools by Amalinda Gamage</title>
+<meta name="description" content="Free browser tools for LoRa PHY research and teaching: make a LoRa packet as an I/Q file for any SDR, and decode LoRa recordings step by step, from chirps to symbols to payload.">
+<meta name="author" content="Amalinda Gamage">
+<link rel="canonical" href="https://nws.sg/amalinda/LoRaTools/">
+<meta property="og:title" content="LoRa Tools by Amalinda Gamage">
+<meta property="og:description" content="Free browser tools for LoRa PHY research and teaching: make a LoRa packet as an I/Q file for any SDR, and decode LoRa recordings step by step, from chirps to symbols to payload.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nws.sg/amalinda/LoRaTools/">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M3 26 L13 6 L13 26 L23 6 L23 26' fill='none' stroke='%23003d7c' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="shared/style.css">
+</head>
+<body>
+<header class="top"><div class="top-inner">
+  <a class="brand" href="./">LoRa Tools</a>
+  <nav class="tabs" aria-label="Tools">
+    <a class="tab" href="iqmodulator/">IQ Modulator</a>
+    <a class="tab" href="iqdemodulator/">IQ Demodulator</a>
+  </nav>
+</div></header>
+<main>
+<div class="intro">
+  <h1>LoRa Tools</h1>
+  <p>Tools for LoRa PHY research and development.</p>
+</div>
+<div class="cards">
+  <a class="card" href="iqmodulator/">
+    <h2>IQ Modulator →</h2>
+    <p>Choose the LoRa settings and a payload, and get the packet as an I/Q file (cf32, ci16, ci8, sc16q11, SigMF) at the sample
+       rate your SDR needs. Add channel impairments (CFO, SFO, sampling time offset) and/or noise to test a receiver.</p>
+  </a>
+  <a class="card orange" href="iqdemodulator/">
+    <h2>IQ Demodulator →</h2>
+    <p>Drop in an I/Q recording at any sample rate and get every LoRa packet in it: time, spreading factor, header, payload,
+       CRC and CFO. Scans SF7 to SF12 if you don't know the spreading factor.</p>
+  </a>
+</div>
+</main>
+<footer class="construction">Under construction: may behave unexpectedly, and not yet ready for research use.</footer>
+<script src="../js/mtr.js" defer></script>
+</body>
+</html>

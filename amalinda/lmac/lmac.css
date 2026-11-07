@@ -1,0 +1,184 @@
+/* Shared style for the LMAC project pages (index, LoRa_CAD, LoRa_CSMA_levels). */
+:root {
+	--text: #222;
+	--muted: #5f6368;
+	--rule: #e3e3e3;
+	--link: #0b57a4;
+	--code-bg: #f6f7f8;
+	--code-border: #e1e4e8;
+	--comment: #6a737d;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+	margin: 0;
+	padding: 0 16px;
+	color: var(--text);
+	background: #fff;
+	font: 17px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+.page {
+	max-width: 46rem;
+	margin: 0 auto;
+	padding: 2.5rem 0 3rem;
+}
+a { color: var(--link); text-underline-offset: 2px; }
+a:hover { color: #08427c; }
+
+/* header */
+.back { font-size: .9rem; color: var(--muted); text-decoration: none; }
+.back:hover { text-decoration: underline; }
+h1 {
+	font-size: 2rem;
+	line-height: 1.25;
+	margin: .75rem 0 .35rem;
+	letter-spacing: -.01em;
+}
+.subtitle { margin: 0 0 1.25rem; color: var(--muted); font-size: 1.05rem; }
+nav.toc {
+	font-size: .95rem;
+	padding: .6rem 0;
+	border-top: 1px solid var(--rule);
+	border-bottom: 1px solid var(--rule);
+	margin-bottom: 2rem;
+}
+nav.toc a { white-space: nowrap; }
+nav.toc .sep { color: #bbb; margin: 0 .35rem; }
+
+/* sections */
+h2 {
+	font-size: 1.35rem;
+	line-height: 1.3;
+	margin: 2.75rem 0 .9rem;
+	padding-bottom: .3rem;
+	border-bottom: 1px solid var(--rule);
+}
+h2 .top { float: right; margin-top: .45rem; font-size: .8rem; font-weight: normal; text-decoration: none; color: var(--muted); }
+h2 .top:hover { text-decoration: underline; }
+h3 { font-size: 1.05rem; margin: 1.75rem 0 .5rem; }
+p { margin: 0 0 1rem; }
+.note { color: var(--muted); font-size: .95rem; }
+
+/* figures */
+figure { margin: 1.5rem 0; text-align: center; }
+figure img { max-width: 100%; height: auto; }
+figcaption { margin-top: .4rem; font-size: .9rem; color: var(--muted); }
+.figures { display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center; }
+.figures figure { flex: 1 1 15rem; margin: 1rem 0; }
+.figures img { max-height: 400px; width: auto; }
+.figures.pair img { max-height: 300px; }
+
+.videos { display: grid; grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr)); gap: 1rem; margin: 1.25rem 0 .5rem; }
+.videos iframe { width: 100%; aspect-ratio: 16 / 9; border: 0; background: #000; }
+.videos figure { margin: 0; }
+
+/* code */
+code, pre {
+	font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+}
+:not(pre) > code {
+	font-size: .86em;
+	background: var(--code-bg);
+	border: 1px solid var(--code-border);
+	border-radius: 3px;
+	padding: .05em .3em;
+	overflow-wrap: anywhere;
+}
+.code {
+	position: relative;
+	margin: 1rem 0 1.25rem;
+}
+.code .label {
+	display: block;
+	font-size: .8rem;
+	color: var(--muted);
+	margin-bottom: .25rem;
+}
+pre {
+	margin: 0;
+	padding: .9rem 1rem;
+	font-size: .84rem;
+	line-height: 1.55;
+	background: var(--code-bg);
+	border: 1px solid var(--code-border);
+	border-radius: 4px;
+	overflow-x: auto;
+	tab-size: 4;
+}
+.code pre { padding-right: 4.75rem; }
+pre.long { max-height: 34rem; }
+pre .c { color: var(--comment); }
+pre .p { color: #a0a0a0; user-select: none; }
+.copy {
+	position: absolute;
+	right: .45rem;
+	font: .75rem/1 inherit;
+	font-family: inherit;
+	top: .45rem;
+	padding: .3rem .55rem;
+	color: var(--muted);
+	background: #fff;
+	border: 1px solid var(--code-border);
+	border-radius: 3px;
+	cursor: pointer;
+}
+.code:has(.label) .copy { top: 1.75rem; }
+.copy:hover { color: var(--text); border-color: #c8ccd0; }
+
+ol.steps { padding-left: 1.4rem; }
+ol.steps > li { margin-bottom: 1.1rem; padding-left: .2rem; }
+ol.steps > li > p { margin-bottom: .5rem; }
+
+/* footer */
+footer {
+	margin-top: 3rem;
+	padding-top: 1rem;
+	border-top: 1px solid var(--rule);
+	font-size: .95rem;
+}
+blockquote {
+	margin: 1.25rem 0 0;
+	padding-left: 1rem;
+	border-left: 3px solid var(--rule);
+	color: var(--muted);
+	font-style: italic;
+}
+blockquote cite { display: block; margin-top: .25rem; font-style: normal; }
+
+@media (max-width: 600px) {
+	body { font-size: 16px; }
+	h1 { font-size: 1.6rem; }
+	.page { padding-top: 1.5rem; }
+}
+@media print {
+	nav.toc, .copy, .videos, h2 .top { display: none; }
+	pre { max-height: none; overflow: visible; white-space: pre-wrap; }
+}
+
+/* State diagrams: readable without filling the whole column */
+.diagram img { max-width: min(100%, 560px); }
+
+/* Project-page header (index): title, authors, venue, paper links */
+header.project { text-align: center; }
+header.project .back { display: block; text-align: left; }
+header.project h1 { margin-top: 1.25rem; }
+.authors { margin: .5rem 0 .15rem; font-size: 1.05rem; }
+.authors a { text-decoration: none; }
+.authors a:hover { text-decoration: underline; }
+.affiliations, .venue { margin: 0; color: var(--muted); font-size: .95rem; }
+.links { margin: .8rem 0 0; font-size: 1rem; }
+.links a { margin: 0 .3rem; white-space: nowrap; text-decoration: none; }
+.links a:hover { text-decoration: underline; }
+figure.teaser { margin: 1.75rem 0 1rem; }
+header.project + figure.teaser + nav.toc {
+	border: 0;
+	padding: 0;
+	margin: 0 0 1rem;
+	color: var(--muted);
+	text-align: center;
+}
+.footnote { font-size: .9rem; color: var(--muted); margin-top: 1.5rem; }
+.footnote a[aria-label] { text-decoration: none; }
+
+/* Figures that read fine at a smaller size */
+figure.small img { max-width: min(100%, 400px); }

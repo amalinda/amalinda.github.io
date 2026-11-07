@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LoRa IQ Modulator | LoRa Tools by Amalinda Gamage</title>
+<meta name="description" content="Make a LoRa packet as an I/Q file (cf32, ci16, ci8, sc16q11, SigMF) at any sample rate for any SDR, with SF7 to SF12, your payload, and optional CFO, SFO, sampling time offset and a chosen SNR.">
+<meta name="author" content="Amalinda Gamage">
+<link rel="canonical" href="https://nws.sg/amalinda/LoRaTools/iqmodulator/">
+<meta property="og:title" content="LoRa IQ Modulator | LoRa Tools by Amalinda Gamage">
+<meta property="og:description" content="Make a LoRa packet as an I/Q file (cf32, ci16, ci8, sc16q11, SigMF) at any sample rate for any SDR, with SF7 to SF12, your payload, and optional CFO, SFO, sampling time offset and a chosen SNR.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nws.sg/amalinda/LoRaTools/iqmodulator/">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M3 26 L13 6 L13 26 L23 6 L23 26' fill='none' stroke='%23003d7c' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../shared/style.css">
+</head>
+<body>
+<header class="top"><div class="top-inner">
+  <a class="brand" href="../">LoRa Tools</a>
+  <nav class="tabs" aria-label="Tools">
+    <a class="tab" href="./" aria-current="page">IQ Modulator</a>
+    <a class="tab" href="../iqdemodulator/">IQ Demodulator</a>
+  </nav>
+</div></header>
+
+<main>
+<div class="intro">
+  <h1>LoRa IQ Modulator</h1>
+  <p>Choose the LoRa settings and a payload, and download the packet as a complex baseband I/Q file for your SDR or receiver.</p>
+</div>
+
+<div class="grid">
+<section>
+  <h2>LoRa packet</h2>
+  <div class="row"><label for="sf">Spreading factor</label>
+    <select id="sf"><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option></select></div>
+  <div class="row"><label for="bw">Bandwidth</label>
+    <select id="bw"><option value="125000">125 kHz</option><option value="250000">250 kHz</option><option value="500000">500 kHz</option></select></div>
+  <div class="row"><label for="cr">Coding rate</label>
+    <select id="cr"><option value="1">4/5</option><option value="2">4/6</option><option value="3">4/7</option><option value="4">4/8</option></select></div>
+  <div class="row"><label for="preamble">Num. preamble symbols</label>
+    <div class="inline"><input type="number" id="preamble" min="1" max="65535" step="1"><span class="hint">upchirps before the sync word</span></div></div>
+  <div class="row"><label for="sync">Sync word</label>
+    <select id="sync">
+      <option value="34">0x34: LoRaWAN public network</option>
+      <option value="12">0x12: private network</option>
+      <option value="custom">custom NetID symbols</option>
+    </select></div>
+  <div class="row"><label for="netid0">NetID symbols</label>
+    <div class="pair"><input type="number" id="netid0" min="0" step="1" aria-label="NetID symbol 1">
+      <input type="number" id="netid1" min="0" step="1" aria-label="NetID symbol 2">
+      <span class="hint" id="netidHint"></span></div></div>
+  <div class="row"><label for="crc">Payload CRC</label>
+    <div class="inline"><input type="checkbox" id="crc"><label for="crc" class="hint">on</label></div></div>
+  <div class="row"><label for="ldr">Low data rate opt.</label>
+    <div class="inline"><select id="ldr" style="width:auto;flex:0 0 auto"><option value="-1">auto</option><option value="1">on</option><option value="0">off</option></select>
+      <span class="hint" id="ldrHint"></span></div></div>
+  <div class="row"><label for="payload">Payload</label>
+    <div><textarea id="payload" spellcheck="false"></textarea>
+      <div class="inline hint"><label><input type="radio" name="pmode" value="text" checked> text</label>
+        <label><input type="radio" name="pmode" value="hex"> hex bytes</label><span id="plen"></span></div></div></div>
+</section>
+
+<section>
+  <h2>I/Q file</h2>
+  <div class="row"><label for="fs">Sample rate</label><select id="fs"></select></div>
+  <div class="row" id="fsCustomRow" hidden><label for="fsCustom">Custom sample rate</label>
+    <div class="inline"><input type="number" id="fsCustom" min="1" step="1" style="width:150px"> <span class="hint">samples per second</span></div></div>
+  <div class="row"><span></span><span class="hint">1 MS/s suits most SDRs and GNU Radio. HackRF needs at least 2 MS/s.</span></div>
+  <div class="row"><label for="fmt">Format</label><select id="fmt"></select></div>
+  <div class="row"><label for="pad">Silence</label>
+    <div class="inline"><input type="number" id="pad" min="0" step="any"><span class="hint">ms of zeros before and after the packet</span></div></div>
+
+  <h2 style="margin-top:18px">Summary</h2>
+  <div class="summary" id="summary"></div>
+</section>
+
+<section class="wide orange">
+  <h2>Channel impairments <span class="badge" id="impState">none</span></h2>
+  <p class="hint" style="margin-top:-4px">Add channel impairments and/or noise as needed. With none ticked, the file is the ideal signal.</p>
+  <div class="imp"><input type="checkbox" id="cfoOn" aria-label="Carrier frequency offset">
+    <div class="what"><b>Carrier frequency offset (CFO)</b><span class="hint">The transmitter's carrier is off by this much; the whole file is rotated by e<sup>j2πΔf·t</sup>.</span></div>
+    <div class="inline"><input type="number" id="cfo" step="any"> Hz</div></div>
+  <div class="imp"><input type="checkbox" id="sfoOn" aria-label="Sampling frequency offset">
+    <div class="what"><b>Sampling frequency offset (SFO)</b><span class="hint">The transmitter's clock runs this many ppm fast (negative: slow) against the receiver's ADC clock,
+      so the timing error grows over the packet. <span id="sfoDrift"></span></span></div>
+    <div class="inline"><input type="number" id="sfo" step="any"> ppm</div></div>
+  <div class="imp"><input type="checkbox" id="stoOn" aria-label="Sampling time offset">
+    <div class="what"><b>Sampling time offset (STO)</b><span class="hint">The frame starts this many samples late, so its chirps fall between the receiver's samples
+      (0.5 = halfway between two samples). The shift is the same for the whole frame; a drift that grows over the frame is SFO. <span id="stoTime"></span></span></div>
+    <div class="inline"><input type="number" id="sto" min="0" step="any"> samples</div></div>
+  <div class="imp"><input type="checkbox" id="awgnOn" aria-label="Anticipated SNR of the LoRa frame">
+    <div class="what"><b>Anticipated SNR of the LoRa frame</b><span class="hint">The right amount of noise is added so that the frame has this
+      signal-to-noise ratio, measured within the LoRa bandwidth as a LoRa radio reports it. LoRa decodes below 0 dB.</span>
+      <div class="inline" style="margin-top:6px"><select id="noiseKind" style="flex:0 1 auto" aria-label="Kind of noise">
+        <option value="white">as white Gaussian noise (AWGN): thermal noise</option>
+        <option value="impulsive">as impulsive noise: bursts, as from motors and switching supplies</option></select></div>
+      <span class="hint" id="noiseHint"></span></div>
+    <div class="inline">SNR <input type="number" id="snr" step="any"> dB</div></div>
+  <div class="imp"><span></span><div class="what hint">Noise seed: the same seed gives the same noise</div>
+    <div class="inline"><input type="number" id="seed" min="0" step="1"></div></div>
+</section>
+
+<section class="wide">
+  <h2>Download</h2>
+  <div class="buttons">
+    <button class="primary" id="go">Generate and download</button>
+    <label class="inline"><input type="checkbox" id="sigmf"> also download a SigMF description (.sigmf-meta)</label>
+  </div>
+  <div class="row" id="fcRow" hidden style="margin-top:10px"><label for="fc">Carrier frequency</label>
+    <div class="inline"><input type="number" id="fc" min="0" step="any"><span class="hint">MHz, written into the SigMF description</span></div></div>
+  <p class="hint" style="margin:10px 0 0">The download is the I/Q samples alone. SigMF adds a small text file that records the sample rate,
+    format and LoRa settings, for tools that read SigMF; the samples are the same.</p>
+  <progress id="prog" value="0" max="1" hidden></progress>
+  <div id="status" style="margin-top:8px"></div>
+</section>
+
+<section class="wide">
+  <h2>Command line</h2>
+  <p class="hint" style="margin-top:-6px">The same file from the C tool, <code>lora_iq_gen</code>:</p>
+  <pre id="cli"></pre>
+  <button class="small" id="copyCli">Copy</button>
+</section>
+
+<section class="wide help">
+  <h2>How to use this file</h2>
+  <p>Interleaved I/Q, little-endian, with no header. <b>cf32</b> is GNU Radio's complex type. The integer formats are scaled so
+     the packet peaks at 95% of full scale (lower with noise, so nothing clips).</p>
+  <ul>
+    <li><b>GNU Radio</b>: File Source (type complex) → your SDR sink, at the sample rate above.</li>
+    <li><b>USRP (UHD)</b>: <code>tx_samples_from_file --file lora.cf32 --type float --rate 1e6 --freq 868.1e6</code></li>
+    <li><b>HackRF</b> (ci8, at least 2 MS/s): <code>hackrf_transfer -t lora.ci8 -s 2000000 -f 868100000 -x 20</code></li>
+    <li><b>bladeRF</b> (sc16q11): in <code>bladeRF-cli</code>, <code>tx config file=lora.sc16q11 format=bin</code>, then <code>tx start</code></li>
+    <li><b>Check it</b>: drop the file into the <a href="../iqdemodulator/">IQ Demodulator</a>.</li>
+  </ul>
+</section>
+</div>
+</main>
+<footer class="construction">Under construction: may behave unexpectedly, and not yet ready for research use.</footer>
+<script type="module" src="app.js"></script>
+<script src="../../js/mtr.js" defer></script>
+</body>
+</html>

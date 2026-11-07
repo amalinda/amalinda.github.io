@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Insights into LoRa CAD Mode | LMAC</title>
+<meta name="description" content="How LoRa Channel Activity Detection (CAD) behaves on preambles, data chirps, different spreading factors and time offsets, and why it works for carrier sense (CSMA).">
+<meta name="keywords" content="CSMA, LoRa, LoRaWAN, CAD, channel activity detection">
+<link rel="canonical" href="https://nws.sg/amalinda/lmac/LoRa_CAD.html">
+<meta property="og:title" content="Insights into LoRa CAD Mode | LMAC">
+<meta property="og:description" content="How LoRa Channel Activity Detection (CAD) behaves on preambles, data chirps, different spreading factors and time offsets.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://nws.sg/amalinda/lmac/LoRa_CAD.html">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="../images/icons/favicon.ico" sizes="any">
+<link rel="stylesheet" href="lmac.css">
+</head>
+<body>
+<div class="page">
+
+<header id="top">
+	<a class="back" href="./">&larr; LMAC: Efficient CSMA for LoRa and LoRaWAN</a>
+	<h1 id="rssi">Insights into LoRa CAD Mode</h1>
+	<p class="subtitle">How Channel Activity Detection behaves on real LoRa frames.</p>
+</header>
+
+<main>
+
+<p>
+The <a href="https://www.semtech.com/products/wireless-rf/lora-transceivers/sx1276">datasheet</a> of the LoRa radio states that the CAD mode exploits correlation.
+The implication is that a CAD operation is completed by correlating received samples within a single chirp duration against a locally generated chirp of a specified SF.
+However, a CAD operation can be initiated by a LoRa radio at an arbitrary point of an incoming LoRa frame; thus, a CAD operation may rarely start at the beginning of an incoming chirp.
+Hence, correlation will be performed on partially combined two consecutive chirps.
+Such combinations could be a result of two partial preamble chirps or data chirps.
+Despite that, CAD should still effectively detect the ongoing presence of a specified SF in a channel if it were to be used as a mechanism for CSMA.
+At the same time, CAD should also be able to sense the absence of a specific SF even when the channel is occupied by different SFs.
+For example, a targeted CAD for SF12 on a channel that is occupied with SF9 should not yield a positive result.
+</p>
+
+<h2 id="preamble">CAD on incoming preambles</h2>
+<p>
+To present better insights into the CAD operation to the interested reader, the CAD operation of the LoRa radio is illustrated under a few different scenarios below.
+We present this by performing correlation offline between recorded IQ samples of LoRa chirps and locally generated up chirps.
+The first case presents performing CAD on preamble parts of two incoming frames: SF12 and SF9.
+The result of cross-correlation shown in the left figure indicates a clear spike signifying a detection.
+The correlation result for the second seems close to null, indicating no detection of SF12 within an SF9 frame.
+</p>
+
+<div class="figures pair">
+	<figure>
+		<picture>
+			<source srcset="cad-preamble.avif" type="image/avif">
+			<source srcset="cad-preamble.webp" type="image/webp">
+			<img src="cad-preamble.jpg" alt="Cross-correlation of an SF12 CAD against an SF12 preamble: a clear spike" width="259" height="313" loading="lazy">
+		</picture>
+		<figcaption>SF12 CAD on an SF12 preamble: detected.</figcaption>
+	</figure>
+	<figure>
+		<picture>
+			<source srcset="cad-preamble-diff-sf.avif" type="image/avif">
+			<source srcset="cad-preamble-diff-sf.webp" type="image/webp">
+			<img src="cad-preamble-diff-sf.jpg" alt="Cross-correlation of an SF12 CAD against an SF9 preamble: close to null" width="209" height="280" loading="lazy">
+		</picture>
+		<figcaption>SF12 CAD on an SF9 preamble: not detected.</figcaption>
+	</figure>
+</div>
+
+<h2 id="offset">CAD on offset preambles and data chirps</h2>
+<p>
+In the second case, a time offset of 2&nbsp;ms is introduced between the recorded incoming chirps and the locally generated chirp.
+The first figure corresponds to offset incoming chirps from a preamble and the second corresponds to offset chirps from data symbols.
+As a result, the locally generated up chirp covers parts of two consecutive incoming chirps.
+Even with these offsets, the cross-correlation results in clear spikes for both cases.
+</p>
+
+<div class="figures pair">
+	<figure>
+		<picture>
+			<source srcset="cad-shifted_preamble.avif" type="image/avif">
+			<source srcset="cad-shifted_preamble.webp" type="image/webp">
+			<img src="cad-shifted_preamble.jpg" alt="Cross-correlation on preamble chirps with a 2 ms offset" width="209" height="280" loading="lazy">
+		</picture>
+		<figcaption>Offset preamble chirps.</figcaption>
+	</figure>
+	<figure>
+		<picture>
+			<source srcset="cad-shifted-data.avif" type="image/avif">
+			<source srcset="cad-shifted-data.webp" type="image/webp">
+			<img src="cad-shifted-data.jpg" alt="Cross-correlation on data chirps with a 2 ms offset" width="209" height="280" loading="lazy">
+		</picture>
+		<figcaption>Offset data chirps.</figcaption>
+	</figure>
+</div>
+
+<p>
+This analysis thus provides a deeper insight into how a CAD operation works across a variety of real-life scenarios and explains why CAD is a good feature within the LoRa radio that can be used for channel sensing.
+</p>
+
+</main>
+
+<footer>
+	<p><a href="./">&larr; Back to LMAC</a> &middot; Questions: <a href="mailto:lmac@nws.sg">lmac@nws.sg</a></p>
+</footer>
+
+</div>
+<script src="../js/mtr.js" defer></script>
+</body>
+</html>
