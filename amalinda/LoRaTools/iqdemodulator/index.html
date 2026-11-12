@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LoRa IQ Demodulator | LoRa Tools by Amalinda Gamage</title>
+<meta name="description" content="Decode every LoRa packet in an I/Q recording at any sample rate (cf32, ci16, ci8, sc16q11, SigMF), and see step by step how chirps become symbols and symbols become the payload.">
+<meta name="author" content="Amalinda Gamage">
+<link rel="canonical" href="https://nws.sg/amalinda/LoRaTools/iqdemodulator/">
+<meta property="og:title" content="LoRa IQ Demodulator | LoRa Tools by Amalinda Gamage">
+<meta property="og:description" content="Decode every LoRa packet in an I/Q recording at any sample rate (cf32, ci16, ci8, sc16q11, SigMF), and see step by step how chirps become symbols and symbols become the payload.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nws.sg/amalinda/LoRaTools/iqdemodulator/">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M3 6 L13 26 L13 6 L23 26 L23 6' fill='none' stroke='%23003d7c' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="../shared/style.css">
+</head>
+<body>
+<header class="top"><div class="top-inner">
+  <a class="brand" href="../">LoRa Tools</a>
+  <nav class="tabs" aria-label="Tools">
+    <a class="tab" href="../iqmodulator/">IQ Modulator</a>
+    <a class="tab" href="./" aria-current="page">IQ Demodulator</a>
+  </nav>
+</div></header>
+<main>
+<div class="intro">
+  <h1>LoRa IQ Demodulator</h1>
+  <p>Drop in an I/Q recording, from your SDR or the <a href="../iqmodulator/">IQ Modulator</a>, at any sample rate, and get every
+     LoRa packet in it: time, spreading factor, header, payload, CRC and CFO. Then watch, step by step, how the chirps became symbols
+     and the symbols became the payload, and click any byte to follow it back.</p>
+</div>
+
+<div class="grid">
+<section>
+  <h2>Recording</h2>
+  <label class="drop" id="drop" for="file">
+    <b>Drop an IQ file here</b> or click to choose one<br>
+    <span class="hint">cf32 / .cfile, ci16, ci8, sc16q11, or a SigMF pair (.sigmf-data with its .sigmf-meta)</span>
+  </label>
+  <input type="file" id="file" multiple hidden>
+  <p id="fileInfo" class="hint"></p>
+  <p class="hint">No recording at hand? <button type="button" id="example">Decode an example</button>
+     or make one with the <a href="../iqmodulator/">IQ Modulator</a>.</p>
+</section>
+
+<section class="orange">
+  <h2>Settings</h2>
+  <div class="row"><label for="sf">Spreading factor</label>
+    <select id="sf"><option value="0">scan all, SF7 to SF12</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option></select></div>
+  <div class="row"><label for="bw">Bandwidth</label>
+    <select id="bw"><option value="125000">125 kHz</option><option value="250000">250 kHz</option><option value="500000">500 kHz</option></select></div>
+  <div class="row"><label for="fs">Sample rate</label>
+    <div class="inline"><input type="number" id="fs" min="1" step="any" list="rates" style="width:150px"> <span class="hint">S/s, any value ≥ bandwidth</span></div></div>
+  <datalist id="rates"><option value="125000"><option value="250000"><option value="500000"><option value="1000000"><option value="1024000"><option value="1920000"><option value="2000000"><option value="2048000"><option value="2400000"><option value="4000000"><option value="8000000"></datalist>
+  <div class="row"><label for="fmt">Format</label><select id="fmt"></select></div>
+  <div class="row"><label for="offset">LoRa channel</label>
+    <div class="inline"><input type="number" id="offset" step="any" style="width:150px"> <span class="hint">Hz from the centre of the recording</span></div></div>
+  <div class="row"><span></span><span class="hint">0 if the recording is centred on the LoRa channel. If you tuned the SDR away from it
+    (for example to keep the DC spike out), enter the channel's frequency minus the SDR's: e.g. +250000 for a channel 250 kHz above.</span></div>
+  <div class="row"><label for="ldr">Low data rate opt.</label>
+    <select id="ldr" style="width:auto"><option value="-1">auto (on above 16 ms per symbol)</option><option value="1">on</option><option value="0">off</option></select></div>
+  <div class="row"><label for="rxmode">Receiver</label><select id="rxmode"></select></div>
+</section>
+
+<section class="wide">
+  <h2>Demodulate and decode</h2>
+  <div class="buttons"><button class="primary" id="go" disabled>Demodulate and decode</button></div>
+  <progress id="prog" value="0" max="1" hidden></progress>
+  <div id="status" class="hint" style="margin-top:8px"></div>
+  <div id="result"></div>
+  <h2 style="margin-top:16px">Command line</h2><p class="hint" style="margin-top:-6px">The same decoding with the C tool, <code>lora_iq_demod</code>:</p><pre id="cli"></pre>
+</section>
+
+<section class="wide" id="explainSection" hidden>
+  <h2 id="explainTitle">How the packet was decoded</h2>
+  <div class="steps" id="explain"></div>
+</section>
+
+<section class="wide help">
+  <h2>How it works</h2>
+  <p>The LoRa channel is moved to the centre (if you gave an offset), the recording is filtered and resampled to the LoRa bandwidth
+     (e.g. 125 kS/s for 125 kHz) from any input rate, scaled to unit power, then decoded following
+     standard LoRa demodulation: preamble detection, sync on the SFD downchirps, CFO estimation, NetID, header (with its checksum), payload, dewhitening and CRC.</p>
+  <p><b>Timing diversity</b>: a packet can start anywhere between two samples, and near half a chip a whole-sample receiver fails.
+     So the recording is also resampled half a chip later, both streams are decoded, and for each packet the version whose CRC passes is kept.
+     <b>Corrections</b>: the preamble detector accepts peaks one bin apart (a tolerance of 0 bins at SF7 and SF8
+     misses packets whose CFO is near half a bin), and the phase-based fine CFO step reads preamble chirps only and averages phasors.</p>
+  <p class="hint">Limits: no SFO tracking (a large clock offset at SF11/12 fails), one bandwidth per run, explicit header only.
+     Raw files have no header, so the sample rate and format must be right; SigMF metadata and the IQ Modulator's file names fill them in.</p>
+</section>
+</div>
+</main>
+<footer class="construction">Under construction: may behave unexpectedly, and not yet ready for research use.</footer>
+<script type="module" src="app.js"></script>
+<script src="../../js/mtr.js" defer></script>
+</body>
+</html>

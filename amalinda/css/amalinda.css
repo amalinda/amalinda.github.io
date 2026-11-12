@@ -1,0 +1,89 @@
+/* vim: set ts=2 sts=2 sw=2 noet: */
+/* Added Justification line to body on 1st July 2024 Amalinda */
+body {
+	padding-top: 50px;
+	text-align: justify;
+}
+
+/* Override bootstrap link color to be a little darker */
+a {color: #0077cc;}
+
+/* Override bootstrap's newer quote to do the recessed look */
+blockquote{
+  font-size: 90%;
+  width: 95%;
+  padding: .5em;
+  position: relative;
+  background: #EDEDED;
+  border-left: 8px solid #CCC;
+}
+blockquote p:last-child { margin-bottom: 0; }
+
+/* Match <p> end style */
+summary {
+	margin-bottom: 16px;
+}
+
+.round {
+	border-radius: 50%;
+	overflow: hidden;
+}
+
+.caption {
+	text-align: justify;
+	font-variant-caps: small-caps;
+}
+
+:target {
+	background-color: #ffa;
+}
+
+/* Section headings: spacing that used to come from <br> tags */
+h4[id] {
+	margin-top: 1.5rem;
+	margin-bottom: 1rem;
+}
+
+/* Long words (URLs, chip names) should not overflow on phones */
+body {
+	overflow-wrap: break-word;
+	hyphens: auto;
+}
+
+/* Figures are shown on phones too now; keep them centred in the column */
+.caption picture,
+.caption img {
+	display: block;
+	margin: 0 auto .5rem;
+}
+img {
+	height: auto;
+}
+
+.skip-link:focus {
+	position: absolute;
+	top: .5rem;
+	left: .5rem;
+	z-index: 1000;
+	padding: .5rem 1rem;
+	background: #fff;
+	border: 2px solid #0077cc;
+}
+
+.site-footer {
+	margin-top: 2rem;
+	padding-top: 1rem;
+	padding-bottom: 2rem;
+	border-top: 1px solid #e5e5e5;
+	color: #6c757d;
+	text-align: left;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+	html { scroll-behavior: smooth; }
+}
+
+/* Justified body text, but never justified headings (ugly gaps on phones) */
+h1, h2, h3, h4, h5, h6 {
+	text-align: left;
+}
